@@ -1,7 +1,8 @@
 export const intialUserState = {
-  firstName: "",
-  lastName: "",
-  userName: "",
+  first_name: "",
+  last_name: "",
+  username: "",
   email: "",
   password: "",
+  password_confirmation: "",
 };
