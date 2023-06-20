@@ -10,7 +10,11 @@ export default function Registration() {
     registerUser(JSON.stringify(user));
   };
 
-  const ref_lastName = useRef();
+  const ref_lastName = useRef(),
+    ref_username = useRef(),
+    ref_email = useRef(),
+    ref_password = useRef(),
+    ref_password_confirmation = useRef();
 
   const handleChange = (label, value) => {
     setUser({
@@ -31,8 +35,7 @@ export default function Registration() {
           onSubmitEditing={() => {
             ref_lastName.current.focus();
           }}
-          // Sta je ovo???
-          // blurOnSubmit={false}
+          blurOnSubmit={false}
           returnKeyType="next"
         />
       </View>
@@ -43,36 +46,60 @@ export default function Registration() {
           ref={ref_lastName}
           value={user.last_name}
           onChangeText={(e) => handleChange("last_name", e)}
+          onSubmitEditing={() => {
+            ref_username.current.focus();
+          }}
+          blurOnSubmit={false}
+          returnKeyType="next"
         />
       </View>
       <View>
         <Text>UserName</Text>
         <TextInput
           placeholder="Display Name"
+          ref={ref_username}
           value={user.username}
           onChangeText={(e) => handleChange("username", e)}
+          onSubmitEditing={() => {
+            ref_email.current.focus();
+          }}
+          blurOnSubmit={false}
+          returnKeyType="next"
         />
       </View>
       <View>
         <Text>Email</Text>
         <TextInput
           placeholder="Email"
+          ref={ref_email}
           value={user.email}
           onChangeText={(e) => handleChange("email", e)}
+          onSubmitEditing={() => {
+            ref_password.current.focus();
+          }}
+          blurOnSubmit={false}
+          returnKeyType="next"
         />
       </View>
       <View>
         <Text>Password</Text>
         <TextInput
           placeholder="Password"
+          ref={ref_password}
           value={user.password}
           onChangeText={(e) => handleChange("password", e)}
+          onSubmitEditing={() => {
+            ref_password_confirmation.current.focus();
+          }}
+          blurOnSubmit={false}
+          returnKeyType="next"
         />
       </View>
       <View>
         <Text>Password</Text>
         <TextInput
           placeholder="Confirm Password"
+          ref={ref_password_confirmation}
           value={user.password_confirmation}
           onChangeText={(e) => handleChange("password_confirmation", e)}
         />
