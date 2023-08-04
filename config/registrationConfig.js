@@ -1,4 +1,4 @@
-export const intialUserState = {
+export const initialUserState = {
   first_name: "",
   last_name: "",
   username: "",

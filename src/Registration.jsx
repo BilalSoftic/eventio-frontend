@@ -1,10 +1,10 @@
 import { StyleSheet, Text, TextInput, View, Button } from "react-native";
 import { useState, useRef } from "react";
-import { intialUserState } from "../config/registrationConfig";
+import { initialUserState } from "../config/registrationConfig";
 import { registerUser } from "../izo-api";
 
 export default function Registration() {
-  const [user, setUser] = useState({ ...intialUserState });
+  const [user, setUser] = useState({ ...initialUserState });
 
   const submitRegistration = async () => {
     registerUser(JSON.stringify(user));
