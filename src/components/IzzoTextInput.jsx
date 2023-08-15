@@ -6,7 +6,6 @@ const IzzoTextInput = forwardRef(
     const { inputName, handleChangeKey, nextRef, user, handleChange } = props;
     return (
       <View style={styles.izzoInputView}>
-        {console.log(nextRef)}
         <Text style={styles.izzoInputLabel}>{inputName}</Text>
         <TextInput
           style={styles.izzoTextInput}
@@ -18,7 +17,7 @@ const IzzoTextInput = forwardRef(
             nextRef ? nextRef.current.focus() : null;
           }}
           blurOnSubmit={false}
-          returnKeyType={nextRef ? 'next' : 'submit'}
+          returnKeyType={nextRef ? 'next' : 'done'}
         />
       </View>
     );

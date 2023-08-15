@@ -1,8 +1,9 @@
-import { StyleSheet, Text, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 import { useState, useRef } from 'react';
 import { initialUserState } from '../config/registrationConfig';
 import { registerUser } from '../izo-api';
 import IzzoTextInput from './components/IzzoTextInput';
+import IzzoButton from './components/IzzoButton';
 
 export default function Registration() {
   const [user, setUser] = useState({ ...initialUserState });
@@ -76,13 +77,7 @@ export default function Registration() {
         user={user}
         handleChange={handleChange}
       />
-
-      <Button
-        onPress={submitRegistration}
-        title="Submit"
-        color="#841584"
-        accessibilityLabel="Learn more about this purple button"
-      />
+      <IzzoButton title="Submit" submitRegistration={submitRegistration} />
     </ScrollView>
   );
 }
@@ -91,12 +86,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#0C6A9F',
-    marginTop: 30,
   },
   izzoHeader: {
     color: '#FFFFFF',
     fontSize: 40,
+    marginTop: 40,
     alignSelf: 'center',
-    marginVertical: 25,
   },
 });
