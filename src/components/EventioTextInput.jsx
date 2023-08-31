@@ -1,14 +1,14 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { forwardRef } from 'react';
 
-const IzzoTextInput = forwardRef(
+const EventioTextInput = forwardRef(
   (Input = (props, ref) => {
     const { inputName, handleChangeKey, nextRef, user, handleChange } = props;
     return (
-      <View style={styles.izzoInputView}>
-        <Text style={styles.izzoInputLabel}>{inputName}</Text>
+      <View style={styles.eventioInputView}>
+        <Text style={styles.eventioInputLabel}>{inputName}</Text>
         <TextInput
-          style={styles.izzoTextInput}
+          style={styles.eventioTextInput}
           placeholder={inputName}
           ref={ref}
           onChangeText={(e) => handleChange(handleChangeKey, e)}
@@ -24,12 +24,12 @@ const IzzoTextInput = forwardRef(
   })
 );
 const styles = StyleSheet.create({
-  izzoInputView: {
+  eventioInputView: {
     backgroundColor: '#0C6A9F',
     marginVertical: 10,
     gap: 3,
   },
-  izzoTextInput: {
+  eventioTextInput: {
     backgroundColor: '#FFFFFF',
     fontSize: 17,
     marginHorizontal: 15,
@@ -37,11 +37,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingLeft: 15,
   },
-  izzoInputLabel: {
+  eventioInputLabel: {
     color: '#FFFFFF',
     paddingLeft: 27,
   },
-  izzoHeader: {
+  eventioHeader: {
     color: '#FFFFFF',
     fontSize: 40,
     alignSelf: 'center',
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IzzoTextInput;
+export default EventioTextInput;

@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-const IzzoButton = (props) => {
+const EventioButton = (props) => {
   const { title, submitRegistration } = props;
   return (
     <TouchableOpacity style={styles.submitBtn} onPress={submitRegistration}>
@@ -26,15 +26,4 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
 });
-export default IzzoButton;
-
-{
-  /*       <View style={styles.submitBtn}>
-        <Button
-          onPress={submitRegistration}
-          title="Submit"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
-      </View> */
-}
+export default EventioButton;
