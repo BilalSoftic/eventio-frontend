@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "izo",
-    "slug": "izo",
+    "name": "eventio",
+    "slug": "eventio",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

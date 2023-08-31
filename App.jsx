@@ -1,5 +1,5 @@
-import Registration from "./src/Registration";
-import { NavigationContainer } from "@react-navigation/native";
+import Registration from './src/Registration';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (

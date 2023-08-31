@@ -1,6 +1,6 @@
-import { Alert } from "react-native";
+import { Alert } from 'react-native';
 
-const apiBaseUrl = "https://46d1-109-175-37-153.ngrok-free.app/api/";
+const apiBaseUrl = 'https://46d1-109-175-37-153.ngrok-free.app/api/';
 
 fetchData = async (url, method, body) => {
   try {
@@ -8,8 +8,8 @@ fetchData = async (url, method, body) => {
       method,
       body: body ? body : null,
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     });
     const jsonData = await response.json();
@@ -21,5 +21,5 @@ fetchData = async (url, method, body) => {
 };
 
 export const registerUser = (user) => {
-  fetchData("register", "POST", user);
+  fetchData('register', 'POST', user);
 };
