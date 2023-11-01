@@ -1,31 +1,25 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { forwardRef } from 'react';
-import {
-  Input as GluestackInput,
-  InputField,
-  VStack,
-  Text,
-} from '@gluestack-ui/themed';
+
 const EventioTextInput = forwardRef(
   (Input = (props, ref) => {
     const { inputName, handleChangeKey, nextRef, user, handleChange } = props;
     return (
-      <VStack style={styles.eventioInputView}>
+      <View style={styles.eventioInputView}>
         <Text style={styles.eventioInputLabel}>{inputName}</Text>
-        <GluestackInput style={styles.eventioTextInput}>
-          <InputField
-            placeholder={inputName}
-            ref={ref}
-            onChangeText={(e) => handleChange(handleChangeKey, e)}
-            value={user[handleChangeKey]}
-            onSubmitEditing={() => {
-              nextRef ? nextRef.current.focus() : null;
-            }}
-            blurOnSubmit={false}
-            returnKeyType={nextRef ? 'next' : 'done'}
-          />
-        </GluestackInput>
-      </VStack>
+        <TextInput
+          style={styles.eventioTextInput}
+          placeholder={inputName}
+          ref={ref}
+          onChangeText={(e) => handleChange(handleChangeKey, e)}
+          value={user[handleChangeKey]}
+          onSubmitEditing={() => {
+            nextRef ? nextRef.current.focus() : null;
+          }}
+          blurOnSubmit={false}
+          returnKeyType={nextRef ? 'next' : 'done'}
+        />
+      </View>
     );
   })
 );

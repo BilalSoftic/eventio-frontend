@@ -1,13 +1,26 @@
-import Registration from './src/Registration';
+import WelcomeScreen from './src/WelcomeScreen';
+import FirstSignUpPage from './src/FirstSignUpPage';
+/*  */
 import { NavigationContainer } from '@react-navigation/native';
-import { config, GluestackUIProvider, Text } from '@gluestack-ui/themed';
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
+/*  */
 
 export default function App() {
   return (
-    <GluestackUIProvider config={config.theme}>
-      <NavigationContainer>
-        <Registration />
-      </NavigationContainer>
-    </GluestackUIProvider>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="WelcomeScreen"
+          options={{ headerShown: false }}
+          component={WelcomeScreen}
+        />
+        <Stack.Screen
+          name="FirstSignUpPage"
+          options={{ headerShown: false }}
+          component={FirstSignUpPage}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

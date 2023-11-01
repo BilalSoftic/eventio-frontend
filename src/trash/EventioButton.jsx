@@ -1,11 +1,10 @@
-import { StyleSheet } from 'react-native';
-import { Button, ButtonText } from '@gluestack-ui/themed';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 const EventioButton = (props) => {
   const { title, submitRegistration } = props;
   return (
-    <Button size="lg" style={styles.submitBtn} onPress={submitRegistration}>
-      <ButtonText style={styles.submitBtnText}>Add</ButtonText>
-    </Button>
+    <TouchableOpacity style={styles.submitBtn} onPress={submitRegistration}>
+      <Text style={styles.submitBtnText}>{title}</Text>
+    </TouchableOpacity>
   );
 };
 
@@ -15,17 +14,16 @@ const styles = StyleSheet.create({
     height: 50,
     width: 250,
     marginTop: 30,
-    padding: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
     alignSelf: 'center',
     borderRadius: 7,
   },
   submitBtnText: {
     color: '#FFFFFF',
     fontSize: 25,
-    fontWeight: '400',
+    fontWeight: '600',
     textTransform: 'uppercase',
-    padding: 10,
-    margin: 0,
   },
 });
 export default EventioButton;
