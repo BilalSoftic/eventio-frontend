@@ -11,34 +11,36 @@ function WelcomeScreen({ navigation }) {
     navigation.navigate('FirstSignUpPage');
   };
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.containerStyle}>
       {/* BACKGROUND*/}
-      <View style={styles.imageBox}>
+      <View style={styles.backgroundImageStyle}>
         <Image
-          style={styles.dotsStart}
+          style={styles.dotsStartStyle}
           source={require('../assets/img/BackgroundDots.png')}
         />
         <Image
-          style={styles.centerImg}
+          style={styles.centerImgStyle}
           source={require('../assets/img/Astronaut.png')}
         />
         <Image
-          style={styles.dotsEnd}
+          style={styles.dotsEndStyle}
           source={require('../assets/img/BackgroundDots.png')}
         />
       </View>
 
       {/* INTERACTIVE BOX */}
-      <View style={styles.interactiveBox}>
-        <Text style={styles.mainHeader}>Welcome</Text>
-        <Text style={styles.secondaryHeader}>Choose your language</Text>
-        <View style={styles.flagWrapper}>
+      <View style={styles.interactiveContainerStyle}>
+        <Text style={styles.mainHeaderTextStyle}>Welcome</Text>
+        <Text style={styles.secondaryHeaderTextStyle}>
+          Choose your language
+        </Text>
+        <View style={styles.flagSelectorStyle}>
           <TouchableOpacity
             style={[
-              styles.flagButton,
+              styles.flagButtonStyle,
               selectedFlag === 'bih'
-                ? styles.selectedFlag
-                : styles.unselectedFlag,
+                ? styles.selectedFlagStyle
+                : styles.unselectedFlagStyle,
             ]}
             onPress={() => {
               setSelectedFlag('bih');
@@ -52,10 +54,10 @@ function WelcomeScreen({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={[
-              styles.flagButton,
+              styles.flagButtonStyle,
               selectedFlag === 'uk'
-                ? styles.selectedFlag
-                : styles.unselectedFlag,
+                ? styles.selectedFlagStyle
+                : styles.unselectedFlagStyle,
             ]}
             onPress={() => {
               setSelectedFlag('uk');
@@ -68,9 +70,12 @@ function WelcomeScreen({ navigation }) {
             />
           </TouchableOpacity>
         </View>
-        <Image style={styles.dots} source={require('../assets/img/Dots.png')} />
+        <Image
+          style={styles.dotsImageStyle}
+          source={require('../assets/img/Dots.png')}
+        />
         <Button
-          styleType="welcomeScreenButton"
+          styleType="welcomeScreenButtonStyle"
           disabled={isSubmitDisabled}
           onPress={navigateToFirstSignUpPage}
           text="Next"
@@ -80,33 +85,33 @@ function WelcomeScreen({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
-  wrapper: {
+  containerStyle: {
     flex: 1,
     backgroundColor: '#004972',
   },
-  imageBox: {
+  backgroundImageStyle: {
     flex: 2,
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  dotsStart: {
+  dotsStartStyle: {
     position: 'absolute',
     top: 50,
     right: 0,
   },
-  centerImg: {
+  centerImgStyle: {
     position: 'absolute',
     top: '23%',
     right: '5%',
   },
-  dotsEnd: {
+  dotsEndStyle: {
     position: 'absolute',
     bottom: -10,
     left: 0,
   },
 
-  interactiveBox: {
+  interactiveContainerStyle: {
     flex: 1.3,
     padding: 25,
     borderTopLeftRadius: 40,
@@ -114,31 +119,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     justifyContent: 'space-around',
   },
-  mainHeader: {
+  mainHeaderTextStyle: {
     fontSize: 24,
     fontWeight: 'bold',
     alignSelf: 'center',
   },
-  secondaryHeader: {
+  secondaryHeaderTextStyle: {
     fontSize: 16,
     marginTop: 15,
     opacity: 0.5,
     alignSelf: 'center',
   },
-  flagWrapper: {
+  flagSelectorStyle: {
     marginTop: 20,
     gap: 35,
     alignSelf: 'center',
     flexDirection: 'row',
   },
-  selectedFlag: {
+  selectedFlagStyle: {
     opacity: 1,
   },
-  unselectedFlag: {
+  unselectedFlagStyle: {
     opacity: 0.5,
   },
 
-  dots: {
+  dotsImageStyle: {
     marginTop: 20,
     alignSelf: 'center',
   },

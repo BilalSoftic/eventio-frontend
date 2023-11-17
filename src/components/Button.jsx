@@ -1,25 +1,25 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-function WelcomeScreenButton(props) {
+function Button(props) {
   const { disabled, onPress, text, styleType } = props;
   const buttonStyle =
-    styleType === 'welcomeScreenButton'
-      ? styles.welcomeScreenButton
-      : styleType === 'signUpPageButton'
-      ? styles.signUpPageButton
-      : styles.welcomeScreenButton;
+    styleType === 'welcomeScreenButtonStyle'
+      ? styles.welcomeScreenButtonStyle
+      : styleType === 'signUpPageButtonStyle'
+      ? styles.signUpPageButtonStyle
+      : styles.welcomeScreenButtonStyle;
   return (
     <TouchableOpacity
       style={[buttonStyle, disabled ? { opacity: 0.5 } : { opacity: 1 }]}
       disabled={disabled}
       onPress={onPress}
     >
-      <Text style={styles.buttonText}>{text}</Text>
+      <Text style={styles.buttonTextStyle}>{text}</Text>
     </TouchableOpacity>
   );
 }
 const styles = StyleSheet.create({
-  welcomeScreenButton: {
+  welcomeScreenButtonStyle: {
     marginTop: 20,
     borderRadius: 10,
     width: '100%',
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#004972',
   },
-  signUpPageButton: {
+  signUpPageButtonStyle: {
     width: '100%',
     paddingVertical: 20,
     marginTop: 5,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#004972',
   },
-  buttonText: {
+  buttonTextStyle: {
     margin: 0,
     padding: 0,
     fontSize: 17,
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
 });
-export default WelcomeScreenButton;
+export default Button;

@@ -74,22 +74,22 @@ const FirstSignUpPage = ({ navigation }) => {
     Linking.openURL(signInUrl);
   };
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
       <Image
-        style={styles.backgroundImage}
+        style={styles.backgroundImageStyle}
         source={require('../assets/img/FirstSignUpPageBackground.png')}
       ></Image>
       {/* INTERACTIVE BOX */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
-        style={styles.interactiveBox}
+        style={styles.interactiveContainerStyle}
       >
-        <Text style={styles.mainHeader}>Sign up</Text>
+        <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
         {/* PAGE NUMBERING */}
         <PageNumberingComponent signUpPageNumber="FirstSignUpPage" />
         {/* FORM */}
-        <View style={styles.inputsWrapper}>
+        <View style={styles.inputsContainerStyle}>
           <SignUpInput
             keyboardType="email-address"
             autoCapitalize="none"
@@ -122,7 +122,7 @@ const FirstSignUpPage = ({ navigation }) => {
             ref={confirmPasswordRef}
           ></SignUpInput>
           <Button
-            styleType="signUpPageButton"
+            styleType="signUpPageButtonStyle"
             disabled={!isContinueButtonEnabled}
             onPress={navigateToSecondSignUpPage}
             text="Continue"
@@ -131,14 +131,14 @@ const FirstSignUpPage = ({ navigation }) => {
         {/*DIVIDER */}
         <Divider text="or" />
         {/* SOCIALS */}
-        <View style={styles.socialsWrapper}>
-          <View style={styles.socialButtonsWrapper}>
+        <View style={styles.socialsContainerStyle}>
+          <View style={styles.socialButtonsContainerStyle}>
             <IconButton label="google" />
             <IconButton label="facebook" />
           </View>
-          <Text style={styles.socialsText}>
+          <Text style={styles.socialsTextStyle}>
             Already have an account?
-            <Text style={styles.socialsLink} onPress={handleSignInPress}>
+            <Text style={styles.socialsLinkStyle} onPress={handleSignInPress}>
               {''} Sign in
             </Text>
           </Text>
@@ -148,17 +148,17 @@ const FirstSignUpPage = ({ navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-  wrapper: {
+  containerStyle: {
     flex: 1,
     alignItems: 'center',
     position: 'relative',
   },
-  backgroundImage: {
+  backgroundImageStyle: {
     minWidth: '150%',
     position: 'absolute',
     top: 0,
   },
-  interactiveBox: {
+  interactiveContainerStyle: {
     width: '100%',
     paddingTop: 25,
     paddingBottom: 15,
@@ -169,36 +169,28 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: '#FFFFFF',
   },
-  mainHeader: {
+  mainHeaderTextStyle: {
     fontSize: 28,
     fontWeight: 'bold',
   },
 
-  inputsWrapper: {
+  inputsContainerStyle: {
     flex: 1,
     marginTop: 10,
   },
-  linesWrapper: {
-    padding: 5,
-    marginTop: 10,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  line: { flex: 3, padding: 0.5, backgroundColor: '#EAEAEA' },
-  middleText: { fontSize: 16, marginHorizontal: 10, color: '#707070' },
-  socialsWrapper: {
+
+  socialsContainerStyle: {
     flexDirection: 'column',
   },
-  socialButtonsWrapper: {
+  socialButtonsContainerStyle: {
     gap: 10,
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  socialsText: {
+  socialsTextStyle: {
     alignSelf: 'center',
   },
-  socialsLink: {
+  socialsLinkStyle: {
     color: '#004972',
   },
 });

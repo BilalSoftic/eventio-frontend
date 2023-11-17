@@ -27,19 +27,19 @@ const DatePickerComponent = (props) => {
       })
     : 'date of birth';
   const buttonStyle = {
-    ...styles.button,
+    ...styles.buttonStyle,
     borderColor: borderColor,
   };
   const buttonTextStyle = {
-    ...styles.buttonText,
+    ...styles.buttonTextStyle,
     color: selectedDate ? 'black' : 'rgba(70, 70, 70, 0.5)',
   };
   return (
     <View>
-      <TouchableOpacity style={styles.button} onPress={showDatePicker}>
+      <TouchableOpacity style={styles.buttonStyle} onPress={showDatePicker}>
         <Text style={buttonTextStyle}>{buttonText}</Text>
-        <View style={styles.iconContainer}>
-          <Icon name="calendar" style={styles.icon} />
+        <View style={styles.iconContainerStyle}>
+          <Icon name="calendar" style={styles.iconStyle} />
         </View>
       </TouchableOpacity>
       <DateTimePickerModal
@@ -52,7 +52,7 @@ const DatePickerComponent = (props) => {
   );
 };
 const styles = StyleSheet.create({
-  button: {
+  buttonStyle: {
     marginTop: 5,
     padding: 12,
     borderWidth: 2,
@@ -62,12 +62,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderColor: '#D9D9D9',
   },
-  buttonText: {
+  buttonTextStyle: {
     flex: 1,
     fontSize: 16,
     textTransform: 'capitalize',
   },
-  iconContainer: {
+  iconContainerStyle: {
     width: 22,
     height: 22,
     marginLeft: 15,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     backgroundColor: 'rgba(0, 49, 72, 0.1)',
   },
-  icon: {
+  iconStyle: {
     fontSize: 15,
     textAlign: 'center',
     alignSelf: 'center',

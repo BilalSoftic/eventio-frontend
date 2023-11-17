@@ -6,75 +6,77 @@ const PageNumberingComponent = (props) => {
   const { signUpPageNumber } = props;
   const content =
     signUpPageNumber === 'FirstSignUpPage' ? (
-      <Text style={styles.whiteNumber}>1</Text>
+      <Text style={styles.whiteContentStyle}>1</Text>
     ) : signUpPageNumber === 'SecondSignUpPage' ? (
-      <Icon name="check" style={styles.whiteNumber} />
+      <Icon name="check" style={styles.whiteContentStyle} />
     ) : null;
-  const circleBackground =
+  const circleBackgroundStyle =
     signUpPageNumber === 'FirstSignUpPage'
-      ? { ...styles.opacityCircle }
+      ? { ...styles.opacityCircleStyle }
       : signUpPageNumber === 'SecondSignUpPage'
-      ? { ...styles.blueCircle }
+      ? { ...styles.blueCircleStyle }
       : null;
-  const numberColor =
+  const contentColorStyle =
     signUpPageNumber === 'FirstSignUpPage'
-      ? { ...styles.darkBlueNumber }
+      ? { ...styles.blueContentStyle }
       : signUpPageNumber === 'SecondSignUpPage'
-      ? { ...styles.whiteNumber }
+      ? { ...styles.whiteContentStyle }
       : null;
   const lineColor =
     signUpPageNumber === 'FirstSignUpPage'
-      ? { ...styles.opacityLine }
+      ? { ...styles.opacityLineStyle }
       : signUpPageNumber === 'SecondSignUpPage'
-      ? { ...styles.blueLine }
+      ? { ...styles.blueLineStyle }
       : null;
 
   return (
-    <View style={styles.numbersWrapper}>
+    <View style={styles.containerStyle}>
       {/* First number */}
-      <View style={styles.firstNumberContainer}>
-        <View style={[styles.circle, styles.blueCircle]}>{content}</View>
-        <Text style={styles.numberHeader}>General</Text>
+      <View style={styles.firstCircleContainerStyle}>
+        <View style={[styles.circleStyle, styles.blueCircleStyle]}>
+          {content}
+        </View>
+        <Text style={styles.circleHeaderStyle}>General</Text>
       </View>
-      <View style={[styles.line, lineColor]} />
+      <View style={[styles.lineStyle, lineColor]} />
       {/* Second number */}
       <View style={styles.secondNumberContainer}>
-        <View style={[styles.circle, circleBackground]}>
-          <Text style={numberColor}>2</Text>
+        <View style={[styles.circleStyle, circleBackgroundStyle]}>
+          <Text style={contentColorStyle}>2</Text>
         </View>
-        <Text style={styles.numberHeader}>Personal Information</Text>
+        <Text style={styles.circleHeaderStyle}>Personal Information</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  numbersWrapper: {
+  containerStyle: {
     width: 250,
     marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  firstNumberContainer: {
+  firstCircleContainerStyle: {
     marginRight: -10,
     flexDirection: 'column',
     alignItems: 'center',
   },
 
-  numberHeader: {
+  circleHeaderStyle: {
     fontSize: 14,
     marginTop: 5,
     opacity: 0.4,
     textTransform: 'capitalize',
   },
 
-  secondNumberContainer: {
+  secondCircleContainerStyle: {
     marginLeft: '-19%',
     flexDirection: 'column',
     alignItems: 'center',
   },
-  circle: {
+  circleStyle: {
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -82,30 +84,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  opacityCircle: {
+  opacityCircleStyle: {
     backgroundColor: 'rgba(0, 49, 72, 0.2)',
   },
-  blueCircle: {
+  blueCircleStyle: {
     backgroundColor: '#004972',
   },
-  whiteNumber: {
+  whiteContentStyle: {
     fontSize: 20,
     color: 'white',
   },
-  darkBlueNumber: {
+  blueContentStyle: {
     fontSize: 20,
     color: '#004972',
   },
 
-  line: {
+  lineStyle: {
     width: 140,
     height: 2,
     marginBottom: 25,
   },
-  opacityLine: {
+  opacityLineStyle: {
     backgroundColor: 'rgba(0, 49, 72, 0.2)',
   },
-  blueLine: {
+  blueLineStyle: {
     backgroundColor: '#004972',
   },
 });

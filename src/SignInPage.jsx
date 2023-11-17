@@ -68,20 +68,20 @@ const SignInPage = ({ navigation }) => {
     Linking.openURL(signInUrl);
   };
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
       <Image
-        style={styles.backgroundImage}
+        style={styles.backgroundImageStyle}
         source={require('../assets/img/SignInPageBackground.png')}
       ></Image>
       {/* INTERACTIVE BOX */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
-        style={styles.interactiveBox}
+        style={styles.interactiveContainerStyle}
       >
-        <Text style={styles.mainHeader}>Sign in</Text>
+        <Text style={styles.mainHeaderTextStyle}>Sign in</Text>
         {/* FORM */}
-        <View style={styles.inputsWrapper}>
+        <View style={styles.inputsContainerStyle}>
           <SignUpInput
             keyboardType="email-address"
             autoCapitalize="none"
@@ -102,7 +102,7 @@ const SignInPage = ({ navigation }) => {
             iconName="lock"
             ref={passwordRef}
           ></SignUpInput>
-          <View style={styles.textWrapper}>
+          <View style={styles.textWrapperStyle}>
             <BouncyCheckbox
               style={styles.checkbox}
               size={20}
@@ -119,7 +119,7 @@ const SignInPage = ({ navigation }) => {
               }}
             />
             <Text
-              style={styles.forgotPassword}
+              style={styles.forgotPasswordStyle}
               onPress={handleForgotPasswordPress}
             >
               forgot password?
@@ -136,14 +136,14 @@ const SignInPage = ({ navigation }) => {
         {/*DIVIDER */}
         <Divider text="or" />
         {/* SOCIALS */}
-        <View style={styles.socialsWrapper}>
-          <View style={styles.socialButtonsWrapper}>
+        <View style={styles.socialsContainerStyle}>
+          <View style={styles.socialButtonsContainerStyle}>
             <IconButton label="google" />
             <IconButton label="facebook" />
           </View>
-          <Text style={styles.socialsText}>
+          <Text style={styles.socialsTextStyle}>
             Don't have an account?
-            <Text style={styles.socialsLink} onPress={handleSignUpPress}>
+            <Text style={styles.socialsLinkStyle} onPress={handleSignUpPress}>
               {''} Sign up
             </Text>
           </Text>
@@ -153,17 +153,17 @@ const SignInPage = ({ navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-  wrapper: {
+  containerStyle: {
     flex: 1,
     alignItems: 'center',
     position: 'relative',
   },
-  backgroundImage: {
+  backgroundImageStyle: {
     minWidth: '110%',
     position: 'absolute',
     top: 0,
   },
-  interactiveBox: {
+  interactiveContainerStyle: {
     width: '100%',
     paddingTop: 25,
     paddingBottom: 15,
@@ -174,22 +174,22 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: '#FFFFFF',
   },
-  mainHeader: {
+  mainHeaderTextStyle: {
     fontSize: 28,
     fontWeight: 'bold',
   },
-  inputsWrapper: {
+  inputsContainerStyle: {
     flex: 1,
     marginTop: 10,
   },
-  textWrapper: {
+  textWrapperStyle: {
     marginVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
 
-  forgotPassword: {
+  forgotPasswordStyle: {
     fontSize: 15,
     textTransform: 'capitalize',
     color: '#004972',
@@ -203,18 +203,18 @@ const styles = StyleSheet.create({
   },
   line: { flex: 3, padding: 0.5, backgroundColor: '#EAEAEA' },
   middleText: { fontSize: 16, marginHorizontal: 10, color: '#707070' },
-  socialsWrapper: {
+  socialsContainerStyle: {
     flexDirection: 'column',
   },
-  socialButtonsWrapper: {
+  socialButtonsContainerStyle: {
     gap: 10,
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  socialsText: {
+  socialsTextStyle: {
     alignSelf: 'center',
   },
-  socialsLink: {
+  socialsLinkStyle: {
     color: '#004972',
   },
 });

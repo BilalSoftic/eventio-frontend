@@ -18,12 +18,12 @@ const SignUpInput = forwardRef(
       onChange,
     } = props;
 
-    const inputWrapperStyle = {
-      ...styles.inputWrapper,
+    const inputContainerStyle = {
+      ...styles.inputContainerStyle,
       borderColor: borderColor,
     };
     return (
-      <View style={inputWrapperStyle}>
+      <View style={inputContainerStyle}>
         <TextInput
           keyboardType={keyboardType}
           autoCapitalize={autoCapitalize}
@@ -31,7 +31,7 @@ const SignUpInput = forwardRef(
           value={value}
           onChange={onChange}
           onChangeText={onChangeText}
-          style={styles.input}
+          style={styles.inputStyle}
           secureTextEntry={secureTextEntry}
           placeholder={placeholder}
           placeholderTextColor="rgba(70, 70, 70, 0.5)"
@@ -42,15 +42,15 @@ const SignUpInput = forwardRef(
           blurOnSubmit={false}
           returnKeyType={nextRef ? 'next' : 'done'}
         />
-        <View style={styles.iconContainer}>
-          <Icon name={iconName} style={styles.icon} />
+        <View style={styles.iconContainerStyle}>
+          <Icon name={iconName} style={styles.iconStyle} />
         </View>
       </View>
     );
   })
 );
 const styles = StyleSheet.create({
-  inputWrapper: {
+  inputContainerStyle: {
     marginTop: 5,
     padding: 12,
     borderWidth: 2,
@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderColor: '#D9D9D9',
   },
-  input: {
+  inputStyle: {
     flex: 1,
     fontSize: 16,
   },
-  iconContainer: {
+  iconContainerStyle: {
     width: 22,
     height: 22,
     marginLeft: 15,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     backgroundColor: 'rgba(0, 49, 72, 0.1)',
   },
-  icon: {
+  iconStyle: {
     fontSize: 15,
     textAlign: 'center',
     alignSelf: 'center',

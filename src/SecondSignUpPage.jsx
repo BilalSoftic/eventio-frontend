@@ -67,23 +67,23 @@ const SecondSignUpPage = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.contanierStyle}>
       {/* BACKGROUND IMAGE */}
       <Image
-        style={styles.backgroundImage}
+        style={styles.backgroundImageStyle}
         source={require('../assets/img/SecondSignUpPageBackground.png')}
       ></Image>
       {/* INTERACTIVE BOX */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
-        style={styles.interactiveBox}
+        style={styles.interactiveContainerStyle}
       >
-        <Text style={styles.mainHeader}>Sign up</Text>
+        <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
         {/* PAGE NUMBERING */}
         <PageNumberingComponent signUpPageNumber="SecondSignUpPage" />
         {/*   */}
 
-        <View style={styles.inputsWrapper}>
+        <View style={styles.inputsContainerStyle}>
           <SignUpInput
             keyboardType="default"
             placeholder="Name"
@@ -114,12 +114,12 @@ const SecondSignUpPage = ({ navigation }) => {
           />
           <DatePickerComponent />
           <Button
-            styleType="signUpPageButton"
+            styleType="signUpPageButtonStyle"
             /* disabled={!isContinueButtonEnabled}
             onPress={navigateToSecondSignUpPage} */
             text="Continue"
           />
-          <Text style={styles.bottomText} onPress={navigateToFirstSignUpPage}>
+          <Text style={styles.goBackStyle} onPress={navigateToFirstSignUpPage}>
             go back
           </Text>
         </View>
@@ -128,17 +128,17 @@ const SecondSignUpPage = ({ navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-  wrapper: {
+  containerStyle: {
     flex: 1,
     alignItems: 'center',
     position: 'relative',
   },
-  backgroundImage: {
+  backgroundImageStyle: {
     minWidth: '150%',
     position: 'absolute',
     top: 0,
   },
-  interactiveBox: {
+  interactiveContainerStyle: {
     width: '100%',
     paddingTop: 25,
     paddingBottom: 15,
@@ -149,15 +149,15 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: '#FFFFFF',
   },
-  mainHeader: {
+  mainHeaderTextStyle: {
     fontSize: 28,
     fontWeight: 'bold',
   },
-  inputsWrapper: {
+  inputsContainerStyle: {
     flex: 1,
     marginTop: 10,
   },
-  bottomText: {
+  goBackStyle: {
     marginVertical: 15,
     fontSize: 15,
     fontWeight: 'bold',

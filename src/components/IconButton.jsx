@@ -3,7 +3,7 @@ const IconButton = (props) => {
   const { label } = props;
 
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.buttonStyle}>
       <Image
         source={
           label === 'google'
@@ -12,13 +12,12 @@ const IconButton = (props) => {
             ? require(`../../assets/img/facebook.png`)
             : null
         }
-        style={styles.icon}
+        style={styles.iconStyle}
       />
     </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
-  button: {},
-  icon: { flex: 1 },
+  iconStyle: { flex: 1 },
 });
 export default IconButton;
