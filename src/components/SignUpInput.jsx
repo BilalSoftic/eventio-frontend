@@ -1,46 +1,64 @@
 import { StyleSheet, View, TextInput } from 'react-native';
+import { forwardRef } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function SignUpInput(props) {
-  const {
-    placeholder,
-    placeholderTextColor,
-    secureTextEntry,
-    iconName,
-    value,
-    onChangeText,
-    borderColor,
-  } = props;
+const SignUpInput = forwardRef(
+  (Input = (props, ref) => {
+    const {
+      placeholder,
 
-  const inputWrapperStyle = {
-    ...styles.inputWrapper,
-    borderColor: borderColor,
-  };
-  return (
-    <View style={inputWrapperStyle}>
-      <TextInput
-        type="text"
-        value={value}
-        onChangeText={onChangeText}
-        style={styles.input}
-        secureTextEntry={secureTextEntry}
-        placeholder={placeholder}
-        placeholderTextColor={placeholderTextColor}
-      />
-      <View style={styles.iconContainer}>
-        <Icon name={iconName} style={styles.icon} />
+      secureTextEntry,
+      iconName,
+      value,
+      onChangeText,
+      borderColor,
+      nextRef,
+      autoCapitalize,
+      keyboardType,
+      onChange,
+    } = props;
+
+    const inputWrapperStyle = {
+      ...styles.inputWrapper,
+      borderColor: borderColor,
+    };
+    return (
+      <View style={inputWrapperStyle}>
+        <TextInput
+          keyboardType={keyboardType}
+          autoCapitalize={autoCapitalize}
+          type="text"
+          value={value}
+          onChange={onChange}
+          onChangeText={onChangeText}
+          style={styles.input}
+          secureTextEntry={secureTextEntry}
+          placeholder={placeholder}
+          placeholderTextColor="rgba(70, 70, 70, 0.5)"
+          ref={ref}
+          onSubmitEditing={() => {
+            nextRef ? nextRef.current.focus() : null;
+          }}
+          blurOnSubmit={false}
+          returnKeyType={nextRef ? 'next' : 'done'}
+        />
+        <View style={styles.iconContainer}>
+          <Icon name={iconName} style={styles.icon} />
+        </View>
       </View>
-    </View>
-  );
-}
+    );
+  })
+);
 const styles = StyleSheet.create({
   inputWrapper: {
-    padding: 15,
+    marginTop: 5,
+    padding: 12,
     borderWidth: 2,
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderColor: '#D9D9D9',
   },
   input: {
     flex: 1,

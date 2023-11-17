@@ -1,10 +1,16 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 function WelcomeScreenButton(props) {
-  const { disabled, onPress, text } = props;
+  const { disabled, onPress, text, styleType } = props;
+  const buttonStyle =
+    styleType === 'welcomeScreenButton'
+      ? styles.welcomeScreenButton
+      : styleType === 'signUpPageButton'
+      ? styles.signUpPageButton
+      : styles.welcomeScreenButton;
   return (
     <TouchableOpacity
-      style={[styles.button, disabled ? { opacity: 0.5 } : { opacity: 1 }]}
+      style={[buttonStyle, disabled ? { opacity: 0.5 } : { opacity: 1 }]}
       disabled={disabled}
       onPress={onPress}
     >
@@ -13,11 +19,20 @@ function WelcomeScreenButton(props) {
   );
 }
 const styles = StyleSheet.create({
-  button: {
+  welcomeScreenButton: {
     marginTop: 20,
     borderRadius: 10,
     width: '100%',
     paddingVertical: 20,
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor: '#004972',
+  },
+  signUpPageButton: {
+    width: '100%',
+    paddingVertical: 20,
+    marginTop: 5,
+    borderRadius: 10,
     alignSelf: 'center',
     alignItems: 'center',
     backgroundColor: '#004972',
@@ -27,6 +42,7 @@ const styles = StyleSheet.create({
     padding: 0,
     fontSize: 17,
     color: '#FFFFFF',
+    textTransform: 'capitalize',
   },
 });
 export default WelcomeScreenButton;

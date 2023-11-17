@@ -7,30 +7,28 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import PageNumberingComponent from './components/PageNumberingComponent';
+
 import SignUpInput from './components/SignUpInput';
 import Button from './components/Button';
 import Divider from './components/Divider';
 import { useState, useRef } from 'react';
 import IconButton from './components/IconButton';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
-const FirstSignUpPage = ({ navigation }) => {
+const SignInPage = ({ navigation }) => {
   /* State */
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [isEmailValid, setEmailValid] = useState(false);
   const [isPasswordValid, setPasswordValid] = useState(false);
-  const [isConfirmPasswordValid, setConfirmPasswordValid] = useState(false);
 
   /* Page navigation */
-  const navigateToSecondSignUpPage = () => {
-    navigation.navigate('SecondSignUpPage');
-  };
+  /* const navigateTo = () => {
+    navigation.navigate('');
+  }; */
 
   /* useRef */
   const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
 
   /* Validation function */
   const validateEmail = (input) => {
@@ -39,9 +37,6 @@ const FirstSignUpPage = ({ navigation }) => {
   };
   const validatePassword = (input) => {
     return input.length >= 6;
-  };
-  const validateConfirmPassword = (password, confirmPassword) => {
-    return password === confirmPassword;
   };
 
   /* Handle change */
@@ -55,21 +50,20 @@ const FirstSignUpPage = ({ navigation }) => {
         setPassword(text);
         setPasswordValid(validatePassword(text));
         break;
-      case 'confirmPassword':
-        setConfirmPassword(text);
-        setConfirmPasswordValid(validateConfirmPassword(password, text));
-        break;
       default:
         break;
     }
   };
 
   /* Enable Button */
-  const isContinueButtonEnabled =
-    isEmailValid && isPasswordValid && isConfirmPasswordValid;
+  const isContinueButtonEnabled = isEmailValid && isPasswordValid;
 
-  /* Handle Sign in link */
-  const handleSignInPress = () => {
+  /* Handle links */
+  const handleSignUpPress = () => {
+    const signInUrl = 'https://google.com';
+    Linking.openURL(signInUrl);
+  };
+  const handleForgotPasswordPress = () => {
     const signInUrl = 'https://google.com';
     Linking.openURL(signInUrl);
   };
@@ -78,16 +72,14 @@ const FirstSignUpPage = ({ navigation }) => {
       {/* BACKGROUND IMAGE */}
       <Image
         style={styles.backgroundImage}
-        source={require('../assets/img/FirstSignUpPageBackground.png')}
+        source={require('../assets/img/SignInPageBackground.png')}
       ></Image>
       {/* INTERACTIVE BOX */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         style={styles.interactiveBox}
       >
-        <Text style={styles.mainHeader}>Sign up</Text>
-        {/* PAGE NUMBERING */}
-        <PageNumberingComponent signUpPageNumber="FirstSignUpPage" />
+        <Text style={styles.mainHeader}>Sign in</Text>
         {/* FORM */}
         <View style={styles.inputsWrapper}>
           <SignUpInput
@@ -109,23 +101,36 @@ const FirstSignUpPage = ({ navigation }) => {
             secureTextEntry={true}
             iconName="lock"
             ref={passwordRef}
-            nextRef={confirmPasswordRef}
           ></SignUpInput>
-          <SignUpInput
-            keyboardType="default"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChangeText={(text) => handleInputChange('confirmPassword', text)}
-            borderColor={isConfirmPasswordValid ? 'green' : '#D9D9D9'}
-            secureTextEntry={true}
-            iconName="lock"
-            ref={confirmPasswordRef}
-          ></SignUpInput>
+          <View style={styles.textWrapper}>
+            <BouncyCheckbox
+              style={styles.checkbox}
+              size={20}
+              fillColor="#004972"
+              unfillColor="#FFFFFF"
+              text="Remember Me"
+              iconStyle={{ borderColor: '#004972', borderRadius: 5 }}
+              innerIconStyle={{ borderWidth: 2, borderRadius: 5 }}
+              textStyle={{
+                marginLeft: -8,
+                fontSize: 15,
+                textDecorationLine: 'none',
+                color: 'rgba(70, 70, 70, 0.5)',
+              }}
+            />
+            <Text
+              style={styles.forgotPassword}
+              onPress={handleForgotPasswordPress}
+            >
+              forgot password?
+            </Text>
+          </View>
+
           <Button
             styleType="signUpPageButton"
             disabled={!isContinueButtonEnabled}
-            onPress={navigateToSecondSignUpPage}
-            text="Continue"
+            /* onPress={navigateTo} */
+            text="sign in"
           />
         </View>
         {/*DIVIDER */}
@@ -137,9 +142,9 @@ const FirstSignUpPage = ({ navigation }) => {
             <IconButton label="facebook" />
           </View>
           <Text style={styles.socialsText}>
-            Already have an account?
-            <Text style={styles.socialsLink} onPress={handleSignInPress}>
-              {''} Sign in
+            Don't have an account?
+            <Text style={styles.socialsLink} onPress={handleSignUpPress}>
+              {''} Sign up
             </Text>
           </Text>
         </View>
@@ -154,7 +159,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   backgroundImage: {
-    minWidth: '150%',
+    minWidth: '110%',
     position: 'absolute',
     top: 0,
   },
@@ -173,10 +178,21 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
   },
-
   inputsWrapper: {
     flex: 1,
     marginTop: 10,
+  },
+  textWrapper: {
+    marginVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  forgotPassword: {
+    fontSize: 15,
+    textTransform: 'capitalize',
+    color: '#004972',
   },
   linesWrapper: {
     padding: 5,
@@ -203,4 +219,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FirstSignUpPage;
+export default SignInPage;

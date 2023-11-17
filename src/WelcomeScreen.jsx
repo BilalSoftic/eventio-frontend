@@ -1,11 +1,13 @@
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
-import WelcomeScreenButton from './components/WelcomeScreenButton';
+import Button from './components/Button';
 
 function WelcomeScreen({ navigation }) {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [selectedFlag, setSelectedFlag] = useState(null);
-  const navigateToFirstSignUp = () => {
+
+  /* Page navigation */
+  const navigateToFirstSignUpPage = () => {
     navigation.navigate('FirstSignUpPage');
   };
   return (
@@ -67,9 +69,10 @@ function WelcomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
         <Image style={styles.dots} source={require('../assets/img/Dots.png')} />
-        <WelcomeScreenButton
+        <Button
+          styleType="welcomeScreenButton"
           disabled={isSubmitDisabled}
-          onPress={navigateToFirstSignUp}
+          onPress={navigateToFirstSignUpPage}
           text="Next"
         />
       </View>
@@ -138,21 +141,6 @@ const styles = StyleSheet.create({
   dots: {
     marginTop: 20,
     alignSelf: 'center',
-  },
-  submitButton: {
-    marginTop: 20,
-    paddingVertical: 20,
-    paddingHorizontal: 150,
-    borderRadius: 10,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#004972',
-  },
-  buttonText: {
-    margin: 0,
-    padding: 0,
-    fontSize: 17,
-    color: '#FFFFFF',
   },
 });
 
