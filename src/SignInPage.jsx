@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 
 import SignUpInput from './components/SignUpInput';
-import Button from './components/Button';
-import Divider from './components/Divider';
+import ButtonComponent from './components/ButtonComponent';
+import DividerComponent from './components/DividerComponent';
 import { useState, useRef } from 'react';
-import IconButton from './components/IconButton';
+import IconButtonComponent from './components/IconButtonComponent';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 const SignInPage = ({ navigation }) => {
@@ -55,13 +55,15 @@ const SignInPage = ({ navigation }) => {
     }
   };
 
-  /* Enable Button */
+  /* Enable ButtonComponent */
   const isContinueButtonEnabled = isEmailValid && isPasswordValid;
 
   /* Handle links */
   const handleSignUpPress = () => {
-    const signInUrl = 'https://google.com';
-    Linking.openURL(signInUrl);
+    navigation.navigate('FirstSignUpPage');
+
+    /* const signInUrl = 'https://google.com';
+    Linking.openURL(signInUrl); */
   };
   const handleForgotPasswordPress = () => {
     const signInUrl = 'https://google.com';
@@ -102,31 +104,33 @@ const SignInPage = ({ navigation }) => {
             iconName="lock"
             ref={passwordRef}
           ></SignUpInput>
-          <View style={styles.textWrapperStyle}>
-            <BouncyCheckbox
-              style={styles.checkbox}
-              size={20}
-              fillColor="#004972"
-              unfillColor="#FFFFFF"
-              text="Remember Me"
-              iconStyle={{ borderColor: '#004972', borderRadius: 5 }}
-              innerIconStyle={{ borderWidth: 2, borderRadius: 5 }}
-              textStyle={{
-                marginLeft: -8,
-                fontSize: 15,
-                textDecorationLine: 'none',
-                color: 'rgba(70, 70, 70, 0.5)',
-              }}
-            />
-            <Text
-              style={styles.forgotPasswordStyle}
-              onPress={handleForgotPasswordPress}
-            >
-              forgot password?
-            </Text>
-          </View>
+        </View>
+        <View style={styles.textWrapperStyle}>
+          <BouncyCheckbox
+            style={styles.checkbox}
+            size={20}
+            fillColor="#004972"
+            unfillColor="#FFFFFF"
+            text="Remember Me"
+            iconStyle={{ borderColor: '#004972', borderRadius: 5 }}
+            innerIconStyle={{ borderWidth: 2, borderRadius: 5 }}
+            textStyle={{
+              marginLeft: -8,
+              fontSize: 15,
+              textDecorationLine: 'none',
+              color: 'rgba(70, 70, 70, 0.5)',
+            }}
+          />
+          <Text
+            style={styles.forgotPasswordStyle}
+            onPress={handleForgotPasswordPress}
+          >
+            forgot password?
+          </Text>
+        </View>
 
-          <Button
+        <View style={styles.buttonContainerStyle}>
+          <ButtonComponent
             styleType="signUpPageButton"
             disabled={!isContinueButtonEnabled}
             /* onPress={navigateTo} */
@@ -134,12 +138,14 @@ const SignInPage = ({ navigation }) => {
           />
         </View>
         {/*DIVIDER */}
-        <Divider text="or" />
+        <View style={styles.dividerContainerStyle}>
+          <DividerComponent text="or" />
+        </View>
         {/* SOCIALS */}
         <View style={styles.socialsContainerStyle}>
           <View style={styles.socialButtonsContainerStyle}>
-            <IconButton label="google" />
-            <IconButton label="facebook" />
+            <IconButtonComponent label="google" />
+            <IconButtonComponent label="facebook" />
           </View>
           <Text style={styles.socialsTextStyle}>
             Don't have an account?
@@ -177,13 +183,20 @@ const styles = StyleSheet.create({
   mainHeaderTextStyle: {
     fontSize: 28,
     fontWeight: 'bold',
+    marginBottom: 15,
   },
   inputsContainerStyle: {
     flex: 1,
-    marginTop: 10,
+    marginBottom: 15,
+    gap: 5,
   },
+  buttonContainerStyle: {
+    marginBottom: 15,
+  },
+  dividerContainerStyle: { marginBottom: 5 },
+
   textWrapperStyle: {
-    marginVertical: 10,
+    marginBottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import PageNumberingComponent from './components/PageNumberingComponent';
 import SignUpInput from './components/SignUpInput';
-import Button from './components/Button';
-import Divider from './components/Divider';
+import ButtonComponent from './components/ButtonComponent';
+import DividerComponent from './components/DividerComponent';
 import { useState, useRef } from 'react';
-import IconButton from './components/IconButton';
+import IconButton from './components/IconButtonComponent';
 
 const FirstSignUpPage = ({ navigation }) => {
   /* State */
@@ -87,7 +87,9 @@ const FirstSignUpPage = ({ navigation }) => {
       >
         <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
         {/* PAGE NUMBERING */}
-        <PageNumberingComponent signUpPageNumber="FirstSignUpPage" />
+        <View style={styles.pageNumberingContainer}>
+          <PageNumberingComponent signUpPageNumber="FirstSignUpPage" />
+        </View>
         {/* FORM */}
         <View style={styles.inputsContainerStyle}>
           <SignUpInput
@@ -121,7 +123,10 @@ const FirstSignUpPage = ({ navigation }) => {
             iconName="lock"
             ref={confirmPasswordRef}
           ></SignUpInput>
-          <Button
+        </View>
+        {/* BUTTON */}
+        <View style={styles.buttonContainerStyle}>
+          <ButtonComponent
             styleType="signUpPageButtonStyle"
             disabled={!isContinueButtonEnabled}
             onPress={navigateToSecondSignUpPage}
@@ -129,7 +134,10 @@ const FirstSignUpPage = ({ navigation }) => {
           />
         </View>
         {/*DIVIDER */}
-        <Divider text="or" />
+
+        <View style={styles.dividerContainerStyle}>
+          <DividerComponent text="or" />
+        </View>
         {/* SOCIALS */}
         <View style={styles.socialsContainerStyle}>
           <View style={styles.socialButtonsContainerStyle}>
@@ -173,11 +181,19 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
   },
+  pageNumberingContainer: {
+    marginBottom: 10,
+  },
 
   inputsContainerStyle: {
     flex: 1,
-    marginTop: 10,
+    gap: 5,
+    marginBottom: 15,
   },
+  buttonContainerStyle: {
+    marginBottom: 15,
+  },
+  dividerContainerStyle: { marginBottom: 5 },
 
   socialsContainerStyle: {
     flexDirection: 'column',

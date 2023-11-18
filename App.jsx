@@ -12,7 +12,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/*         <Stack.Screen
+        {/* <Stack.Screen
           name="WelcomeScreen"
           options={{ headerShown: false }}
           component={WelcomeScreen}
@@ -21,18 +21,18 @@ export default function App() {
           name="FirstSignUpPage"
           options={{ headerShown: false }}
           component={FirstSignUpPage}
-        />
+        /> */}
         <Stack.Screen
           name="SecondSignUpPage"
           options={{ headerShown: false }}
           component={SecondSignUpPage}
         />
-         */}
-        <Stack.Screen
+
+        {/* <Stack.Screen
           name="SignInPage"
           options={{ headerShown: false }}
           component={SignInPage}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -10,9 +10,8 @@ import {
 import PageNumberingComponent from './components/PageNumberingComponent';
 import DatePickerComponent from './components/DatePickerComponent';
 import SignUpInput from './components/SignUpInput';
-import PhoneNumberInput from './components/PhoneNumberInput';
-import Button from './components/Button';
-
+import PhoneNumberInputComponent from './components/PhoneNumberInputComponent';
+import ButtonComponent from './components/ButtonComponent';
 import { useState, useRef } from 'react';
 
 const SecondSignUpPage = ({ navigation }) => {
@@ -31,6 +30,7 @@ const SecondSignUpPage = ({ navigation }) => {
   const nameRef = useRef();
   const lastNameRef = useRef();
   const phoneNumberRef = useRef();
+  const datePickerComponentRef = useRef();
 
   /* Validation function */
   const validateName = (input) => {
@@ -67,7 +67,7 @@ const SecondSignUpPage = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.contanierStyle}>
+    <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
       <Image
         style={styles.backgroundImageStyle}
@@ -80,9 +80,10 @@ const SecondSignUpPage = ({ navigation }) => {
       >
         <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
         {/* PAGE NUMBERING */}
-        <PageNumberingComponent signUpPageNumber="SecondSignUpPage" />
-        {/*   */}
-
+        <View style={styles.pageNumberingContainer}>
+          <PageNumberingComponent signUpPageNumber="SecondSignUpPage" />
+        </View>
+        {/* FORM */}
         <View style={styles.inputsContainerStyle}>
           <SignUpInput
             keyboardType="default"
@@ -104,25 +105,28 @@ const SecondSignUpPage = ({ navigation }) => {
             ref={lastNameRef}
             nextRef={phoneNumberRef}
           ></SignUpInput>
-          <PhoneNumberInput
+          <PhoneNumberInputComponent
             value={phoneNumber}
             onChangePhoneNumber={(text) =>
               handleInputChange('phoneNumber', text)
             }
             ref={phoneNumberRef}
+            nextRef={datePickerComponentRef}
             borderColor={isPhoneNumberValid ? 'green' : '#D9D9D9'}
           />
-          <DatePickerComponent />
-          <Button
+          <DatePickerComponent ref={datePickerComponentRef} />
+        </View>
+        <View style={styles.buttonContainerStyle}>
+          <ButtonComponent
             styleType="signUpPageButtonStyle"
             /* disabled={!isContinueButtonEnabled}
-            onPress={navigateToSecondSignUpPage} */
+              onPress={navigateToSecondSignUpPage} */
             text="Continue"
           />
-          <Text style={styles.goBackStyle} onPress={navigateToFirstSignUpPage}>
-            go back
-          </Text>
         </View>
+        <Text style={styles.goBackStyle} onPress={navigateToFirstSignUpPage}>
+          go back
+        </Text>
       </KeyboardAvoidingView>
     </View>
   );
@@ -153,12 +157,19 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
   },
+  pageNumberingContainer: {
+    marginBottom: 10,
+  },
   inputsContainerStyle: {
     flex: 1,
-    marginTop: 10,
+    marginBottom: 10,
+    gap: 5,
+  },
+  buttonContainerStyle: {
+    marginBottom: 15,
   },
   goBackStyle: {
-    marginVertical: 15,
+    marginBottom: 15,
     fontSize: 15,
     fontWeight: 'bold',
     alignSelf: 'center',

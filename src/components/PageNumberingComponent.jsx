@@ -22,7 +22,7 @@ const PageNumberingComponent = (props) => {
       : signUpPageNumber === 'SecondSignUpPage'
       ? { ...styles.whiteContentStyle }
       : null;
-  const lineColor =
+  const lineColorStyle =
     signUpPageNumber === 'FirstSignUpPage'
       ? { ...styles.opacityLineStyle }
       : signUpPageNumber === 'SecondSignUpPage'
@@ -38,9 +38,9 @@ const PageNumberingComponent = (props) => {
         </View>
         <Text style={styles.circleHeaderStyle}>General</Text>
       </View>
-      <View style={[styles.lineStyle, lineColor]} />
+      <View style={[styles.lineStyle, lineColorStyle]} />
       {/* Second number */}
-      <View style={styles.secondNumberContainer}>
+      <View style={styles.secondCircleContainerStyle}>
         <View style={[styles.circleStyle, circleBackgroundStyle]}>
           <Text style={contentColorStyle}>2</Text>
         </View>

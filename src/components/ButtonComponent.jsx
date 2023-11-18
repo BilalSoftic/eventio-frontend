@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-function Button(props) {
+function ButtonComponent(props) {
   const { disabled, onPress, text, styleType } = props;
   const buttonStyle =
     styleType === 'welcomeScreenButtonStyle'
@@ -20,10 +20,9 @@ function Button(props) {
 }
 const styles = StyleSheet.create({
   welcomeScreenButtonStyle: {
-    marginTop: 20,
-    borderRadius: 10,
     width: '100%',
     paddingVertical: 20,
+    borderRadius: 10,
     alignSelf: 'center',
     alignItems: 'center',
     backgroundColor: '#004972',
@@ -31,7 +30,6 @@ const styles = StyleSheet.create({
   signUpPageButtonStyle: {
     width: '100%',
     paddingVertical: 20,
-    marginTop: 5,
     borderRadius: 10,
     alignSelf: 'center',
     alignItems: 'center',
@@ -45,4 +43,4 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
 });
-export default Button;
+export default ButtonComponent;

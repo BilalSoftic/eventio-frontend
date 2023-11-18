@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-function Divider(props) {
+function DividerComponent(props) {
   const { text } = props;
   return (
     <View style={styles.containerStyle}>
@@ -13,9 +13,7 @@ function Divider(props) {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    padding: 5,
-    marginTop: 10,
-    width: '100%',
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -23,4 +21,4 @@ const styles = StyleSheet.create({
   textStyle: { fontSize: 16, marginHorizontal: 10, color: '#707070' },
 });
 
-export default Divider;
+export default DividerComponent;

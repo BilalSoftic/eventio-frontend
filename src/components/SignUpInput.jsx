@@ -51,7 +51,6 @@ const SignUpInput = forwardRef(
 );
 const styles = StyleSheet.create({
   inputContainerStyle: {
-    marginTop: 5,
     padding: 12,
     borderWidth: 2,
     borderRadius: 10,

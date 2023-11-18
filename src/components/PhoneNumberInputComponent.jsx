@@ -4,9 +4,9 @@ import PhoneInput from 'react-native-phone-input';
 /* import CountryPicker from 'react-native-country-picker-modal'; */
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const PhoneNumberInput = forwardRef(
+const PhoneNumberInputComponent = forwardRef(
   (Input = (props, ref) => {
-    const { value, onChangePhoneNumber, borderColor } = props;
+    const { value, onChangePhoneNumber, borderColor, nextRef } = props;
     /* const [phoneNumber, setPhoneNumber] = useState(''); */
     const [countryCode, setCountryCode] = useState('');
     const [selectedCountry, setSelectedCountry] = useState(null);
@@ -19,12 +19,10 @@ const PhoneNumberInput = forwardRef(
     }; */
 
     const onSubmit = () => {
-      // Perform your desired action with
-      // the phone number and country code
       Alert.alert(
         'Form Submitted',
-        `Phone Number: ${phoneNumber} 
-					\nCountry Code: ${countryCode}`
+        `Phone Number: ${value} 
+					`
       );
     };
 
@@ -43,10 +41,15 @@ const PhoneNumberInput = forwardRef(
           textStyle={{ fontSize: 16 }}
           value={value}
           onChangePhoneNumber={onChangePhoneNumber}
-          onSubmit={onSubmit}
           flagStyle={{ height: 22, borderRadius: 5 }}
           style={styles.phoneInput}
           ref={ref}
+          textProps={{
+            returnKeyType: nextRef ? 'next' : 'done',
+            onSubmitEditing: () => {
+              nextRef ? nextRef.current.focus() : null;
+            },
+          }}
         />
         <View style={styles.iconContainer}>
           <Icon name="phone" style={styles.icon} />
@@ -77,7 +80,6 @@ const PhoneNumberInput = forwardRef(
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 5,
     padding: 14,
     borderWidth: 2,
     borderRadius: 10,
@@ -117,4 +119,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PhoneNumberInput;
+export default PhoneNumberInputComponent;

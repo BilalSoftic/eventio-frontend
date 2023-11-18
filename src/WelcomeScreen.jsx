@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
-import Button from './components/Button';
+import ButtonComponent from './components/ButtonComponent';
 
 function WelcomeScreen({ navigation }) {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
@@ -34,6 +34,7 @@ function WelcomeScreen({ navigation }) {
         <Text style={styles.secondaryHeaderTextStyle}>
           Choose your language
         </Text>
+        {/* FLAGS  */}
         <View style={styles.flagSelectorStyle}>
           <TouchableOpacity
             style={[
@@ -74,7 +75,7 @@ function WelcomeScreen({ navigation }) {
           style={styles.dotsImageStyle}
           source={require('../assets/img/Dots.png')}
         />
-        <Button
+        <ButtonComponent
           styleType="welcomeScreenButtonStyle"
           disabled={isSubmitDisabled}
           onPress={navigateToFirstSignUpPage}
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
 
   interactiveContainerStyle: {
     flex: 1.3,
-    padding: 25,
+    padding: 20,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     backgroundColor: '#FFFFFF',
@@ -125,13 +126,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   secondaryHeaderTextStyle: {
+    marginBottom: 20,
     fontSize: 16,
-    marginTop: 15,
     opacity: 0.5,
     alignSelf: 'center',
   },
   flagSelectorStyle: {
-    marginTop: 20,
+    marginBottom: 20,
     gap: 35,
     alignSelf: 'center',
     flexDirection: 'row',
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
   },
 
   dotsImageStyle: {
-    marginTop: 20,
+    marginBottom: 20,
     alignSelf: 'center',
   },
 });

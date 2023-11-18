@@ -1,5 +1,5 @@
 import { TouchableOpacity, StyleSheet, Image } from 'react-native';
-const IconButton = (props) => {
+const IconButtonComponent = (props) => {
   const { label } = props;
 
   return (
@@ -20,4 +20,4 @@ const IconButton = (props) => {
 const styles = StyleSheet.create({
   iconStyle: { flex: 1 },
 });
-export default IconButton;
+export default IconButtonComponent;
