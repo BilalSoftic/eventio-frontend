@@ -1,20 +1,22 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './DatePickerComponentStyle';
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const DatePickerComponent = forwardRef((props, ref) => {
-  const { borderColor } = props;
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+const DatePickerComponent = ({
+  borderColor,
+  isDatePickerVisible,
+  setIsDatePickerVisible,
+}) => {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const showDatePicker = () => {
-    setDatePickerVisibility(true);
+    setIsDatePickerVisible(true);
   };
 
   const hideDatePicker = () => {
-    setDatePickerVisibility(false);
+    setIsDatePickerVisible(false);
   };
 
   const handleConfirm = (date) => {
@@ -36,11 +38,7 @@ const DatePickerComponent = forwardRef((props, ref) => {
 
   return (
     <View>
-      <TouchableOpacity
-        style={styles.buttonStyle}
-        onPress={showDatePicker}
-        ref={ref}
-      >
+      <TouchableOpacity style={styles.buttonStyle} onPress={showDatePicker}>
         <Text style={buttonTextStyle}>{buttonText}</Text>
         <View style={styles.iconContainerStyle}>
           <Icon name="calendar" style={styles.iconStyle} />
@@ -55,6 +53,6 @@ const DatePickerComponent = forwardRef((props, ref) => {
       />
     </View>
   );
-});
+};
 
 export default DatePickerComponent;

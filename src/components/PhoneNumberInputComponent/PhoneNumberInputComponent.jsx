@@ -5,7 +5,7 @@ import PhoneInput from 'react-native-phone-input';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const PhoneNumberInputComponent = forwardRef((props, ref) => {
-  const { value, onChangePhoneNumber, borderColor, onPressNext } = props;
+  const { value, onChangePhoneNumber, borderColor, onSubmitEditing } = props;
 
   const phoneNumberStyle = {
     ...styles.container,
@@ -23,6 +23,7 @@ const PhoneNumberInputComponent = forwardRef((props, ref) => {
         ref={ref}
         textProps={{
           returnKeyType: 'next',
+          onSubmitEditing,
         }}
       />
       <View style={styles.iconContainer}>

@@ -23,6 +23,7 @@ const SecondSignUpPage = ({ navigation }) => {
   const [isNameValid, setNameValid] = useState(false);
   const [isLastNameValid, setLastNameValid] = useState(false);
   const [isPhoneNumberValid, setPhoneNumberValid] = useState(false);
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
 
   /* Page navigation */
   const navigateToFirstSignUpPage = () => {
@@ -115,8 +116,12 @@ const SecondSignUpPage = ({ navigation }) => {
             }
             ref={phoneNumberRef}
             borderColor={isPhoneNumberValid ? 'green' : '#D9D9D9'}
+            onSubmitEditing={() => setIsDatePickerVisible(true)}
           />
-          <DatePickerComponent ref={datePickerComponentRef} />
+          <DatePickerComponent
+            isDatePickerVisible={isDatePickerVisible}
+            setIsDatePickerVisible={setIsDatePickerVisible}
+          />
         </View>
         <View style={styles.buttonContainerStyle}>
           <ButtonComponent
