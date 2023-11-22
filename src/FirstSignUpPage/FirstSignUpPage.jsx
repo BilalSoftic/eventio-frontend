@@ -29,6 +29,9 @@ const FirstSignUpPage = ({ navigation }) => {
   const navigateToSecondSignUpPage = () => {
     navigation.navigate('SecondSignUpPage');
   };
+  const navigateToSignInPage = () => {
+    navigation.navigate('SignInPage');
+  };
 
   /* useRef */
   const passwordRef = useRef();
@@ -148,7 +151,10 @@ const FirstSignUpPage = ({ navigation }) => {
           </View>
           <Text style={styles.socialsTextStyle}>
             Already have an account?
-            <Text style={styles.socialsLinkStyle} onPress={handleSignInPress}>
+            <Text
+              style={styles.socialsLinkStyle}
+              onPress={navigateToSignInPage}
+            >
               {''} Sign in
             </Text>
           </Text>

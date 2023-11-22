@@ -25,9 +25,13 @@ const SignInPage = ({ navigation }) => {
   const [isPasswordValid, setPasswordValid] = useState(false);
 
   /* Page navigation */
-  /* const navigateTo = () => {
-    navigation.navigate('');
-  }; */
+  const handleSignUpPress = () => {
+    navigation.navigate('FirstSignUpPage');
+  };
+  const handleForgotPasswordPress = () => {
+    const forgotPasswordUrl = 'https://google.com';
+    Linking.openURL(forgotPasswordUrl);
+  };
 
   /* useRef */
   const passwordRef = useRef();
@@ -60,14 +64,6 @@ const SignInPage = ({ navigation }) => {
   /* Enable ButtonComponent */
   const isContinueButtonEnabled = isEmailValid && isPasswordValid;
 
-  /* Handle links */
-  const handleSignUpPress = () => {
-    navigation.navigate('FirstSignUpPage');
-  };
-  const handleForgotPasswordPress = () => {
-    const forgotPasswordUrl = 'https://google.com';
-    Linking.openURL(forgotPasswordUrl);
-  };
   return (
     <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
