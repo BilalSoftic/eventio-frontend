@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   View,
   Text,
   Image,
@@ -7,12 +6,15 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import PageNumberingComponent from './components/PageNumberingComponent';
-import SignUpInput from './components/SignUpInput';
-import ButtonComponent from './components/ButtonComponent';
-import DividerComponent from './components/DividerComponent';
 import { useState, useRef } from 'react';
-import IconButton from './components/IconButtonComponent';
+import styles from './FirstSignUpPageStyle';
+import PageNumberingComponent from '../components/PageNumberingComponent/PageNumberingComponent';
+import SignUpInput from '../components/InputComponent/InputComponent';
+import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
+import DividerComponent from '../components/DividerComponent/DividerComponent';
+import IconButton from '../components/IconButtonComponent/IconButtonComponent';
+
+const imgPath = '../../assets/img/';
 
 const FirstSignUpPage = ({ navigation }) => {
   /* State */
@@ -78,7 +80,7 @@ const FirstSignUpPage = ({ navigation }) => {
       {/* BACKGROUND IMAGE */}
       <Image
         style={styles.backgroundImageStyle}
-        source={require('../assets/img/FirstSignUpPageBackground.png')}
+        source={require(imgPath + 'FirstSignUpPageBackground.png')}
       ></Image>
       {/* INTERACTIVE BOX */}
       <KeyboardAvoidingView
@@ -155,60 +157,5 @@ const FirstSignUpPage = ({ navigation }) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  containerStyle: {
-    flex: 1,
-    alignItems: 'center',
-    position: 'relative',
-  },
-  backgroundImageStyle: {
-    minWidth: '150%',
-    position: 'absolute',
-    top: 0,
-  },
-  interactiveContainerStyle: {
-    width: '100%',
-    paddingTop: 25,
-    paddingBottom: 15,
-    paddingHorizontal: 25,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#FFFFFF',
-  },
-  mainHeaderTextStyle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-  },
-  pageNumberingContainer: {
-    marginBottom: 10,
-  },
-
-  inputsContainerStyle: {
-    flex: 1,
-    gap: 5,
-    marginBottom: 15,
-  },
-  buttonContainerStyle: {
-    marginBottom: 15,
-  },
-  dividerContainerStyle: { marginBottom: 5 },
-
-  socialsContainerStyle: {
-    flexDirection: 'column',
-  },
-  socialButtonsContainerStyle: {
-    gap: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  socialsTextStyle: {
-    alignSelf: 'center',
-  },
-  socialsLinkStyle: {
-    color: '#004972',
-  },
-});
 
 export default FirstSignUpPage;

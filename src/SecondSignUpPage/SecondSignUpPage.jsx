@@ -1,18 +1,19 @@
 import {
-  StyleSheet,
   View,
   Text,
   Image,
-  Linking,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import PageNumberingComponent from './components/PageNumberingComponent';
-import DatePickerComponent from './components/DatePickerComponent';
-import SignUpInput from './components/SignUpInput';
-import PhoneNumberInputComponent from './components/PhoneNumberInputComponent';
-import ButtonComponent from './components/ButtonComponent';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import styles from './SecondSignUpPageStyle';
+import PageNumberingComponent from '../components/PageNumberingComponent/PageNumberingComponent';
+import DatePickerComponent from '../components/DatePickerComponent/DatePickerComponent';
+import InputComponent from '../components/InputComponent/InputComponent';
+import PhoneNumberInputComponent from '../components/PhoneNumberInputComponent/PhoneNumberInputComponent';
+import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
+
+const imgPath = '../../assets/img/';
 
 const SecondSignUpPage = ({ navigation }) => {
   /* State */
@@ -22,6 +23,7 @@ const SecondSignUpPage = ({ navigation }) => {
   const [isNameValid, setNameValid] = useState(false);
   const [isLastNameValid, setLastNameValid] = useState(false);
   const [isPhoneNumberValid, setPhoneNumberValid] = useState(false);
+
   /* Page navigation */
   const navigateToFirstSignUpPage = () => {
     navigation.navigate('FirstSignUpPage');
@@ -59,6 +61,7 @@ const SecondSignUpPage = ({ navigation }) => {
       case 'phoneNumber':
         setPhoneNumber(text);
         setPhoneNumberValid(validatePhoneNumber(text));
+
         break;
 
       default:
@@ -71,7 +74,7 @@ const SecondSignUpPage = ({ navigation }) => {
       {/* BACKGROUND IMAGE */}
       <Image
         style={styles.backgroundImageStyle}
-        source={require('../assets/img/SecondSignUpPageBackground.png')}
+        source={require(imgPath + 'SecondSignUpPageBackground.png')}
       ></Image>
       {/* INTERACTIVE BOX */}
       <KeyboardAvoidingView
@@ -85,7 +88,7 @@ const SecondSignUpPage = ({ navigation }) => {
         </View>
         {/* FORM */}
         <View style={styles.inputsContainerStyle}>
-          <SignUpInput
+          <InputComponent
             keyboardType="default"
             placeholder="Name"
             value={firstName}
@@ -94,8 +97,8 @@ const SecondSignUpPage = ({ navigation }) => {
             iconName="user"
             ref={nameRef}
             nextRef={lastNameRef}
-          ></SignUpInput>
-          <SignUpInput
+          ></InputComponent>
+          <InputComponent
             keyboardType="default"
             placeholder="Last Name"
             value={lastName}
@@ -104,14 +107,13 @@ const SecondSignUpPage = ({ navigation }) => {
             iconName="user"
             ref={lastNameRef}
             nextRef={phoneNumberRef}
-          ></SignUpInput>
+          ></InputComponent>
           <PhoneNumberInputComponent
             value={phoneNumber}
             onChangePhoneNumber={(text) =>
               handleInputChange('phoneNumber', text)
             }
             ref={phoneNumberRef}
-            nextRef={datePickerComponentRef}
             borderColor={isPhoneNumberValid ? 'green' : '#D9D9D9'}
           />
           <DatePickerComponent ref={datePickerComponentRef} />
@@ -131,50 +133,5 @@ const SecondSignUpPage = ({ navigation }) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  containerStyle: {
-    flex: 1,
-    alignItems: 'center',
-    position: 'relative',
-  },
-  backgroundImageStyle: {
-    minWidth: '150%',
-    position: 'absolute',
-    top: 0,
-  },
-  interactiveContainerStyle: {
-    width: '100%',
-    paddingTop: 25,
-    paddingBottom: 15,
-    paddingHorizontal: 25,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#FFFFFF',
-  },
-  mainHeaderTextStyle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-  },
-  pageNumberingContainer: {
-    marginBottom: 10,
-  },
-  inputsContainerStyle: {
-    flex: 1,
-    marginBottom: 10,
-    gap: 5,
-  },
-  buttonContainerStyle: {
-    marginBottom: 15,
-  },
-  goBackStyle: {
-    marginBottom: 15,
-    fontSize: 15,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    textTransform: 'capitalize',
-    color: 'rgb(0, 49, 72)',
-  },
-});
+
 export default SecondSignUpPage;

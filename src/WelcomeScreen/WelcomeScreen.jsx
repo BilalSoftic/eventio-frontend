@@ -1,6 +1,9 @@
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import styles from './WelcomeScreenStyle';
 import React, { useState } from 'react';
-import ButtonComponent from './components/ButtonComponent';
+import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
+
+const imgPath = '../../assets/img/';
 
 function WelcomeScreen({ navigation }) {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
@@ -16,15 +19,15 @@ function WelcomeScreen({ navigation }) {
       <View style={styles.backgroundImageStyle}>
         <Image
           style={styles.dotsStartStyle}
-          source={require('../assets/img/BackgroundDots.png')}
+          source={require(imgPath + 'BackgroundDots.png')}
         />
         <Image
           style={styles.centerImgStyle}
-          source={require('../assets/img/Astronaut.png')}
+          source={require(imgPath + 'Astronaut.png')}
         />
         <Image
           style={styles.dotsEndStyle}
-          source={require('../assets/img/BackgroundDots.png')}
+          source={require(imgPath + 'BackgroundDots.png')}
         />
       </View>
 
@@ -50,7 +53,7 @@ function WelcomeScreen({ navigation }) {
           >
             <Image
               id="bih"
-              source={require('../assets/img/Flag_of_Bosnia_and_Herzegovina.png')}
+              source={require(imgPath + 'Flag_of_Bosnia_and_Herzegovina.png')}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -67,13 +70,13 @@ function WelcomeScreen({ navigation }) {
           >
             <Image
               id="uk"
-              source={require('../assets/img/Flag_of_the_United_Kingdom.png')}
+              source={require(imgPath + 'Flag_of_the_United_Kingdom.png')}
             />
           </TouchableOpacity>
         </View>
         <Image
           style={styles.dotsImageStyle}
-          source={require('../assets/img/Dots.png')}
+          source={require(imgPath + 'Dots.png')}
         />
         <ButtonComponent
           styleType="welcomeScreenButtonStyle"
@@ -85,69 +88,5 @@ function WelcomeScreen({ navigation }) {
     </View>
   );
 }
-const styles = StyleSheet.create({
-  containerStyle: {
-    flex: 1,
-    backgroundColor: '#004972',
-  },
-  backgroundImageStyle: {
-    flex: 2,
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  dotsStartStyle: {
-    position: 'absolute',
-    top: 50,
-    right: 0,
-  },
-  centerImgStyle: {
-    position: 'absolute',
-    top: '23%',
-    right: '5%',
-  },
-  dotsEndStyle: {
-    position: 'absolute',
-    bottom: -10,
-    left: 0,
-  },
-
-  interactiveContainerStyle: {
-    flex: 1.3,
-    padding: 20,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-around',
-  },
-  mainHeaderTextStyle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-  },
-  secondaryHeaderTextStyle: {
-    marginBottom: 20,
-    fontSize: 16,
-    opacity: 0.5,
-    alignSelf: 'center',
-  },
-  flagSelectorStyle: {
-    marginBottom: 20,
-    gap: 35,
-    alignSelf: 'center',
-    flexDirection: 'row',
-  },
-  selectedFlagStyle: {
-    opacity: 1,
-  },
-  unselectedFlagStyle: {
-    opacity: 0.5,
-  },
-
-  dotsImageStyle: {
-    marginBottom: 20,
-    alignSelf: 'center',
-  },
-});
 
 export default WelcomeScreen;

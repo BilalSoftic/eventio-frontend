@@ -1,15 +1,17 @@
-import { TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
+import styles from './IconButtonComponentStyle';
 const IconButtonComponent = (props) => {
   const { label } = props;
 
+  const iconPath = '../../../assets/img/';
   return (
     <TouchableOpacity style={styles.buttonStyle}>
       <Image
         source={
           label === 'google'
-            ? require(`../../assets/img/google.png`)
+            ? require(iconPath + `google.png`)
             : 'facebook'
-            ? require(`../../assets/img/facebook.png`)
+            ? require(iconPath + `facebook.png`)
             : null
         }
         style={styles.iconStyle}
@@ -17,7 +19,5 @@ const IconButtonComponent = (props) => {
     </TouchableOpacity>
   );
 };
-const styles = StyleSheet.create({
-  iconStyle: { flex: 1 },
-});
+
 export default IconButtonComponent;

@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   View,
   Text,
   Image,
@@ -7,13 +6,16 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-
-import SignUpInput from './components/SignUpInput';
-import ButtonComponent from './components/ButtonComponent';
-import DividerComponent from './components/DividerComponent';
 import { useState, useRef } from 'react';
-import IconButtonComponent from './components/IconButtonComponent';
+import styles from './SignInPageStyle';
+
+import InputComponent from '../components/InputComponent/InputComponent';
+import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
+import DividerComponent from '../components/DividerComponent/DividerComponent';
+import IconButtonComponent from '../components/IconButtonComponent/IconButtonComponent';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+
+const imgPath = '../../assets/img/';
 
 const SignInPage = ({ navigation }) => {
   /* State */
@@ -61,20 +63,17 @@ const SignInPage = ({ navigation }) => {
   /* Handle links */
   const handleSignUpPress = () => {
     navigation.navigate('FirstSignUpPage');
-
-    /* const signInUrl = 'https://google.com';
-    Linking.openURL(signInUrl); */
   };
   const handleForgotPasswordPress = () => {
-    const signInUrl = 'https://google.com';
-    Linking.openURL(signInUrl);
+    const forgotPasswordUrl = 'https://google.com';
+    Linking.openURL(forgotPasswordUrl);
   };
   return (
     <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
       <Image
         style={styles.backgroundImageStyle}
-        source={require('../assets/img/SignInPageBackground.png')}
+        source={require(imgPath + 'SignInPageBackground.png')}
       ></Image>
       {/* INTERACTIVE BOX */}
       <KeyboardAvoidingView
@@ -84,7 +83,7 @@ const SignInPage = ({ navigation }) => {
         <Text style={styles.mainHeaderTextStyle}>Sign in</Text>
         {/* FORM */}
         <View style={styles.inputsContainerStyle}>
-          <SignUpInput
+          <InputComponent
             keyboardType="email-address"
             autoCapitalize="none"
             placeholder="E-mail"
@@ -93,8 +92,8 @@ const SignInPage = ({ navigation }) => {
             borderColor={isEmailValid ? 'green' : '#D9D9D9'}
             iconName="envelope"
             nextRef={passwordRef}
-          ></SignUpInput>
-          <SignUpInput
+          ></InputComponent>
+          <InputComponent
             keyboardType="default"
             placeholder="Password"
             value={password}
@@ -103,7 +102,7 @@ const SignInPage = ({ navigation }) => {
             secureTextEntry={true}
             iconName="lock"
             ref={passwordRef}
-          ></SignUpInput>
+          ></InputComponent>
         </View>
         <View style={styles.textWrapperStyle}>
           <BouncyCheckbox
@@ -158,78 +157,5 @@ const SignInPage = ({ navigation }) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  containerStyle: {
-    flex: 1,
-    alignItems: 'center',
-    position: 'relative',
-  },
-  backgroundImageStyle: {
-    minWidth: '110%',
-    position: 'absolute',
-    top: 0,
-  },
-  interactiveContainerStyle: {
-    width: '100%',
-    paddingTop: 25,
-    paddingBottom: 15,
-    paddingHorizontal: 25,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: '#FFFFFF',
-  },
-  mainHeaderTextStyle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 15,
-  },
-  inputsContainerStyle: {
-    flex: 1,
-    marginBottom: 15,
-    gap: 5,
-  },
-  buttonContainerStyle: {
-    marginBottom: 15,
-  },
-  dividerContainerStyle: { marginBottom: 5 },
-
-  textWrapperStyle: {
-    marginBottom: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-
-  forgotPasswordStyle: {
-    fontSize: 15,
-    textTransform: 'capitalize',
-    color: '#004972',
-  },
-  linesWrapper: {
-    padding: 5,
-    marginTop: 10,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  line: { flex: 3, padding: 0.5, backgroundColor: '#EAEAEA' },
-  middleText: { fontSize: 16, marginHorizontal: 10, color: '#707070' },
-  socialsContainerStyle: {
-    flexDirection: 'column',
-  },
-  socialButtonsContainerStyle: {
-    gap: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  socialsTextStyle: {
-    alignSelf: 'center',
-  },
-  socialsLinkStyle: {
-    color: '#004972',
-  },
-});
 
 export default SignInPage;

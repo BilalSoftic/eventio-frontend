@@ -1,4 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
+import styles from './ButtonComponentStyle';
 
 function ButtonComponent(props) {
   const { disabled, onPress, text, styleType } = props;
@@ -18,29 +19,5 @@ function ButtonComponent(props) {
     </TouchableOpacity>
   );
 }
-const styles = StyleSheet.create({
-  welcomeScreenButtonStyle: {
-    width: '100%',
-    paddingVertical: 20,
-    borderRadius: 10,
-    alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor: '#004972',
-  },
-  signUpPageButtonStyle: {
-    width: '100%',
-    paddingVertical: 20,
-    borderRadius: 10,
-    alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor: '#004972',
-  },
-  buttonTextStyle: {
-    margin: 0,
-    padding: 0,
-    fontSize: 17,
-    color: '#FFFFFF',
-    textTransform: 'capitalize',
-  },
-});
+
 export default ButtonComponent;
