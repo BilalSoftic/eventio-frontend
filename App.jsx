@@ -2,6 +2,8 @@ import WelcomeScreen from './src/WelcomeScreen/WelcomeScreen';
 import FirstSignUpPage from './src/FirstSignUpPage/FirstSignUpPage';
 import SecondSignUpPage from './src/SecondSignUpPage/SecondSignUpPage';
 import SignInPage from './src/SignInPage/SignInPage';
+import FirstInfoPage from './src/FirstInfoPage/FirstInfoPage';
+import SecondInfoPage from './src/SecondInfoPage/SecondInfoPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
@@ -13,11 +15,13 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        {/*   <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen name="FirstSignUpPage" component={FirstSignUpPage} />
         <Stack.Screen name="SecondSignUpPage" component={SecondSignUpPage} />
 
-        <Stack.Screen name="SignInPage" component={SignInPage} />
+        <Stack.Screen name="SignInPage" component={SignInPage} /> 
+        <Stack.Screen name="FirstInfoPage" component={FirstInfoPage} />*/}
+        <Stack.Screen name="SecondInfoPage" component={SecondInfoPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

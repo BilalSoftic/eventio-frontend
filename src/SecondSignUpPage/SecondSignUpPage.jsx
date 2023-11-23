@@ -28,115 +28,118 @@ const SecondSignUpPage = ({ navigation }) => {
   /* Page navigation */
   const navigateToFirstSignUpPage = () => {
     navigation.navigate('FirstSignUpPage');
-  };
-  /* useRef */
-  const nameRef = useRef();
-  const lastNameRef = useRef();
-  const phoneNumberRef = useRef();
-  const datePickerComponentRef = useRef();
+    const navigateFirstInfoPage = () => {
+      navigation.navigate('FirstInfoPage');
+    };
+    /* useRef */
+    const nameRef = useRef();
+    const lastNameRef = useRef();
+    const phoneNumberRef = useRef();
+    const datePickerComponentRef = useRef();
 
-  /* Validation function */
-  const validateName = (input) => {
-    const namePattern = /^[A-Za-zčćŠšĐđŽžČčĆć\s]+$/;
-    return namePattern.test(input);
-  };
+    /* Validation function */
+    const validateName = (input) => {
+      const namePattern = /^[A-Za-zčćŠšĐđŽžČčĆć\s]+$/;
+      return namePattern.test(input);
+    };
 
-  const validateLastName = (input) => {
-    const namePattern = /^[A-Za-zčćŠšĐđŽžČčĆć\s]+$/;
-    return namePattern.test(input);
-  };
-  const validatePhoneNumber = (input) => {
-    return input.length >= 3;
-  };
-  /* Handle change */
-  const handleInputChange = (name, text) => {
-    switch (name) {
-      case 'name':
-        setName(text);
-        setNameValid(validateName(text));
-        break;
-      case 'lastName':
-        setLastName(text);
-        setLastNameValid(validateLastName(text));
-        break;
-      case 'phoneNumber':
-        setPhoneNumber(text);
-        setPhoneNumberValid(validatePhoneNumber(text));
+    const validateLastName = (input) => {
+      const namePattern = /^[A-Za-zčćŠšĐđŽžČčĆć\s]+$/;
+      return namePattern.test(input);
+    };
+    const validatePhoneNumber = (input) => {
+      return input.length >= 3;
+    };
+    /* Handle change */
+    const handleInputChange = (name, text) => {
+      switch (name) {
+        case 'name':
+          setName(text);
+          setNameValid(validateName(text));
+          break;
+        case 'lastName':
+          setLastName(text);
+          setLastNameValid(validateLastName(text));
+          break;
+        case 'phoneNumber':
+          setPhoneNumber(text);
+          setPhoneNumberValid(validatePhoneNumber(text));
 
-        break;
+          break;
 
-      default:
-        break;
-    }
+        default:
+          break;
+      }
+    };
+
+    return (
+      <View style={styles.containerStyle}>
+        {/* BACKGROUND IMAGE */}
+        <Image
+          style={styles.backgroundImageStyle}
+          source={require(imgPath + 'SecondSignUpPageBackground.png')}
+        ></Image>
+        {/* INTERACTIVE BOX */}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : ''}
+          style={styles.interactiveContainerStyle}
+        >
+          <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
+          {/* PAGE NUMBERING */}
+          <View style={styles.pageNumberingContainer}>
+            <PageNumberingComponent signUpPageNumber="SecondSignUpPage" />
+          </View>
+          {/* FORM */}
+          <View style={styles.inputsContainerStyle}>
+            <InputComponent
+              keyboardType="default"
+              placeholder="Name"
+              value={firstName}
+              onChangeText={(text) => handleInputChange('name', text)}
+              borderColor={isNameValid ? 'green' : '#D9D9D9'}
+              iconName="user"
+              ref={nameRef}
+              nextRef={lastNameRef}
+            ></InputComponent>
+            <InputComponent
+              keyboardType="default"
+              placeholder="Last Name"
+              value={lastName}
+              onChangeText={(text) => handleInputChange('lastName', text)}
+              borderColor={isLastNameValid ? 'green' : '#D9D9D9'}
+              iconName="user"
+              ref={lastNameRef}
+              nextRef={phoneNumberRef}
+            ></InputComponent>
+            <PhoneNumberInputComponent
+              value={phoneNumber}
+              onChangePhoneNumber={(text) =>
+                handleInputChange('phoneNumber', text)
+              }
+              ref={phoneNumberRef}
+              borderColor={isPhoneNumberValid ? 'green' : '#D9D9D9'}
+              onSubmitEditing={() => setIsDatePickerVisible(true)}
+            />
+            <DatePickerComponent
+              isDatePickerVisible={isDatePickerVisible}
+              setIsDatePickerVisible={setIsDatePickerVisible}
+            />
+          </View>
+          <View style={styles.buttonContainerStyle}>
+            <ButtonComponent
+              styleType="signUpPageButtonStyle"
+              disabled={!isContinueButtonEnabled}
+              onPress={navigateFirstInfoPage}
+              text="Continue"
+            />
+          </View>
+          <Text style={styles.goBackStyle} onPress={navigateToFirstSignUpPage}>
+            go back
+          </Text>
+        </KeyboardAvoidingView>
+      </View>
+    );
   };
-
-  return (
-    <View style={styles.containerStyle}>
-      {/* BACKGROUND IMAGE */}
-      <Image
-        style={styles.backgroundImageStyle}
-        source={require(imgPath + 'SecondSignUpPageBackground.png')}
-      ></Image>
-      {/* INTERACTIVE BOX */}
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : ''}
-        style={styles.interactiveContainerStyle}
-      >
-        <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
-        {/* PAGE NUMBERING */}
-        <View style={styles.pageNumberingContainer}>
-          <PageNumberingComponent signUpPageNumber="SecondSignUpPage" />
-        </View>
-        {/* FORM */}
-        <View style={styles.inputsContainerStyle}>
-          <InputComponent
-            keyboardType="default"
-            placeholder="Name"
-            value={firstName}
-            onChangeText={(text) => handleInputChange('name', text)}
-            borderColor={isNameValid ? 'green' : '#D9D9D9'}
-            iconName="user"
-            ref={nameRef}
-            nextRef={lastNameRef}
-          ></InputComponent>
-          <InputComponent
-            keyboardType="default"
-            placeholder="Last Name"
-            value={lastName}
-            onChangeText={(text) => handleInputChange('lastName', text)}
-            borderColor={isLastNameValid ? 'green' : '#D9D9D9'}
-            iconName="user"
-            ref={lastNameRef}
-            nextRef={phoneNumberRef}
-          ></InputComponent>
-          <PhoneNumberInputComponent
-            value={phoneNumber}
-            onChangePhoneNumber={(text) =>
-              handleInputChange('phoneNumber', text)
-            }
-            ref={phoneNumberRef}
-            borderColor={isPhoneNumberValid ? 'green' : '#D9D9D9'}
-            onSubmitEditing={() => setIsDatePickerVisible(true)}
-          />
-          <DatePickerComponent
-            isDatePickerVisible={isDatePickerVisible}
-            setIsDatePickerVisible={setIsDatePickerVisible}
-          />
-        </View>
-        <View style={styles.buttonContainerStyle}>
-          <ButtonComponent
-            styleType="signUpPageButtonStyle"
-            /* disabled={!isContinueButtonEnabled}
-              onPress={navigateToSecondSignUpPage} */
-            text="Continue"
-          />
-        </View>
-        <Text style={styles.goBackStyle} onPress={navigateToFirstSignUpPage}>
-          go back
-        </Text>
-      </KeyboardAvoidingView>
-    </View>
-  );
 };
 
 export default SecondSignUpPage;
