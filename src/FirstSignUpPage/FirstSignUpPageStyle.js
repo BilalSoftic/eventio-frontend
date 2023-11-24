@@ -22,11 +22,12 @@ const FirstSignUpPageStyle = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   mainHeaderTextStyle: {
-    fontSize: 28,
+    fontSize: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
   },
   pageNumberingContainer: {
-    marginBottom: 10,
+    marginBottom: 20,
   },
 
   inputsContainerStyle: {

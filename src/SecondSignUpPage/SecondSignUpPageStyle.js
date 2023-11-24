@@ -2,8 +2,6 @@ import { StyleSheet } from 'react-native';
 const SecondSignUpPageStyle = StyleSheet.create({
   containerStyle: {
     flex: 1,
-    alignItems: 'center',
-    position: 'relative',
   },
   backgroundImageStyle: {
     minWidth: '150%',
@@ -22,11 +20,12 @@ const SecondSignUpPageStyle = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   mainHeaderTextStyle: {
-    fontSize: 28,
+    fontSize: 30,
+    marginBottom: 10,
     fontWeight: 'bold',
   },
   pageNumberingContainer: {
-    marginBottom: 10,
+    marginBottom: 20,
   },
   inputsContainerStyle: {
     flex: 1,

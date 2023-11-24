@@ -74,10 +74,7 @@ function WelcomeScreen({ navigation }) {
             />
           </TouchableOpacity>
         </View>
-        <Image
-          style={styles.dotsImageStyle}
-          source={require(imgPath + 'Dots.png')}
-        />
+
         <ButtonComponent
           styleType="welcomeScreenButtonStyle"
           disabled={isSubmitDisabled}

@@ -21,7 +21,7 @@ const PageNumberingComponentStyle = StyleSheet.create({
   },
 
   secondCircleContainerStyle: {
-    marginLeft: '-19%',
+    marginLeft: -46.2,
     flexDirection: 'column',
     alignItems: 'center',
   },

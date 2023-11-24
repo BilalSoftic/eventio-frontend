@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import styles from './SecondSignUpPageStyle';
 import PageNumberingComponent from '../components/PageNumberingComponent/PageNumberingComponent';
 import DatePickerComponent from '../components/DatePickerComponent/DatePickerComponent';
@@ -35,7 +35,6 @@ const SecondSignUpPage = ({ navigation }) => {
     const nameRef = useRef();
     const lastNameRef = useRef();
     const phoneNumberRef = useRef();
-    const datePickerComponentRef = useRef();
 
     /* Validation function */
     const validateName = (input) => {
@@ -71,6 +70,9 @@ const SecondSignUpPage = ({ navigation }) => {
           break;
       }
     };
+    /* Enable Button */
+    const isContinueButtonEnabled =
+      isNameValid && isLastNameValid && isPhoneNumberValid;
 
     return (
       <View style={styles.containerStyle}>

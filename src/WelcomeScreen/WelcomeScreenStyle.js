@@ -35,18 +35,18 @@ const WelcomeScreenStyle = StyleSheet.create({
     justifyContent: 'space-around',
   },
   mainHeaderTextStyle: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
     alignSelf: 'center',
   },
   secondaryHeaderTextStyle: {
     marginBottom: 20,
-    fontSize: 16,
+    fontSize: 20,
     opacity: 0.5,
     alignSelf: 'center',
   },
   flagSelectorStyle: {
-    marginBottom: 20,
+    marginBottom: 30,
     gap: 35,
     alignSelf: 'center',
     flexDirection: 'row',
@@ -56,11 +56,6 @@ const WelcomeScreenStyle = StyleSheet.create({
   },
   unselectedFlagStyle: {
     opacity: 0.5,
-  },
-
-  dotsImageStyle: {
-    marginBottom: 20,
-    alignSelf: 'center',
   },
 });
 
