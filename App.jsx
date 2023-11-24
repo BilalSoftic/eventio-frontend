@@ -15,13 +15,13 @@ export default function App() {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        {/* <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} /> */}
 
         <Stack.Screen name="FirstSignUpPage" component={FirstSignUpPage} />
         <Stack.Screen name="SecondSignUpPage" component={SecondSignUpPage} />
-        <Stack.Screen name="SignInPage" component={SignInPage} />
+        {/* <Stack.Screen name="SignInPage" component={SignInPage} />
         <Stack.Screen name="FirstInfoPage" component={FirstInfoPage} />
-        <Stack.Screen name="SecondInfoPage" component={SecondInfoPage} />
+        <Stack.Screen name="SecondInfoPage" component={SecondInfoPage} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
