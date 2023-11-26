@@ -39,6 +39,10 @@ const SecondSignUpPage = ({ navigation }) => {
     navigation.navigate('FirstInfoPage');
   };
 
+  const onSignUpSuccess = () => {
+    navigation.navigate('AllEvents');
+  };
+
   /* Validation function */
   const validateName = (input) => {
     const namePattern = /^[A-Za-zčćŠšĐđŽžČčĆć\s]+$/;
@@ -134,8 +138,8 @@ const SecondSignUpPage = ({ navigation }) => {
         <View style={styles.buttonContainerStyle}>
           <ButtonComponent
             styleType='signUpPageButtonStyle'
-            disabled={!isContinueButtonEnabled}
-            onPress={navigateFirstInfoPage}
+            disabled={false}
+            onPress={onSignUpSuccess}
             text='Continue'
           />
         </View>
