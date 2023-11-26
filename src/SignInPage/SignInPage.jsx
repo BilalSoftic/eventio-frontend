@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useState, useRef } from 'react';
 import styles from './SignInPageStyle';
-
+import * as Keychain from 'react-native-keychain';
 import InputComponent from '../components/InputComponent/InputComponent';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DividerComponent from '../components/DividerComponent/DividerComponent';
@@ -34,12 +34,26 @@ const SignInPage = ({ navigation }) => {
   };
 
   const handleSignIn = () => {
-    signIn({ email, password }).then((res) => {
-      const token = res.token.planTextToken;
-      console.log(token);
-      navigation.navigate('AllEvents');
-    });
+    signIn({ email, password })
+      .then(async (res) => {
+        const token = res?.token?.plainTextToken; // Check your response structure
+        console.log(token);
+
+        // Save the token using react-native-keychain
+        try {
+          await Keychain.setGenericPassword('token', token);
+          navigation.navigate('AllEvents');
+        } catch (error) {
+          console.error('Error saving token', error);
+          // Handle the error (e.g., show an alert to the user)
+        }
+      })
+      .catch((error) => {
+        console.error('Login failed', error);
+        // Handle login failure (e.g., show an alert or message to the user)
+      });
   };
+
   /* useRef */
   const passwordRef = useRef();
 
