@@ -94,61 +94,61 @@ const FirstSignUpPage = ({ navigation }) => {
         <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
         {/* PAGE NUMBERING */}
         <View style={styles.pageNumberingContainer}>
-          <PageNumberingComponent signUpPageNumber="FirstSignUpPage" />
+          <PageNumberingComponent signUpPageNumber='FirstSignUpPage' />
         </View>
         {/* FORM */}
         <View style={styles.inputsContainerStyle}>
           <SignUpInput
-            keyboardType="email-address"
-            autoCapitalize="none"
-            placeholder="E-mail"
+            keyboardType='email-address'
+            autoCapitalize='none'
+            placeholder='E-mail'
             value={email}
             onChangeText={(text) => handleInputChange('email', text)}
             borderColor={isEmailValid ? 'green' : '#D9D9D9'}
-            iconName="envelope"
+            iconName='envelope'
             nextRef={passwordRef}
           ></SignUpInput>
           <SignUpInput
-            keyboardType="default"
-            placeholder="Password"
+            keyboardType='default'
+            placeholder='Password'
             value={password}
             onChangeText={(text) => handleInputChange('password', text)}
             borderColor={isPasswordValid ? 'green' : '#D9D9D9'}
             secureTextEntry={true}
-            iconName="lock"
+            iconName='lock'
             ref={passwordRef}
             nextRef={confirmPasswordRef}
           ></SignUpInput>
           <SignUpInput
-            keyboardType="default"
-            placeholder="Confirm Password"
+            keyboardType='default'
+            placeholder='Confirm Password'
             value={confirmPassword}
             onChangeText={(text) => handleInputChange('confirmPassword', text)}
             borderColor={isConfirmPasswordValid ? 'green' : '#D9D9D9'}
             secureTextEntry={true}
-            iconName="lock"
+            iconName='lock'
             ref={confirmPasswordRef}
           ></SignUpInput>
         </View>
         {/* BUTTON */}
         <View style={styles.buttonContainerStyle}>
           <ButtonComponent
-            styleType="signUpPageButtonStyle"
-            disabled={!isContinueButtonEnabled}
+            styleType='signUpPageButtonStyle'
+            disabled={false}
             onPress={navigateToSecondSignUpPage}
-            text="Continue"
+            text='Continue'
           />
         </View>
         {/*DIVIDER */}
 
         <View style={styles.dividerContainerStyle}>
-          <DividerComponent text="or" />
+          <DividerComponent text='or' />
         </View>
         {/* SOCIALS */}
         <View style={styles.socialsContainerStyle}>
           <View style={styles.socialButtonsContainerStyle}>
-            <IconButton label="google" />
-            <IconButton label="facebook" />
+            <IconButton label='google' />
+            <IconButton label='facebook' />
           </View>
           <Text style={styles.socialsTextStyle}>
             Already have an account?
