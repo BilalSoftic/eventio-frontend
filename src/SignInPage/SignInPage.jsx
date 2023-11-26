@@ -14,7 +14,7 @@ import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DividerComponent from '../components/DividerComponent/DividerComponent';
 import IconButtonComponent from '../components/IconButtonComponent/IconButtonComponent';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-
+import { signIn } from '../../eventio-api';
 const imgPath = '../../assets/img/';
 
 const SignInPage = ({ navigation }) => {
@@ -33,6 +33,13 @@ const SignInPage = ({ navigation }) => {
     Linking.openURL(forgotPasswordUrl);
   };
 
+  const handleSignIn = () => {
+    signIn({ email, password }).then((res) => {
+      const token = res.token.planTextToken;
+      console.log(token);
+      navigation.navigate('AllEvents');
+    });
+  };
   /* useRef */
   const passwordRef = useRef();
 
@@ -80,23 +87,23 @@ const SignInPage = ({ navigation }) => {
         {/* FORM */}
         <View style={styles.inputsContainerStyle}>
           <InputComponent
-            keyboardType="email-address"
-            autoCapitalize="none"
-            placeholder="E-mail"
+            keyboardType='email-address'
+            autoCapitalize='none'
+            placeholder='E-mail'
             value={email}
             onChangeText={(text) => handleInputChange('email', text)}
             borderColor={isEmailValid ? 'green' : '#D9D9D9'}
-            iconName="envelope"
+            iconName='envelope'
             nextRef={passwordRef}
           ></InputComponent>
           <InputComponent
-            keyboardType="default"
-            placeholder="Password"
+            keyboardType='default'
+            placeholder='Password'
             value={password}
             onChangeText={(text) => handleInputChange('password', text)}
             borderColor={isPasswordValid ? 'green' : '#D9D9D9'}
             secureTextEntry={true}
-            iconName="lock"
+            iconName='lock'
             ref={passwordRef}
           ></InputComponent>
         </View>
@@ -104,9 +111,9 @@ const SignInPage = ({ navigation }) => {
           <BouncyCheckbox
             style={styles.checkbox}
             size={20}
-            fillColor="#004972"
-            unfillColor="#FFFFFF"
-            text="Remember Me"
+            fillColor='#004972'
+            unfillColor='#FFFFFF'
+            text='Remember Me'
             iconStyle={{ borderColor: '#004972', borderRadius: 5 }}
             innerIconStyle={{ borderWidth: 2, borderRadius: 5 }}
             textStyle={{
@@ -126,21 +133,21 @@ const SignInPage = ({ navigation }) => {
 
         <View style={styles.buttonContainerStyle}>
           <ButtonComponent
-            styleType="signUpPageButton"
+            styleType='signUpPageButton'
             disabled={!isContinueButtonEnabled}
-            /* onPress={navigateTo} */
-            text="sign in"
+            onPress={handleSignIn}
+            text='sign in'
           />
         </View>
         {/*DIVIDER */}
         <View style={styles.dividerContainerStyle}>
-          <DividerComponent text="or" />
+          <DividerComponent text='or' />
         </View>
         {/* SOCIALS */}
         <View style={styles.socialsContainerStyle}>
           <View style={styles.socialButtonsContainerStyle}>
-            <IconButtonComponent label="google" />
-            <IconButtonComponent label="facebook" />
+            <IconButtonComponent label='google' />
+            <IconButtonComponent label='facebook' />
           </View>
           <Text style={styles.socialsTextStyle}>
             Don't have an account?

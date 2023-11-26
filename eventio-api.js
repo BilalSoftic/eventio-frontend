@@ -1,10 +1,10 @@
 import { Alert } from 'react-native';
 
-const apiBaseUrl = 'https://dc06-188-127-123-225.ngrok.io/api/';
+const apiBaseUrl = 'https://4604-188-127-123-225.ngrok.io/';
 
 fetchData = async (url, method, body) => {
-  const token = '57|tk1fabSl0tjfdJIQqrZgL6U6zbICFSLigW3gSckv';
-  console.log(apiBaseUrl + url)
+  const token = '62|vGfHhnZlAqpp8fprWm0NQglgEXNvQfE2974OJRpP';
+  console.log(apiBaseUrl + url);
   try {
     const response = await fetch(apiBaseUrl + url, {
       method,
@@ -18,7 +18,7 @@ fetchData = async (url, method, body) => {
     });
 
     const data = await response.json();
-    // console.log(data);
+    console.log(body);
     return data;
   } catch (error) {
     console.log(JSON.stringify(error));
@@ -27,9 +27,13 @@ fetchData = async (url, method, body) => {
 };
 
 export const registerUser = (user) => {
-  fetchData('register', 'POST', user);
+  fetchData('register', 'POST', JSON.stringify(user));
 };
 
 export const getAllEvents = () => {
-  return fetchData('events', 'GET');
+  return fetchData('api/events', 'GET');
+};
+
+export const signIn = (user) => {
+  return fetchData('login', 'POST', JSON.stringify(user));
 };
