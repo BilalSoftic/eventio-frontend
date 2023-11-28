@@ -51,6 +51,16 @@ const WelcomeScreenStyle = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
   },
+  flagButtonStyle: {
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation: 10,
+  },
   selectedFlagStyle: {
     opacity: 1,
   },

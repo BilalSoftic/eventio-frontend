@@ -1,11 +1,9 @@
 import { StyleSheet } from 'react-native';
 const PageNumberingComponentStyle = StyleSheet.create({
   containerStyle: {
-    width: 250,
-    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   firstCircleContainerStyle: {
     marginRight: -10,
@@ -26,9 +24,9 @@ const PageNumberingComponentStyle = StyleSheet.create({
     alignItems: 'center',
   },
   circleStyle: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 35,
+    height: 35,
+    borderRadius: 17.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -40,18 +38,17 @@ const PageNumberingComponentStyle = StyleSheet.create({
     backgroundColor: '#004972',
   },
   whiteContentStyle: {
-    fontSize: 20,
+    fontSize: 15,
     color: 'white',
   },
   blueContentStyle: {
-    fontSize: 20,
+    fontSize: 15,
     color: '#004972',
   },
 
   lineStyle: {
-    width: 140,
+    width: 100,
     height: 2,
-    marginBottom: 25,
   },
   opacityLineStyle: {
     backgroundColor: 'rgba(0, 49, 72, 0.2)',

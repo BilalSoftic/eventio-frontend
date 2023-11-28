@@ -23,11 +23,13 @@ const FirstSignUpPageStyle = StyleSheet.create({
   },
   mainHeaderTextStyle: {
     fontSize: 30,
-    marginBottom: 10,
+    marginBottom: 15,
     fontWeight: 'bold',
   },
   pageNumberingContainer: {
     marginBottom: 20,
+    width: '100%',
+    alignItems: 'flex-start',
   },
 
   inputsContainerStyle: {
@@ -38,13 +40,13 @@ const FirstSignUpPageStyle = StyleSheet.create({
   buttonContainerStyle: {
     marginBottom: 15,
   },
-  dividerContainerStyle: { marginBottom: 5 },
+  dividerContainerStyle: { marginBottom: 20 },
 
   socialsContainerStyle: {
     flexDirection: 'column',
   },
   socialButtonsContainerStyle: {
-    gap: 10,
+    gap: 20,
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -52,6 +54,7 @@ const FirstSignUpPageStyle = StyleSheet.create({
     alignSelf: 'center',
   },
   socialsLinkStyle: {
+    marginBottom: 10,
     color: '#004972',
   },
 });

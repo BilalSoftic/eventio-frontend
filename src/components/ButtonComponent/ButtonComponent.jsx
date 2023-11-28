@@ -1,17 +1,10 @@
 import { Text, TouchableOpacity } from 'react-native';
 import styles from './ButtonComponentStyle';
 
-function ButtonComponent(props) {
-  const { disabled, onPress, text, styleType } = props;
-  const buttonStyle =
-    styleType === 'welcomeScreenButtonStyle'
-      ? styles.welcomeScreenButtonStyle
-      : styleType === 'signUpPageButtonStyle'
-      ? styles.signUpPageButtonStyle
-      : styles.welcomeScreenButtonStyle;
+function ButtonComponent({ disabled, onPress, text }) {
   return (
     <TouchableOpacity
-      style={[buttonStyle, disabled ? { opacity: 0.5 } : { opacity: 1 }]}
+      style={[styles.button, disabled ? { opacity: 0.5 } : { opacity: 1 }]}
       disabled={disabled}
       onPress={onPress}
     >

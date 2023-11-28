@@ -35,19 +35,22 @@ const SignInPage = ({ navigation }) => {
 
   const handleSignIn = () => {
     signIn({ email, password })
-      .then(async (res) => {
-        const token = res?.token?.plainTextToken; // Check your response structure
-        console.log(token);
+      .then(
+        /* async */
+        (res) => {
+          const token = res?.token?.plainTextToken; // Check your response structure
+          console.log(token);
 
-        // Save the token using react-native-keychain
-        try {
-          await Keychain.setGenericPassword('token', token);
-          navigation.navigate('AllEvents');
-        } catch (error) {
-          console.error('Error saving token', error);
-          // Handle the error (e.g., show an alert to the user)
+          // Save the token using react-native-keychain
+          try {
+            /* await Keychain.setGenericPassword('token', token); */
+            navigation.navigate('AllEvents');
+          } catch (error) {
+            console.error('Error saving token', error);
+            // Handle the error (e.g., show an alert to the user)
+          }
         }
-      })
+      )
       .catch((error) => {
         console.error('Login failed', error);
         // Handle login failure (e.g., show an alert or message to the user)
@@ -160,8 +163,8 @@ const SignInPage = ({ navigation }) => {
         {/* SOCIALS */}
         <View style={styles.socialsContainerStyle}>
           <View style={styles.socialButtonsContainerStyle}>
-            <IconButtonComponent label='google' />
-            <IconButtonComponent label='facebook' />
+            <IconButtonComponent imageName={'google'} />
+            <IconButtonComponent imageName={'facebook'} />
           </View>
           <Text style={styles.socialsTextStyle}>
             Don't have an account?

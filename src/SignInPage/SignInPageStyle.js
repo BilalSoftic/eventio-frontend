@@ -61,7 +61,7 @@ const SignInPageStyle = StyleSheet.create({
     flexDirection: 'column',
   },
   socialButtonsContainerStyle: {
-    gap: 10,
+    gap: 20,
     flexDirection: 'row',
     justifyContent: 'center',
   },

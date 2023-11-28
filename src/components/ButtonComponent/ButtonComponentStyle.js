@@ -1,22 +1,23 @@
 import { StyleSheet } from 'react-native';
 
 const ButtonComponentStyle = StyleSheet.create({
-  welcomeScreenButtonStyle: {
+  button: {
     width: '100%',
     paddingVertical: 20,
     borderRadius: 10,
     alignSelf: 'center',
     alignItems: 'center',
     backgroundColor: '#004972',
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
   },
-  signUpPageButtonStyle: {
-    width: '100%',
-    paddingVertical: 20,
-    borderRadius: 10,
-    alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor: '#004972',
-  },
+
   buttonTextStyle: {
     margin: 0,
     padding: 0,

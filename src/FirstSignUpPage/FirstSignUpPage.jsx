@@ -5,6 +5,7 @@ import {
   Linking,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import { useState, useRef } from 'react';
 import styles from './FirstSignUpPageStyle';
@@ -12,7 +13,7 @@ import PageNumberingComponent from '../components/PageNumberingComponent/PageNum
 import SignUpInput from '../components/InputComponent/InputComponent';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DividerComponent from '../components/DividerComponent/DividerComponent';
-import IconButton from '../components/IconButtonComponent/IconButtonComponent';
+import IconButtonComponent from '../components/IconButtonComponent/IconButtonComponent';
 
 const imgPath = '../../assets/img/';
 
@@ -133,7 +134,6 @@ const FirstSignUpPage = ({ navigation }) => {
         {/* BUTTON */}
         <View style={styles.buttonContainerStyle}>
           <ButtonComponent
-            styleType='signUpPageButtonStyle'
             disabled={false}
             onPress={navigateToSecondSignUpPage}
             text='Continue'
@@ -145,10 +145,11 @@ const FirstSignUpPage = ({ navigation }) => {
           <DividerComponent text='or' />
         </View>
         {/* SOCIALS */}
+
         <View style={styles.socialsContainerStyle}>
           <View style={styles.socialButtonsContainerStyle}>
-            <IconButton label='google' />
-            <IconButton label='facebook' />
+            <IconButtonComponent imageName={'google'} />
+            <IconButtonComponent imageName={'facebook'} />
           </View>
           <Text style={styles.socialsTextStyle}>
             Already have an account?

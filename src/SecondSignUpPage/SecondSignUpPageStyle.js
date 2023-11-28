@@ -21,11 +21,13 @@ const SecondSignUpPageStyle = StyleSheet.create({
   },
   mainHeaderTextStyle: {
     fontSize: 30,
-    marginBottom: 10,
+    marginBottom: 15,
     fontWeight: 'bold',
   },
   pageNumberingContainer: {
     marginBottom: 20,
+    width: '100%',
+    alignItems: 'flex-start',
   },
   inputsContainerStyle: {
     flex: 1,

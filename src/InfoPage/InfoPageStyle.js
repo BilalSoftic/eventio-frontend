@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-const FirstInfoPageStyle = StyleSheet.create({
+const InfoPageStyle = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: '#004972',
@@ -17,8 +17,8 @@ const FirstInfoPageStyle = StyleSheet.create({
   },
   centerImgStyle: {
     position: 'absolute',
-    top: '23%',
-    right: '5%',
+    top: '25%',
+    right: '-1%',
   },
   dotsEndStyle: {
     position: 'absolute',
@@ -46,6 +46,13 @@ const FirstInfoPageStyle = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
   },
+  dotsContainer: {
+    width: '100%',
+    gap: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   flagSelectorStyle: {
     marginBottom: 20,
     gap: 35,
@@ -65,4 +72,4 @@ const FirstInfoPageStyle = StyleSheet.create({
   },
 });
 
-export default FirstInfoPageStyle;
+export default InfoPageStyle;

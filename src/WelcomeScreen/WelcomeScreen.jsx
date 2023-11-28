@@ -52,7 +52,7 @@ function WelcomeScreen({ navigation }) {
             }}
           >
             <Image
-              id="bih"
+              id='bih'
               source={require(imgPath + 'Flag_of_Bosnia_and_Herzegovina.png')}
             />
           </TouchableOpacity>
@@ -69,17 +69,16 @@ function WelcomeScreen({ navigation }) {
             }}
           >
             <Image
-              id="uk"
+              id='uk'
               source={require(imgPath + 'Flag_of_the_United_Kingdom.png')}
             />
           </TouchableOpacity>
         </View>
 
         <ButtonComponent
-          styleType="welcomeScreenButtonStyle"
           disabled={isSubmitDisabled}
           onPress={navigateToFirstSignUpPage}
-          text="Next"
+          text='Next'
         />
       </View>
     </View>
