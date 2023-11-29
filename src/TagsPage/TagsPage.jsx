@@ -1,13 +1,14 @@
 import { View, Text, Image } from 'react-native';
-import styles from './InfoPageStyle';
+import styles from './TagsPageStyle';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DotComponent from '../components/DotComponent/DotComponent';
+import TagComponent from '../components/TagComponent/TagComponent';
 const imgPath = '../../assets/img/';
 
-function InfoPage({ navigation }) {
+function TagsPage({ navigation }) {
   /* Page navigation */
-  /*  const navigateToTagsPage = () => {
-    navigation.navigate('TagsPage');
+  /*  const navigateTo = () => {
+    navigation.navigate('');
   }; */
   return (
     <View style={styles.containerStyle}>
@@ -17,10 +18,10 @@ function InfoPage({ navigation }) {
           style={styles.dotsStartStyle}
           source={require(imgPath + 'BackgroundDots.png')}
         />
-        <Image
-          style={styles.centerImgStyle}
-          source={require(imgPath + 'Looking.png')}
-        />
+        <View style={styles.tagsContainer}>
+          <TagComponent />
+        </View>
+        <Image style={styles.arrow} source={require(imgPath + 'Arrow.png')} />
         <Image
           style={styles.dotsEndStyle}
           source={require(imgPath + 'BackgroundDots.png')}
@@ -29,7 +30,7 @@ function InfoPage({ navigation }) {
 
       {/* INTERACTIVE BOX */}
       <View style={styles.interactiveContainerStyle}>
-        <Text style={styles.mainHeaderTextStyle}>Traži Event</Text>
+        <Text style={styles.mainHeaderTextStyle}>Izaberi Kategoriju</Text>
         <Text style={styles.mainText}>
           Naša aplikacija će vam omogućiti da budete u toku s najnovijim
           događajima, koncertima, izložbama, sportskim manifestacijama i mnogo
@@ -37,11 +38,11 @@ function InfoPage({ navigation }) {
         </Text>
 
         <View style={styles.dotsContainer}>
-          <DotComponent size={15} backgroundColor={'#004972'} />
           <DotComponent size={15} backgroundColor={'#C1C9DC'} />
+          <DotComponent size={15} backgroundColor={'#004972'} />
         </View>
         <ButtonComponent
-          /*    onPress={navigateToTagsPage} */
+          /*    onPress={navigateTo} */
           text='Next'
         />
       </View>
@@ -49,4 +50,4 @@ function InfoPage({ navigation }) {
   );
 }
 
-export default InfoPage;
+export default TagsPage;

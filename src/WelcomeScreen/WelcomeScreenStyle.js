@@ -12,8 +12,8 @@ const WelcomeScreenStyle = StyleSheet.create({
   },
   dotsStartStyle: {
     position: 'absolute',
-    top: 50,
-    right: 0,
+    top: '10%',
+    right: '3%',
   },
   centerImgStyle: {
     position: 'absolute',
@@ -22,8 +22,8 @@ const WelcomeScreenStyle = StyleSheet.create({
   },
   dotsEndStyle: {
     position: 'absolute',
-    bottom: -10,
-    left: 0,
+    bottom: '-1%',
+    left: '1%',
   },
 
   interactiveContainerStyle: {

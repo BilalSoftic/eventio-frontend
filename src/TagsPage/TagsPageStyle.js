@@ -13,17 +13,22 @@ const InfoPageStyle = StyleSheet.create({
   dotsStartStyle: {
     position: 'absolute',
     top: '10%',
-    right: '3%',
+    left: '3%',
   },
-  centerImgStyle: {
+  tagsContainer: {
     position: 'absolute',
     top: '25%',
-    right: '-1%',
+  },
+
+  arrow: {
+    position: 'absolute',
+    bottom: '-8%',
+    right: '15%',
   },
   dotsEndStyle: {
     position: 'absolute',
-    bottom: '-1%',
-    left: '1%',
+    bottom: '3%',
+    right: '3%',
   },
 
   interactiveContainerStyle: {
