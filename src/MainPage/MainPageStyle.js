@@ -24,14 +24,27 @@ const MainPageStyle = StyleSheet.create({
   },
   contentContainerStyle: {
     flex: 1,
-    paddingHorizontal: 30,
     paddingBottom: 30,
+    alignItems: 'center',
   },
   carouselContainerStyle: {
     borderRadius: 20,
+    marginBottom: 30,
     overflow: 'hidden',
     height: '30%',
-    width: '100%',
+    width: '85%',
+  },
+  horizontalScrollContainerStyle: {
+    height: '40%',
+    borderWidth: 2,
+    marginLeft: '7.5%',
+  },
+  horizontalScrollStyle: {},
+  HorizontalScrollHeaderStyle: {
+    paddingVertical: 5,
+  },
+  horizontalScrollHeading: {
+    fontSize: 20,
   },
 });
 

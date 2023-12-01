@@ -22,8 +22,9 @@ const EventioCarousel = () => {
     <SwiperFlatList
       autoplay
       autoplayLoop
-      showPagination
       autoplayDelay={5}
+      autoplayLoopKeepAnimation
+      showPagination
       renderAll
       paginationStyleItemActive={{
         backgroundColor: '#004972',
