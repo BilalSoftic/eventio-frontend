@@ -30,7 +30,7 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
       height: 0,
     },
     shadowOpacity: 0.5,
-    shadowRadius: 7,
+    shadowRadius: 5,
     elevation: 5,
   },
   backgroundImageContainerStyle: {
