@@ -36,10 +36,20 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
   backgroundImageContainerStyle: {
     height: '80%',
     width: '100%',
+    position: 'relative',
   },
   backgroundImageStyle: {
     width: '100%',
     height: '100%',
+  },
+  heartButton: {
+    position: 'absolute',
+    top: 15,
+    right: 15,
+  },
+  heartIcon: {
+    color: 'white',
+    fontSize: 20,
   },
 
   informationContainerStyle: {
