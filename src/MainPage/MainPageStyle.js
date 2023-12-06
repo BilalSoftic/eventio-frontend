@@ -1,26 +1,27 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const { width } = Dimensions.get('window');
 const MainPageStyle = StyleSheet.create({
   containerStyle: {
     flex: 1,
   },
   headerStyle: {
     height: 200,
-    marginBottom: '-20%',
+    margin: -50,
     backgroundColor: '#004972',
     position: 'relative',
   },
   headingStyle: {
-    fontSize: 28,
+    fontSize: 34,
     color: 'white',
     fontWeight: 'bold',
+    alignSelf: 'center',
     position: 'absolute',
-    top: '30%',
-    left: '10%',
+    top: 90,
   },
   dotsStyle: {
     position: 'absolute',
-    top: '50%',
-    right: '3%',
+    top: 130,
+    right: 40,
   },
   contentContainerStyle: {
     flex: 1,
@@ -31,20 +32,8 @@ const MainPageStyle = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 30,
     overflow: 'hidden',
-    height: '30%',
-    width: '85%',
-  },
-  horizontalScrollContainerStyle: {
-    height: '40%',
-    borderWidth: 2,
-    marginLeft: '7.5%',
-  },
-  horizontalScrollStyle: {},
-  HorizontalScrollHeaderStyle: {
-    paddingVertical: 5,
-  },
-  horizontalScrollHeading: {
-    fontSize: 20,
+    height: 200,
+    width: '96%',
   },
 });
 

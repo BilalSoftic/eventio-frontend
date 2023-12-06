@@ -26,6 +26,7 @@ const EventioCarousel = () => {
       autoplayLoopKeepAnimation
       showPagination
       renderAll
+      disableGesture
       paginationStyleItemActive={{
         backgroundColor: '#004972',
         borderWidth: 1,

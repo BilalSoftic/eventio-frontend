@@ -1,41 +1,33 @@
 import { View, Text, Image, ScrollView } from 'react-native';
 import styles from './MainPageStyle';
 import EventioCarousel from '../components/EventioCarousel/EventioCarousel';
-import SingleEventComponent from '../components/SingleEventComponent/SingleEventComponent';
+
+import HorizontalScrollComponent from '../components/HorizontalScrollComponent/HorizontalScrollComponent';
 const imagePath = '../../assets/img/';
 const MainPage = ({}) => {
   return (
     <View style={styles.containerStyle}>
-      {/* HEADER */}
-      <View style={styles.headerStyle}>
-        <Text style={styles.headingStyle}>Eventio</Text>
-        <Image
-          style={styles.dotsStyle}
-          source={require(imagePath + 'BackgroundDots.png')}
-        />
-      </View>
-      {/* CAROUSEL */}
-      <View style={styles.contentContainerStyle}>
-        <View style={styles.carouselContainerStyle}>
-          <EventioCarousel />
+      <ScrollView>
+        {/* HEADER */}
+        <View style={styles.headerStyle}>
+          <Text style={styles.headingStyle}>Eventio</Text>
+          <Image
+            style={styles.dotsStyle}
+            source={require(imagePath + 'BackgroundDots.png')}
+          />
         </View>
-        {/* HORIZONTAL SCROLL */}
-        <View style={styles.horizontalScrollContainerStyle}>
-          <View style={styles.HorizontalScrollHeaderStyle}>
-            <Text style={styles.horizontalScrollHeading}>Muzika</Text>
+        {/* CAROUSEL */}
+        <View style={styles.contentContainerStyle}>
+          <View style={styles.carouselContainerStyle}>
+            <EventioCarousel />
           </View>
-          <ScrollView style={styles.horizontalScrollStyle} horizontal={true}>
-            <SingleEventComponent />
-            <SingleEventComponent />
-            <SingleEventComponent />
-            <SingleEventComponent />
-            <SingleEventComponent />
-            <SingleEventComponent />
-            <SingleEventComponent />
-            <SingleEventComponent />
-          </ScrollView>
+          {/* HORIZONTAL SCROLL */}
+
+          <HorizontalScrollComponent title={'muzika'} />
+          <HorizontalScrollComponent title={'teatar'} />
+          <HorizontalScrollComponent title={'sport'} />
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

@@ -38,7 +38,7 @@ function WelcomeScreen({ navigation }) {
           Choose your language
         </Text>
         {/* FLAGS  */}
-        <View style={styles.flagSelectorStyle}>
+        <View style={styles.flagSelectorContainerStyle}>
           <TouchableOpacity
             style={[
               styles.flagButtonStyle,
@@ -52,8 +52,9 @@ function WelcomeScreen({ navigation }) {
             }}
           >
             <Image
+              style={styles.flagImageStyle}
               id='bih'
-              source={require(imgPath + 'Flag_of_Bosnia_and_Herzegovina.png')}
+              source={require(imgPath + 'FlagBiH.png')}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -69,8 +70,9 @@ function WelcomeScreen({ navigation }) {
             }}
           >
             <Image
+              style={styles.flagImageStyle}
               id='uk'
-              source={require(imgPath + 'Flag_of_the_United_Kingdom.png')}
+              source={require(imgPath + 'FlagUK.png')}
             />
           </TouchableOpacity>
         </View>

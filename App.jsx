@@ -23,8 +23,8 @@ export default function App() {
         {/* <Stack.Screen name='FirstSignUpPage' component={FirstSignUpPage} /> */}
         {/* <Stack.Screen name='SecondSignUpPage' component={SecondSignUpPage} /> */}
         {/*  <Stack.Screen name='SignInPage' component={SignInPage} /> */}
-        {/* <Stack.Screen name='InfoPage' component={InfoPage} /> */}
-        {/* <Stack.Screen name='TagsPage' component={TagsPage} /> */}
+        {/*  <Stack.Screen name='InfoPage' component={InfoPage} /> */}
+        {/*  <Stack.Screen name='TagsPage' component={TagsPage} /> */}
         {/* <Stack.Screen name='AllEvents' component={AllEvents} /> */}
         <Stack.Screen name='MainPage' component={MainPage} />
       </Stack.Navigator>
