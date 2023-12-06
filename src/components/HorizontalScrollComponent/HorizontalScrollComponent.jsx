@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import styles from './HorizontalScrollComponentStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const data = [
+const Data = [
   {
     id: 1,
     image: require('../../../assets/horizontalScrollImages/image-1.png'),
@@ -32,10 +32,10 @@ const data = [
 ];
 
 const HorizontalScrollComponent = ({ title }) => {
-  const [Data, setData] = useState(data);
+  const [data, setData] = useState(Data);
 
   const handleLikeButton = (id) => {
-    const updatedData = Data.map((item) =>
+    const updatedData = data.map((item) =>
       item.id === id ? { ...item, liked: !item.liked } : item
     );
     setData(updatedData);
@@ -46,8 +46,8 @@ const HorizontalScrollComponent = ({ title }) => {
       <View style={styles.HorizontalScrollHeaderStyle}>
         <Text style={styles.horizontalScrollHeading}>{title}</Text>
       </View>
-      <ScrollView style={styles.horizontalScrollStyle} horizontal={true}>
-        {Data.map(({ id, image, liked }) => (
+      <ScrollView horizontal={true}>
+        {data.map(({ id, image, liked }) => (
           <View style={styles.containerStyle} key={id}>
             <View style={styles.backgroundImageContainerStyle}>
               <Image style={styles.backgroundImageStyle} source={image} />
@@ -66,10 +66,9 @@ const HorizontalScrollComponent = ({ title }) => {
               <Text style={styles.titleStyle}>
                 Kakva ti je zena takav ti je zivot
               </Text>
-              <View style={styles.locationContainerStyle}>
+              <View>
                 <Text style={styles.locationStyle}>
-                  <Icon name={'map-pin'} style={styles.iconStyle} /> Bosanski
-                  Kulturni centar
+                  <Icon name={'map-pin'} /> Bosanski Kulturni centar
                 </Text>
               </View>
             </View>

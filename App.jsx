@@ -6,7 +6,6 @@ import SignInPage from './src/SignInPage/SignInPage';
 import InfoPage from './src/InfoPage/InfoPage';
 import TagsPage from './src/TagsPage/TagsPage';
 import MainPage from './src/MainPage/MainPage';
-import AllEvents from './src/components/AllEvents';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
@@ -25,7 +24,6 @@ export default function App() {
         {/*  <Stack.Screen name='SignInPage' component={SignInPage} /> */}
         {/*  <Stack.Screen name='InfoPage' component={InfoPage} /> */}
         {/*  <Stack.Screen name='TagsPage' component={TagsPage} /> */}
-        {/* <Stack.Screen name='AllEvents' component={AllEvents} /> */}
         <Stack.Screen name='MainPage' component={MainPage} />
       </Stack.Navigator>
     </NavigationContainer>

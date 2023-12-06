@@ -4,7 +4,7 @@ import EventioCarousel from '../components/EventioCarousel/EventioCarousel';
 
 import HorizontalScrollComponent from '../components/HorizontalScrollComponent/HorizontalScrollComponent';
 const imagePath = '../../assets/img/';
-const MainPage = ({}) => {
+const MainPage = () => {
   return (
     <View style={styles.containerStyle}>
       <ScrollView>

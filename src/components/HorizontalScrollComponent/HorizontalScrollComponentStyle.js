@@ -13,8 +13,6 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
     textTransform: 'capitalize',
   },
 
-  horizontalScrollStyle: {},
-  //
   containerStyle: {
     width: 160,
     marginHorizontal: 10,
@@ -65,9 +63,8 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
   },
   dateStyle: { fontSize: 11, color: '#0C6A9F' },
   titleStyle: { fontSize: 15, fontWeight: 'bold' },
-  locationContainerStyle: {},
+
   locationStyle: { fontSize: 11, color: '#707070' },
-  iconStyle: {},
 });
 
 export default HorizontalScrollComponentStyle;
