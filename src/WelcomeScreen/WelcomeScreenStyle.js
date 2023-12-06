@@ -45,27 +45,28 @@ const WelcomeScreenStyle = StyleSheet.create({
     opacity: 0.5,
     alignSelf: 'center',
   },
-  flagSelectorStyle: {
+  flagSelectorContainerStyle: {
+    height: '25%',
     marginBottom: 30,
-    gap: 35,
-    alignSelf: 'center',
+    gap: 20,
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   flagButtonStyle: {
-    shadowColor: 'black',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 10,
+    width: '40%',
+    height: '90%',
   },
   selectedFlagStyle: {
     opacity: 1,
   },
   unselectedFlagStyle: {
     opacity: 0.5,
+  },
+  flagImageStyle: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
   },
 });
 
