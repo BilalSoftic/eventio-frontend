@@ -13,7 +13,7 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
     textTransform: 'capitalize',
   },
 
-  containerStyle: {
+  singleEventContainerStyle: {
     width: 160,
     marginHorizontal: 10,
     marginVertical: 10,

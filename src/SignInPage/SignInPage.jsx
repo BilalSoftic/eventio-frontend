@@ -44,7 +44,7 @@ const SignInPage = ({ navigation }) => {
           // Save the token using react-native-keychain
           try {
             /* await Keychain.setGenericPassword('token', token); */
-            navigation.navigate('AllEvents');
+            navigation.navigate('MainPage');
           } catch (error) {
             console.error('Error saving token', error);
             // Handle the error (e.g., show an alert to the user)

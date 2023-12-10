@@ -48,7 +48,7 @@ const HorizontalScrollComponent = ({ title }) => {
       </View>
       <ScrollView horizontal={true}>
         {data.map(({ id, image, liked }) => (
-          <View style={styles.containerStyle} key={id}>
+          <View style={styles.singleEventContainerStyle} key={id}>
             <View style={styles.backgroundImageContainerStyle}>
               <Image style={styles.backgroundImageStyle} source={image} />
               <TouchableOpacity

@@ -1,7 +1,7 @@
 import { View, Text, Image, ScrollView } from 'react-native';
 import styles from './MainPageStyle';
 import EventioCarousel from '../components/EventioCarousel/EventioCarousel';
-
+import AllEvents from '../components/AllEvents';
 import HorizontalScrollComponent from '../components/HorizontalScrollComponent/HorizontalScrollComponent';
 const imagePath = '../../assets/img/';
 const MainPage = () => {
@@ -22,10 +22,14 @@ const MainPage = () => {
             <EventioCarousel />
           </View>
           {/* HORIZONTAL SCROLL */}
-
-          <HorizontalScrollComponent title={'muzika'} />
-          <HorizontalScrollComponent title={'teatar'} />
-          <HorizontalScrollComponent title={'sport'} />
+          <View style={styles.horizontalScrollsContainerStyle}>
+            <HorizontalScrollComponent title={'muzika'} />
+            <HorizontalScrollComponent title={'teatar'} />
+            <HorizontalScrollComponent title={'sport'} />
+          </View>
+          <View style={styles.allEventsContainerStyle}>
+            <AllEvents />
+          </View>
         </View>
       </ScrollView>
     </View>

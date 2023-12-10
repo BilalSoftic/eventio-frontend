@@ -34,6 +34,12 @@ const MainPageStyle = StyleSheet.create({
     height: 200,
     width: '96%',
   },
+  horizontalScrollsContainerStyle: {
+    gap: 5,
+  },
+  allEventsContainerStyle: {
+    flex: 1,
+  },
 });
 
 export default MainPageStyle;
