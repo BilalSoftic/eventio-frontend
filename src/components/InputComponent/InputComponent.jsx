@@ -26,14 +26,14 @@ const InputComponent = forwardRef((props, ref) => {
       <TextInput
         keyboardType={keyboardType}
         autoCapitalize={autoCapitalize}
-        type="text"
+        type='text'
         value={value}
         onChange={onChange}
         onChangeText={onChangeText}
         style={styles.inputStyle}
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
-        placeholderTextColor="rgba(70, 70, 70, 0.5)"
+        placeholderTextColor='rgba(70, 70, 70, 0.5)'
         ref={ref}
         onSubmitEditing={() => {
           nextRef ? nextRef.current.focus() : null;
