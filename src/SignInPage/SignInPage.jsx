@@ -6,9 +6,8 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './SignInPageStyle';
-import * as Keychain from 'react-native-keychain';
 import InputComponent from '../components/InputComponent/InputComponent';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DividerComponent from '../components/DividerComponent/DividerComponent';
@@ -16,6 +15,7 @@ import IconButtonComponent from '../components/IconButtonComponent/IconButtonCom
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { signIn } from '../../eventio-api';
 const imgPath = '../../assets/img/';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignInPage = ({ navigation }) => {
   /* State */
@@ -39,11 +39,8 @@ const SignInPage = ({ navigation }) => {
         /* async */
         (res) => {
           const token = res?.token?.plainTextToken; // Check your response structure
-          console.log(token);
-
-          // Save the token using react-native-keychain
+          AsyncStorage.setItem('token', token);
           try {
-            /* await Keychain.setGenericPassword('token', token); */
             navigation.navigate('MainPage');
           } catch (error) {
             console.error('Error saving token', error);

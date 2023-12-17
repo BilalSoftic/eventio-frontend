@@ -39,6 +39,7 @@ const MainPageStyle = StyleSheet.create({
   },
   allEventsContainerStyle: {
     flex: 1,
+    marginTop: 100,
   },
 });
 

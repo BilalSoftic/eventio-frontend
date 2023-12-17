@@ -1,11 +1,15 @@
 import { Alert } from 'react-native';
-
-/* const apiBaseUrl = 'https://3202-188-127-123-225.ngrok.io/'; */
 const apiBaseUrl = 'http://192.168.0.18:8000/';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-fetchData = async (url, method, body) => {
-  const token = '4|5owGiyhKVato7pFzM0DjtLD4HZ4dHC2VVBY5aI1yc8be4f5c';
-  console.log(apiBaseUrl + url);
+fetchData = async (url, method, body, navigation) => {
+  const token = await AsyncStorage.getItem('token');
+
+  console.log('BASE URL: ', apiBaseUrl + url);
+  console.log('METHOD: ', method);
+  console.log('BODY: ', body);
+  console.log('TOKEN: ', token);
+
   try {
     const response = await fetch(apiBaseUrl + url, {
       method,
@@ -17,8 +21,24 @@ fetchData = async (url, method, body) => {
         Authorization: `Bearer ${token}`,
       },
     });
+    let data;
 
-    const data = await response.json();
+    console.log(response);
+
+    if (response.status === 401) {
+      console.log('401');
+      AsyncStorage.removeItem('token');
+      console.log('token removed');
+      console.log('navigation');
+      navigation.navigate('SignInPage');
+      console.log(navigation);
+      Alert.alert('Session expired', 'Please sign in again');
+      return;
+    }
+
+    data = await response.json();
+    console.log(data);
+
     return data;
   } catch (error) {
     console.log(JSON.stringify(error));
@@ -30,12 +50,12 @@ export const registerUser = (user) => {
   fetchData('register', 'POST', JSON.stringify(user));
 };
 
-export const getAllEvents = () => {
-  return fetchData('api/events', 'GET');
+export const getAllEvents = (navigation) => {
+  return fetchData('api/events', 'GET', null, navigation);
 };
 
 export const signIn = (user) => {
-  return fetchData('login', 'POST', JSON.stringify(user));
+  return fetchData('login', 'POST', JSON.stringify(user), null);
 };
 
 export const getUserTags = () => {

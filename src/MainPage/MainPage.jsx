@@ -5,10 +5,11 @@ import AllEvents from '../components/AllEvents';
 import HorizontalScrollComponent from '../components/HorizontalScrollComponent/HorizontalScrollComponent';
 import { useEffect } from 'react';
 import { getUserTags } from '../../eventio-api';
+
 const imagePath = '../../assets/img/';
 const MainPage = () => {
   useEffect(() => {
-    getUserTags().then((res) => console.log(res));
+    // getUserTags().then((res) => console.log(res));
   }, []);
 
   return (
@@ -33,9 +34,9 @@ const MainPage = () => {
             <HorizontalScrollComponent title={'teatar'} />
             <HorizontalScrollComponent title={'sport'} />
           </View>
-          <View style={styles.allEventsContainerStyle}>
-            <AllEvents />
-          </View>
+        </View>
+        <View style={styles.allEventsContainerStyle}>
+          <AllEvents />
         </View>
       </ScrollView>
     </View>
