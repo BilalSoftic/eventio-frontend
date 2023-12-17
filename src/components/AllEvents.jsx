@@ -25,7 +25,6 @@ const AllEvents = () => {
 
     getAllEvents()
       .then((response) => {
-        console.log(response);
         setEvents(response.data.data);
         setLoading(false);
       })
@@ -54,11 +53,11 @@ const AllEvents = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {console.log(events)}
         {events.map((event) => (
           <View key={event.id} style={styles.eventContainer}>
+            {console.log('Event1: ', event)}
             <ImageBackground
-              source={{ uri: event.media[0].display_image }}
+              source={{ uri: event.media[0]?.display_image }}
               resizeMode='cover'
               borderRadius={22.92}
               style={styles.eventImage}

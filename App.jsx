@@ -22,11 +22,11 @@ export default function App() {
         {/* <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} /> */}
         {/* <Stack.Screen name='FirstSignUpPage' component={FirstSignUpPage} /> */}
         {/* <Stack.Screen name='SecondSignUpPage' component={SecondSignUpPage} /> */}
-        {/* <Stack.Screen name='SignInPage' component={SignInPage} /> */}
+        {/*  <Stack.Screen name='SignInPage' component={SignInPage} /> */}
         {/*  <Stack.Screen name='InfoPage' component={InfoPage} /> */}
         {/*  <Stack.Screen name='TagsPage' component={TagsPage} /> */}
-        {/* <Stack.Screen name='MainPage' component={MainPage} /> */}
-        <Stack.Screen name='SingleEventPage' component={SingleEventPage} />
+        <Stack.Screen name='MainPage' component={MainPage} />
+        {/* <Stack.Screen name='SingleEventPage' component={SingleEventPage} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

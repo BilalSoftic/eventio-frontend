@@ -3,8 +3,14 @@ import styles from './MainPageStyle';
 import EventioCarousel from '../components/EventioCarousel/EventioCarousel';
 import AllEvents from '../components/AllEvents';
 import HorizontalScrollComponent from '../components/HorizontalScrollComponent/HorizontalScrollComponent';
+import { useEffect } from 'react';
+import { getUserTags } from '../../eventio-api';
 const imagePath = '../../assets/img/';
 const MainPage = () => {
+  useEffect(() => {
+    getUserTags().then((res) => console.log(res));
+  }, []);
+
   return (
     <View style={styles.containerStyle}>
       <ScrollView>
