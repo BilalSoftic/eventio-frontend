@@ -22,25 +22,19 @@ const MainPageStyle = StyleSheet.create({
     top: 130,
     right: 40,
   },
-  contentContainerStyle: {
-    flex: 1,
-    paddingBottom: 30,
-    alignItems: 'center',
-  },
+
   carouselContainerStyle: {
     borderRadius: 20,
     marginBottom: 30,
-    overflow: 'hidden',
     height: 200,
+    overflow: 'hidden',
     width: '96%',
+    alignSelf: 'center',
   },
   horizontalScrollsContainerStyle: {
     gap: 5,
   },
-  allEventsContainerStyle: {
-    flex: 1,
-    marginTop: 100,
-  },
+  allEventsContainerStyle: { flex: 1, marginTop: 100 },
 });
 
 export default MainPageStyle;

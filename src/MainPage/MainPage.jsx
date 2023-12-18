@@ -3,43 +3,33 @@ import styles from './MainPageStyle';
 import EventioCarousel from '../components/EventioCarousel/EventioCarousel';
 import AllEvents from '../components/AllEvents';
 import HorizontalScrollComponent from '../components/HorizontalScrollComponent/HorizontalScrollComponent';
-import { useEffect } from 'react';
-import { getUserTags } from '../../eventio-api';
 
 const imagePath = '../../assets/img/';
 const MainPage = () => {
-  useEffect(() => {
-    // getUserTags().then((res) => console.log(res));
-  }, []);
-
   return (
-    <View style={styles.containerStyle}>
-      <ScrollView>
-        {/* HEADER */}
-        <View style={styles.headerStyle}>
-          <Text style={styles.headingStyle}>Eventio</Text>
-          <Image
-            style={styles.dotsStyle}
-            source={require(imagePath + 'BackgroundDots.png')}
-          />
-        </View>
-        {/* CAROUSEL */}
-        <View style={styles.contentContainerStyle}>
-          <View style={styles.carouselContainerStyle}>
-            <EventioCarousel />
-          </View>
-          {/* HORIZONTAL SCROLL */}
-          <View style={styles.horizontalScrollsContainerStyle}>
-            <HorizontalScrollComponent title={'muzika'} />
-            <HorizontalScrollComponent title={'teatar'} />
-            <HorizontalScrollComponent title={'sport'} />
-          </View>
-        </View>
-        <View style={styles.allEventsContainerStyle}>
-          <AllEvents />
-        </View>
-      </ScrollView>
-    </View>
+    <ScrollView style={styles.container}>
+      {/* HEADER */}
+      <View style={styles.headerStyle}>
+        <Text style={styles.headingStyle}>Eventio</Text>
+        <Image
+          style={styles.dotsStyle}
+          source={require(imagePath + 'BackgroundDots.png')}
+        />
+      </View>
+      {/* CAROUSEL */}
+
+      <View style={styles.carouselContainerStyle}>
+        <EventioCarousel />
+      </View>
+      {/* HORIZONTAL SCROLL */}
+      <View style={styles.horizontalScrollsContainerStyle}>
+        <HorizontalScrollComponent />
+      </View>
+
+      <View style={styles.allEventsContainerStyle}>
+        <AllEvents />
+      </View>
+    </ScrollView>
   );
 };
 export default MainPage;

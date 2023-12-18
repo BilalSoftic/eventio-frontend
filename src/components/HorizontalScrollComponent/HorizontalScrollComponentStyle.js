@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 const HorizontalScrollComponentStyle = StyleSheet.create({
-  horizontalScrollContainerStyle: {
+  wrapper: {},
+  container: {
     height: 300,
   },
   HorizontalScrollHeaderStyle: {
@@ -63,8 +64,9 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
   },
   dateStyle: { fontSize: 11, color: '#0C6A9F' },
   titleStyle: { fontSize: 15, fontWeight: 'bold' },
-
-  locationStyle: { fontSize: 11, color: '#707070' },
+  locationStyle: { flexDirection: 'row', gap: 3 },
+  locationIconStyle: { color: '#707070' },
+  locationTextStyle: { fontSize: 11, color: '#707070' },
 });
 
 export default HorizontalScrollComponentStyle;

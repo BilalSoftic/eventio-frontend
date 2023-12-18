@@ -9,12 +9,9 @@ import {
 } from 'react-native';
 import { getAllEvents } from '../../eventio-api';
 import { formatDate, formatTime } from '../../helpers';
-import { useNavigation } from '@react-navigation/native';
 
 const AllEvents = () => {
   const allEventsContainer = useRef({});
-
-  const navigation = useNavigation();
 
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,9 +23,10 @@ const AllEvents = () => {
       backgroundColor: '#fff',
     };
 
-    getAllEvents(navigation)
+    getAllEvents()
       .then((response) => {
         setEvents(response.data.data);
+        console.log(response.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -58,7 +56,7 @@ const AllEvents = () => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {events.map((event) => (
           <View key={event.id} style={styles.eventContainer}>
-            {console.log('Event1: ', event)}
+            {/*  {console.log('Event1: ', event)} */}
             <ImageBackground
               source={{ uri: event.media[0]?.display_image }}
               resizeMode='cover'

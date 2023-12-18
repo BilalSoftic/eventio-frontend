@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'http://192.168.0.18:8000/';
+const apiBaseUrl = 'http://192.168.0.2:8000/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
@@ -23,13 +23,12 @@ fetchData = async (url, method, body, navigation) => {
     });
     let data;
 
-    console.log(response);
+    /*  console.log(response); */
 
     if (response.status === 401) {
       console.log('401');
       AsyncStorage.removeItem('token');
       console.log('token removed');
-      console.log('navigation');
       navigation.navigate('SignInPage');
       console.log(navigation);
       Alert.alert('Session expired', 'Please sign in again');
@@ -37,7 +36,7 @@ fetchData = async (url, method, body, navigation) => {
     }
 
     data = await response.json();
-    console.log(data);
+    /*  console.log('data', data); */
 
     return data;
   } catch (error) {
@@ -59,5 +58,5 @@ export const signIn = (user) => {
 };
 
 export const getUserTags = () => {
-  return fetchData('user-events', 'GET');
+  return fetchData('api/user-events', 'GET');
 };
