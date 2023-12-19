@@ -54,7 +54,7 @@ const HorizontalScrollComponent = ({ navigation }) => {
                 key={event.id}
                 onPress={() => handleEventPress(event.id)}
               >
-                <View style={styles.backgroundImageContainerStyle}>
+                {/* <View style={styles.backgroundImageContainerStyle}> */}
                   {/*
              <Image style={styles.backgroundImageStyle} source={image} />
               <TouchableOpacity
@@ -66,7 +66,7 @@ const HorizontalScrollComponent = ({ navigation }) => {
                   style={styles.heartIcon}
                 />
               </TouchableOpacity> */}
-                </View>
+                {/* </View> */}
                 <View style={styles.informationContainerStyle}>
                   <Text style={styles.dateStyle}>
                     {formatDate(new Date(event.start_date))} u{' '}

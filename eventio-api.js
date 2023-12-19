@@ -33,12 +33,6 @@ fetchData = async (url, method, body, navigation) => {
 
     data = await response.json();
 
-    if (requestName === 'getAllEvents') {
-      console.log('getAllEvents', data);
-    } else if (requestName === 'getUserTags') {
-      console.log('getUserTags', data);
-    }
-
     return data;
   } catch (error) {
     console.log(JSON.stringify(error));
