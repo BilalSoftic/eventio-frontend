@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'http://192.168.0.2:8000/';
+const apiBaseUrl = 'http://192.168.0.18:8000/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
@@ -14,7 +14,6 @@ fetchData = async (url, method, body, navigation) => {
     const response = await fetch(apiBaseUrl + url, {
       method,
       body: body ? body : null,
-
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -23,25 +22,27 @@ fetchData = async (url, method, body, navigation) => {
     });
     let data;
 
-    /*  console.log(response); */
-
     if (response.status === 401) {
-      console.log('401');
       AsyncStorage.removeItem('token');
-      console.log('token removed');
       navigation.navigate('SignInPage');
-      console.log(navigation);
       Alert.alert('Session expired', 'Please sign in again');
       return;
     }
 
+  
+
     data = await response.json();
-    /*  console.log('data', data); */
+
+    if (requestName === 'getAllEvents') {
+      console.log('getAllEvents', data);
+    } else if (requestName === 'getUserTags') {
+      console.log('getUserTags', data);
+    }
 
     return data;
   } catch (error) {
     console.log(JSON.stringify(error));
-    // throw error;
+    throw error;
   }
 };
 

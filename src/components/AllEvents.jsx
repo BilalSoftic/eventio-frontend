@@ -26,7 +26,6 @@ const AllEvents = () => {
     getAllEvents()
       .then((response) => {
         setEvents(response.data.data);
-        console.log(response.data.data);
         setLoading(false);
       })
       .catch((error) => {

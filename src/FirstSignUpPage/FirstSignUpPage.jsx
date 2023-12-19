@@ -29,7 +29,6 @@ const FirstSignUpPage = ({ navigation }) => {
   /* Page navigation */
   const navigateToSecondSignUpPage = () => {
     navigation.navigate('SecondSignUpPage');
-    console.log('pressed');
   };
   const navigateToSignInPage = () => {
     navigation.navigate('SignInPage');

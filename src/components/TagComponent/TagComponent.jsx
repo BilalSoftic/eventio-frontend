@@ -14,7 +14,6 @@ const TagComponent = () => {
       setSelectedTags(
         selectedTags.filter((selectedTag) => selectedTag !== tag)
       );
-      console.log(selectedTags);
     } else {
       // Add the tag if it's not selected
       setSelectedTags([...selectedTags, tag]);

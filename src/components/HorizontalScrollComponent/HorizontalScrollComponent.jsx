@@ -13,13 +13,12 @@ import { formatDate, formatTime } from '../../../helpers';
 
 const HorizontalScrollComponent = ({ navigation }) => {
   const [userTags, setUserTags] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getUserTags().then((res) => {
-      /*  console.log(JSON.stringify(res.data)); */
-      setUserTags(res.data.map((obj) => obj.tag));
-
-      console.log(userTags);
+      setUserTags(res);
+      setLoading(false);
     });
   }, []);
 
@@ -33,6 +32,14 @@ const HorizontalScrollComponent = ({ navigation }) => {
     setData(updatedData);
   }; */
 
+  if (loading) {
+    return (
+      <View style={styles.wrapper}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.wrapper}>
       {userTags.map((tag) => (
@@ -41,8 +48,8 @@ const HorizontalScrollComponent = ({ navigation }) => {
             <Text style={styles.horizontalScrollHeading}>{tag.name}</Text>
           </View>
           <ScrollView horizontal={true}>
-            {tag.events.map((event) => (
-              <TouchableWithoutFeedback
+            {tag.tags.events.data.map((event) => (
+              <View
                 style={styles.singleEventContainerStyle}
                 key={event.id}
                 onPress={() => handleEventPress(event.id)}
@@ -73,7 +80,7 @@ const HorizontalScrollComponent = ({ navigation }) => {
                     </Text>
                   </View>
                 </View>
-              </TouchableWithoutFeedback>
+              </View>
             ))}
           </ScrollView>
         </View>

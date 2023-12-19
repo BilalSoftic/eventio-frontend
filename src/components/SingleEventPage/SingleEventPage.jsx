@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { getEventById } from '../../../eventio-api';
 
 const SingleEventPage = ({ route }) => {
-  const { eventId } = route.params;
+
+  const [eventId, setEventId] = useState(route.params?.eventId || 1);
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -22,14 +23,13 @@ const SingleEventPage = ({ route }) => {
         setLoading(false);
       }
     };
-
     fetchEvent();
-  }, [eventId]);
+  }, []);
 
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size='large' color='#007BFF' />
+        <Text>Error loading</Text>
       </View>
     );
   }
