@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import { getAllEvents } from '../../eventio-api';
 import { formatDate, formatTime } from '../../helpers';
+import { useNavigation } from '@react-navigation/native';
 
 const AllEvents = () => {
+  const navigation = useNavigation();
   const allEventsContainer = useRef({});
 
   const [events, setEvents] = useState([]);
@@ -23,7 +25,7 @@ const AllEvents = () => {
       backgroundColor: '#fff',
     };
 
-    getAllEvents()
+    getAllEvents(navigation)
       .then((response) => {
         setEvents(response.data.data);
         setLoading(false);
