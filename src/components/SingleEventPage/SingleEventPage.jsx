@@ -2,21 +2,56 @@ import { View, Text, ScrollView, Image, StyleSheet } from 'react-native';
 import StaticTagComponent from '../StaticTagComponent/StaticTagComponent';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import VenueSocialsButtonComponent from '../VenueSocialsButtonComponent/VenueSocialsButtonComponent';
+import { useEffect, useState } from 'react';
+import { getEventById } from '../../../eventio-api';
 
-const SingleEventPage = () => {
+const SingleEventPage = ({ route }) => {
+  const { eventId } = route.params;
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const data = await getEventById(eventId);
+        setEvent(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching event details:', error);
+        setIsError(true);
+        setLoading(false);
+      }
+    };
+
+    fetchEvent();
+  }, [eventId]);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size='large' color='#007BFF' />
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error fetching event details</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.containerStyle}>
       <View style={styles.backgroundImageContainerStyle}>
-        <Image
+        {/* <Image
           source={require('../../../assets/horizontalScrollImages/image-1.png')}
           style={styles.backgroundImageStyle}
-        />
+        /> */}
       </View>
       <View style={styles.eventInformationContainerStyle}>
-        <Text style={styles.headerStyle}>
-          Kakva ti je zena takav ti je zivot
-        </Text>
-
+        <Text style={styles.headerStyle}>{event.name}</Text>
         <View style={styles.venueContainerStyle}>
           <Image
             style={styles.venueImageStyle}
@@ -30,13 +65,14 @@ const SingleEventPage = () => {
         <View style={styles.informationContainerStyle}>
           <View style={styles.informationStyle}>
             <Icon name='map-marker' style={styles.informationIconStyle} />
-            <Text style={styles.informationTextStyle}>
-              Branilaca Sarajeva 24, Sarajevo
-            </Text>
+            <Text style={styles.informationTextStyle}>{event.address}</Text>
           </View>
           <View style={styles.informationStyle}>
             <Icon name='clock-o' style={styles.informationIconStyle} />
-            <Text>18:00 - 20:00</Text>
+            <Text>
+              {formatTime(new Date(event.start_date))} -
+              {formatTime(new Date(event.end_date))}
+            </Text>
           </View>
           <View style={styles.informationStyle}>
             <Icon name='credit-card' style={styles.informationIconStyle} />
@@ -46,21 +82,7 @@ const SingleEventPage = () => {
         <View style={styles.detailsContainerStyle}>
           <Text style={styles.detailsHeaderStyle}>Details</Text>
           <ScrollView style={styles.detailsScrollStyle}>
-            <Text style={styles.detailsStyle}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Aspernatur esse facilis quidem dolores sit veritatis
-              exercitationem, veniam laudantium, quam recusandae voluptas in et
-              doloribus amet excepturi, commodi numquam. Soluta vitae quam, quae
-              officiis doloribus praesentium blanditiis accusantium incidunt
-              repudiandae minus tempore mollitia consequatur, unde sunt impedit
-              voluptate numquam adipisci odio repellat itaque doloremque
-              dolorum. Maiores voluptates, qui debitis dolores vitae nesciunt
-              quo! Cum amet nostrum fugit, harum, nesciunt blanditiis sed
-              voluptate odit maiores hic laboriosam ipsa eaque esse. Similique
-              in, voluptatibus, beatae amet pariatur placeat dicta numquam
-              possimus autem officiis ab dignissimos, neque sit illum sint sunt
-              optio magni assumenda.
-            </Text>
+            <Text style={styles.detailsStyle}>{event.details}</Text>
           </ScrollView>
         </View>
         <View style={styles.socialsContainerStyle}>
@@ -74,7 +96,8 @@ const SingleEventPage = () => {
   );
 };
 const styles = StyleSheet.create({
-  border: { borderWidth: 2, borderColor: 'red' },
+  loadingContainer: { flex: 1 },
+  errorContainer: { flex: 1 },
   containerStyle: {
     flex: 1,
     position: 'relative',

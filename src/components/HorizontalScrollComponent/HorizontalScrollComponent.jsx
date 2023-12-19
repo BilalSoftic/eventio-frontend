@@ -1,12 +1,19 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import styles from './HorizontalScrollComponentStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useEffect, useState } from 'react';
 import { getUserTags } from '../../../eventio-api';
 import { formatDate, formatTime } from '../../../helpers';
 
-const HorizontalScrollComponent = ({}) => {
+const HorizontalScrollComponent = ({ navigation }) => {
   const [userTags, setUserTags] = useState([]);
+
   useEffect(() => {
     getUserTags().then((res) => {
       /*  console.log(JSON.stringify(res.data)); */
@@ -16,6 +23,9 @@ const HorizontalScrollComponent = ({}) => {
     });
   }, []);
 
+  const handleEventPress = (eventId) => {
+    navigation.navigate('SingleEventPage', { eventId });
+  };
   /*   const handleLikeButton = (id) => {
     const updatedData = data.map((item) =>
       item.id === id ? { ...item, liked: !item.liked } : item
@@ -32,7 +42,11 @@ const HorizontalScrollComponent = ({}) => {
           </View>
           <ScrollView horizontal={true}>
             {tag.events.map((event) => (
-              <View style={styles.singleEventContainerStyle} key={event.id}>
+              <TouchableWithoutFeedback
+                style={styles.singleEventContainerStyle}
+                key={event.id}
+                onPress={() => handleEventPress(event.id)}
+              >
                 <View style={styles.backgroundImageContainerStyle}>
                   {/*
              <Image style={styles.backgroundImageStyle} source={image} />
@@ -59,7 +73,7 @@ const HorizontalScrollComponent = ({}) => {
                     </Text>
                   </View>
                 </View>
-              </View>
+              </TouchableWithoutFeedback>
             ))}
           </ScrollView>
         </View>

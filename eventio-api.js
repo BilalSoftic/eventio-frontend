@@ -60,3 +60,7 @@ export const signIn = (user) => {
 export const getUserTags = () => {
   return fetchData('api/user-events', 'GET');
 };
+
+export const getEventById = (eventId, navigation) => {
+  return fetchData(`api/events/${eventId}`, 'GET', null, navigation);
+};
