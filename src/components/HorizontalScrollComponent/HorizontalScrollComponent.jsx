@@ -13,6 +13,8 @@ import { getUserTags } from '../../../eventio-api';
 import { formatDate, formatTime } from '../../../helpers';
 import { useNavigation } from '@react-navigation/native';
 
+const imagePath = '../../../assets/';
+
 const HorizontalScrollComponent = ({}) => {
   const navigation = useNavigation();
   const [userTags, setUserTags] = useState([]);
@@ -58,19 +60,23 @@ const HorizontalScrollComponent = ({}) => {
                 key={event.id}
                 onPress={() => handleEventPress(event)}
               >
-                {/*   <View style={styles.backgroundImageContainerStyle}> 
-                
-                                <Image style={styles.backgroundImageStyle} source={image} />
-                                 <TouchableOpacity
-                   style={styles.heartButton}
-                   onPress={() => handleLikeButton(id)}
-                                 >
-                   <Icon
-                     name={liked ? 'heart' : 'heart-o'}
-                     style={styles.heartIcon}
-                   />
-                                 </TouchableOpacity> 
-                 </View>  */}
+                <View style={styles.backgroundImageContainerStyle}>
+                  <Image
+                    style={styles.backgroundImageStyle}
+                    source={require(imagePath + 'placeholder.png')}
+                  />
+                  {/*
+                  <TouchableOpacity
+                    style={styles.heartButton}
+                    onPress={() => handleLikeButton(id)}
+                  >
+                    <Icon
+                      name={liked ? 'heart' : 'heart-o'}
+                      style={styles.heartIcon}
+                    />
+                  </TouchableOpacity>
+                  */}
+                </View>
                 <View style={styles.informationContainerStyle}>
                   <Text style={styles.dateStyle}>
                     {formatDate(new Date(event.start_date))} u{' '}

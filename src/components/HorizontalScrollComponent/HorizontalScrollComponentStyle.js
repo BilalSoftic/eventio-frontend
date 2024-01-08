@@ -34,7 +34,7 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
     elevation: 5,
   },
   backgroundImageContainerStyle: {
-    height: '80%',
+    height: '60%',
     width: '100%',
     position: 'relative',
   },
@@ -54,6 +54,7 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
 
   informationContainerStyle: {
     width: '100%',
+    height: '50%',
     padding: 10,
     gap: 5,
     borderRadius: 15,

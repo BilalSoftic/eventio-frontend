@@ -5,6 +5,8 @@ import VenueSocialsButtonComponent from '../VenueSocialsButtonComponent/VenueSoc
 import { formatDate, formatTime } from '../../../helpers';
 import { useEffect, useState } from 'react';
 
+const imagePath = '../../../assets/';
+
 const SingleEventPage = ({ route }) => {
   const [eventDetails, setEventDetails] = useState(route.params);
   const [loading, setLoading] = useState(true);
@@ -32,18 +34,18 @@ const SingleEventPage = ({ route }) => {
     <View style={styles.containerStyle}>
       {console.log(event)}
       <View style={styles.backgroundImageContainerStyle}>
-        {/* <Image
-          source={require('../../../assets/horizontalScrollImages/image-1.png')}
+        <Image
+          source={require(imagePath + 'placeholder.png')}
           style={styles.backgroundImageStyle}
-        /> */}
+        />
       </View>
       <View style={styles.eventInformationContainerStyle}>
         <Text style={styles.headerStyle}>{event.name}</Text>
         <View style={styles.venueContainerStyle}>
-          <Image
+          {/* <Image
             style={styles.venueImageStyle}
-            source={require('../../../assets/img/venueImage.png')}
-          />
+            source={require('../../../assets/img/placeholder.png')}
+          /> */}
           <Text style={styles.venueNameStyle}>Mondaco</Text>
         </View>
         <View style={styles.tagsContainerStyle}>
