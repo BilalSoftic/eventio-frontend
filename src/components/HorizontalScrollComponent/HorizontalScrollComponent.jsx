@@ -4,26 +4,30 @@ import {
   ScrollView,
   Image,
   TouchableWithoutFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import styles from './HorizontalScrollComponentStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useEffect, useState } from 'react';
 import { getUserTags } from '../../../eventio-api';
 import { formatDate, formatTime } from '../../../helpers';
+import { useNavigation } from '@react-navigation/native';
 
-const HorizontalScrollComponent = ({ navigation }) => {
+const HorizontalScrollComponent = ({}) => {
+  const navigation = useNavigation();
   const [userTags, setUserTags] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getUserTags().then((res) => {
       setUserTags(res);
+      console.log('result', JSON.stringify(res));
       setLoading(false);
     });
   }, []);
 
-  const handleEventPress = (eventId) => {
-    navigation.navigate('SingleEventPage', { eventId });
+  const handleEventPress = (event) => {
+    navigation.navigate('SingleEventPage', { event });
   };
   /*   const handleLikeButton = (id) => {
     const updatedData = data.map((item) =>
@@ -42,31 +46,31 @@ const HorizontalScrollComponent = ({ navigation }) => {
 
   return (
     <View style={styles.wrapper}>
-      {userTags.map((tag) => (
-        <View key={tag.id} style={styles.container}>
+      {userTags.map((tag, i) => (
+        <View key={i} style={styles.container}>
           <View style={styles.HorizontalScrollHeaderStyle}>
             <Text style={styles.horizontalScrollHeading}>{tag.name}</Text>
           </View>
           <ScrollView horizontal={true}>
-            {tag.tags.events.data.map((event) => (
-              <View
+            {tag.events.map((event) => (
+              <TouchableOpacity
                 style={styles.singleEventContainerStyle}
                 key={event.id}
-                onPress={() => handleEventPress(event.id)}
+                onPress={() => handleEventPress(event)}
               >
-                {/* <View style={styles.backgroundImageContainerStyle}> */}
-                  {/*
-             <Image style={styles.backgroundImageStyle} source={image} />
-              <TouchableOpacity
-                style={styles.heartButton}
-                onPress={() => handleLikeButton(id)}
-              >
-                <Icon
-                  name={liked ? 'heart' : 'heart-o'}
-                  style={styles.heartIcon}
-                />
-              </TouchableOpacity> */}
-                {/* </View> */}
+                {/*   <View style={styles.backgroundImageContainerStyle}> 
+                
+                                <Image style={styles.backgroundImageStyle} source={image} />
+                                 <TouchableOpacity
+                   style={styles.heartButton}
+                   onPress={() => handleLikeButton(id)}
+                                 >
+                   <Icon
+                     name={liked ? 'heart' : 'heart-o'}
+                     style={styles.heartIcon}
+                   />
+                                 </TouchableOpacity> 
+                 </View>  */}
                 <View style={styles.informationContainerStyle}>
                   <Text style={styles.dateStyle}>
                     {formatDate(new Date(event.start_date))} u{' '}
@@ -80,7 +84,7 @@ const HorizontalScrollComponent = ({ navigation }) => {
                     </Text>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>

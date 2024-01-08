@@ -28,6 +28,7 @@ const AllEvents = () => {
     getAllEvents(navigation)
       .then((response) => {
         setEvents(response.data.data);
+        console.log(response);
         setLoading(false);
       })
       .catch((error) => {

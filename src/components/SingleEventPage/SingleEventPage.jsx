@@ -2,34 +2,20 @@ import { View, Text, ScrollView, Image, StyleSheet } from 'react-native';
 import StaticTagComponent from '../StaticTagComponent/StaticTagComponent';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import VenueSocialsButtonComponent from '../VenueSocialsButtonComponent/VenueSocialsButtonComponent';
+import { formatDate, formatTime } from '../../../helpers';
 import { useEffect, useState } from 'react';
-import { getEventById } from '../../../eventio-api';
 
 const SingleEventPage = ({ route }) => {
-
-  const [eventId, setEventId] = useState(route.params?.eventId || 1);
-  const [event, setEvent] = useState(null);
+  const [eventDetails, setEventDetails] = useState(route.params);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  useEffect(() => {
-    const fetchEvent = async () => {
-      try {
-        const data = await getEventById(eventId);
-        setEvent(data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching event details:', error);
-        setIsError(true);
-        setLoading(false);
-      }
-    };
-    fetchEvent();
-  }, []);
+  const event = eventDetails.event;
 
-  if (loading) {
+  /* if (loading) {
     return (
       <View style={styles.loadingContainer}>
         <Text>Error loading</Text>
+        {console.log(event)}
       </View>
     );
   }
@@ -39,11 +25,12 @@ const SingleEventPage = ({ route }) => {
       <View style={styles.errorContainer}>
         <Text>Error fetching event details</Text>
       </View>
-    );
-  }
+    ); 
+  }*/
 
   return (
     <View style={styles.containerStyle}>
+      {console.log(event)}
       <View style={styles.backgroundImageContainerStyle}>
         {/* <Image
           source={require('../../../assets/horizontalScrollImages/image-1.png')}
@@ -82,7 +69,7 @@ const SingleEventPage = ({ route }) => {
         <View style={styles.detailsContainerStyle}>
           <Text style={styles.detailsHeaderStyle}>Details</Text>
           <ScrollView style={styles.detailsScrollStyle}>
-            <Text style={styles.detailsStyle}>{event.details}</Text>
+            <Text style={styles.detailsStyle}>{event.description}</Text>
           </ScrollView>
         </View>
         <View style={styles.socialsContainerStyle}>

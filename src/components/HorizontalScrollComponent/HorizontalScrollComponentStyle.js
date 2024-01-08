@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 const HorizontalScrollComponentStyle = StyleSheet.create({
   wrapper: {},
   container: {
+    marginBottom: 5,
     height: 300,
   },
   HorizontalScrollHeaderStyle: {
