@@ -1,5 +1,5 @@
-import { View, TextInput } from 'react-native';
-import { forwardRef } from 'react';
+import { View, TextInput, TouchableOpacity } from 'react-native';
+import { forwardRef, useState } from 'react';
 import styles from './InputComponentStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -17,10 +17,13 @@ const InputComponent = forwardRef((props, ref) => {
     onChange,
   } = props;
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const inputContainerStyle = {
     ...styles.inputContainerStyle,
     borderColor: borderColor,
   };
+
   return (
     <View style={inputContainerStyle}>
       <TextInput
@@ -31,7 +34,7 @@ const InputComponent = forwardRef((props, ref) => {
         onChange={onChange}
         onChangeText={onChangeText}
         style={styles.inputStyle}
-        secureTextEntry={secureTextEntry}
+        secureTextEntry={secureTextEntry && !showPassword}
         placeholder={placeholder}
         placeholderTextColor='rgba(70, 70, 70, 0.5)'
         ref={ref}
@@ -41,9 +44,21 @@ const InputComponent = forwardRef((props, ref) => {
         blurOnSubmit={false}
         returnKeyType={nextRef ? 'next' : 'done'}
       />
-      <View style={styles.iconContainerStyle}>
-        <Icon name={iconName} style={styles.iconStyle} />
-      </View>
+      {iconName === 'eye' ? (
+        <TouchableOpacity
+          style={styles.iconContainerStyle}
+          onPress={() => setShowPassword(!showPassword)}
+        >
+          <Icon
+            name={showPassword ? 'eye-slash' : 'eye'}
+            style={styles.iconStyle}
+          />
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.iconContainerStyle}>
+          <Icon name={iconName} style={styles.iconStyle} />
+        </View>
+      )}
     </View>
   );
 });

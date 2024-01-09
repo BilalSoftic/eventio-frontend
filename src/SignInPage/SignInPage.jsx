@@ -14,9 +14,9 @@ import DividerComponent from '../components/DividerComponent/DividerComponent';
 import IconButtonComponent from '../components/IconButtonComponent/IconButtonComponent';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { signIn } from '../../eventio-api';
-const imgPath = '../../assets/img/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+const imgPath = '../../assets/img/';
 
 const SignInPage = () => {
   const navigation = useNavigation();
@@ -112,7 +112,7 @@ const SignInPage = () => {
             onChangeText={(text) => handleInputChange('password', text)}
             borderColor={isPasswordValid ? 'green' : '#D9D9D9'}
             secureTextEntry={true}
-            iconName='lock'
+            iconName='eye'
             ref={passwordRef}
           ></InputComponent>
         </View>

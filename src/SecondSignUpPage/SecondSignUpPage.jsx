@@ -12,10 +12,12 @@ import DatePickerComponent from '../components/DatePickerComponent/DatePickerCom
 import InputComponent from '../components/InputComponent/InputComponent';
 import PhoneNumberInputComponent from '../components/PhoneNumberInputComponent/PhoneNumberInputComponent';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
+import { useNavigation } from '@react-navigation/native';
 
 const imgPath = '../../assets/img/';
 
-const SecondSignUpPage = ({ navigation }) => {
+const SecondSignUpPage = () => {
+  const navigation = useNavigation();
   /* State */
   const [firstName, setName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -138,7 +140,7 @@ const SecondSignUpPage = ({ navigation }) => {
         <View style={styles.buttonContainerStyle}>
           <ButtonComponent
             styleType='signUpPageButtonStyle'
-            disabled={false}
+            disabled={!isContinueButtonEnabled}
             onPress={onSignUpSuccess}
             text='Continue'
           />

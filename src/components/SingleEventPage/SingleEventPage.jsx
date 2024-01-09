@@ -42,10 +42,10 @@ const SingleEventPage = ({ route }) => {
       <View style={styles.eventInformationContainerStyle}>
         <Text style={styles.headerStyle}>{event.name}</Text>
         <View style={styles.venueContainerStyle}>
-          {/* <Image
+          <Image
             style={styles.venueImageStyle}
-            source={require('../../../assets/img/placeholder.png')}
-          /> */}
+            source={require(imagePath + 'placeholder.png')}
+          />
           <Text style={styles.venueNameStyle}>Mondaco</Text>
         </View>
         <View style={styles.tagsContainerStyle}>

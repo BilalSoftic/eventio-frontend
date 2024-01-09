@@ -4,7 +4,8 @@ const SecondSignUpPageStyle = StyleSheet.create({
     flex: 1,
   },
   backgroundImageStyle: {
-    minWidth: '150%',
+    minWidth: '110%',
+    alignSelf: 'center',
     position: 'absolute',
     top: 0,
   },

@@ -24,6 +24,10 @@ const DatePickerComponent = ({
     hideDatePicker();
   };
 
+  // Maximum date (today minus 15 years)
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 15);
+  //
   const buttonText = selectedDate
     ? selectedDate.toLocaleDateString('bs-BA', {
         month: 'short',
@@ -41,15 +45,17 @@ const DatePickerComponent = ({
       <TouchableOpacity style={styles.buttonStyle} onPress={showDatePicker}>
         <Text style={buttonTextStyle}>{buttonText}</Text>
         <View style={styles.iconContainerStyle}>
-          <Icon name="calendar" style={styles.iconStyle} />
+          <Icon name='calendar' style={styles.iconStyle} />
         </View>
       </TouchableOpacity>
 
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="date"
+        mode='date'
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+        maximumDate={maxDate}
+        minimumDate={new Date(1950, 0, 1)}
       />
     </View>
   );

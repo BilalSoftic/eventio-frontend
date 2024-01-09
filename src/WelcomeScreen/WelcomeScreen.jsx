@@ -2,10 +2,13 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './WelcomeScreenStyle';
 import React, { useState } from 'react';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
-
+import { useNavigation } from '@react-navigation/native';
 const imgPath = '../../assets/img/';
 
-function WelcomeScreen({ navigation }) {
+function WelcomeScreen() {
+  const navigation = useNavigation();
+
+  /* State */
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [selectedFlag, setSelectedFlag] = useState(null);
 
