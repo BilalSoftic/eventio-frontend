@@ -11,7 +11,20 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
-// Repo change
+// TODO:
+// 1. Pregledat i ispravit sve styling greske
+// 2. Bosanski i engleski jezik
+// 3. Search komponenta
+// 4. Bottom bar (navigacija kroz aplikaciju sa menijem dole)
+// 5. Single event page back i swipe down akcije
+// 6. Profil stranica
+// 7. Pripremit single event page za tagove
+// 8. Komponente za loading i error handleing
+// 9. Dodat skeleton loading
+// 10. Sign up page
+// 11. Rasporedit komponente
+// 12. Navigacija kroz aplikaciju
+// 13. Istestirat token logiku
 
 export default function App() {
   return (
@@ -24,10 +37,11 @@ export default function App() {
         {/* <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} /> */}
         {/*  <Stack.Screen name='FirstSignUpPage' component={FirstSignUpPage} /> */}
         {/*  <Stack.Screen name='SecondSignUpPage' component={SecondSignUpPage} /> */}
-        {/* <Stack.Screen name='SignInPage' component={SignInPage} />
-        <Stack.Screen name='MainPage' component={MainPage} /> */}
-        {/*  <Stack.Screen name='InfoPage' component={InfoPage} /> */}
+        {/* <Stack.Screen name='SignInPage' component={SignInPage} /> */}
+        {/* <Stack.Screen name='MainPage' component={MainPage} />  */}
+        <Stack.Screen name='InfoPage' component={InfoPage} />
         <Stack.Screen name='TagsPage' component={TagsPage} />
+
         {/* <Stack.Screen name='SingleEventPage' component={SingleEventPage} /> */}
       </Stack.Navigator>
     </NavigationContainer>
