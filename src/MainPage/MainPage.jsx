@@ -26,7 +26,9 @@ const MainPage = () => {
         <HorizontalScrollComponent />
       </View>
 
-      <View style={styles.allEventsContainerStyle}>{/* <AllEvents /> */}</View>
+      <View style={styles.allEventsContainerStyle}>
+        <AllEvents />
+      </View>
     </ScrollView>
   );
 };

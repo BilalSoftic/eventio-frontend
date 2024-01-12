@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
 const InfoPageStyle = StyleSheet.create({
+  loadingContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+  },
   containerStyle: {
     flex: 1,
     backgroundColor: '#004972',
@@ -15,9 +20,22 @@ const InfoPageStyle = StyleSheet.create({
     top: '10%',
     left: '3%',
   },
+
   tagsContainer: {
-    position: 'absolute',
-    top: '25%',
+    padding: 20,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    columnGap: 5,
+    rowGap: 10,
+  },
+  tag: {
+    padding: 5,
+    borderRadius: 10,
+    textAlign: 'center',
+  },
+  tagText: {
+    fontSize: 20,
   },
 
   arrow: {

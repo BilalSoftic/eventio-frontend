@@ -15,7 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const imagePath = '../../../assets/';
 
-const HorizontalScrollComponent = ({}) => {
+const HorizontalScrollComponent = () => {
   const navigation = useNavigation();
   const [userTags, setUserTags] = useState([]);
   const [loading, setLoading] = useState(true);

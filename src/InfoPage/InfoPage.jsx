@@ -2,10 +2,12 @@ import { View, Text, Image } from 'react-native';
 import styles from './InfoPageStyle';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DotComponent from '../components/DotComponent/DotComponent';
+import { useNavigation } from '@react-navigation/native';
 const imgPath = '../../assets/img/';
 
-function InfoPage({ navigation }) {
+function InfoPage() {
   /* Page navigation */
+  const navigation = useNavigation();
   /*  const navigateToTagsPage = () => {
     navigation.navigate('TagsPage');
   }; */
