@@ -59,5 +59,10 @@ export const getAllTags = () => {
 };
 
 export const setUserTags = (tags) => {
-  return fetchData('api/user-tags', 'PATCH', JSON.stringify(tags), null);
+  return fetchData(
+    'api/user-tags',
+    'PATCH',
+    JSON.stringify({ tag_ids: tags }),
+    null
+  );
 };
