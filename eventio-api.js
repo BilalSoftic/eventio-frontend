@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'https://35d7-77-78-203-194.ngrok-free.app/';
+const apiBaseUrl = 'http://192.168.0.9:8000/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
@@ -66,3 +66,6 @@ export const setUserTags = (tags) => {
     null
   );
 };
+
+// post event id 
+export const 

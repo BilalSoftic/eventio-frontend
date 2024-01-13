@@ -35,6 +35,18 @@ const MainPageStyle = StyleSheet.create({
     gap: 5,
   },
   allEventsContainerStyle: { flex: 1, marginTop: 100 },
+  containerI: {
+    marginBottom: 5,
+    height: 300,
+  },
+  HorizontalScrollHeaderStyle: {
+    paddingLeft: '5%',
+  },
+  horizontalScrollHeading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+  },
 });
 
 export default MainPageStyle;

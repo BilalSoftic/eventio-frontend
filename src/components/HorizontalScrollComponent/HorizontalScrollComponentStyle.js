@@ -1,20 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 const HorizontalScrollComponentStyle = StyleSheet.create({
-  wrapper: {},
-  container: {
-    marginBottom: 5,
-    height: 300,
-  },
-  HorizontalScrollHeaderStyle: {
-    paddingLeft: '5%',
-  },
-  horizontalScrollHeading: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textTransform: 'capitalize',
-  },
-
   singleEventContainerStyle: {
     width: 160,
     marginHorizontal: 10,
@@ -48,6 +34,7 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
     right: 15,
   },
   heartIcon: {
+    padding: 3,
     color: 'white',
     fontSize: 20,
   },
