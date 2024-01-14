@@ -13,6 +13,8 @@ import { getUserTags } from '../../../eventio-api';
 import { formatDate, formatTime } from '../../../helpers';
 import { useNavigation } from '@react-navigation/native';
 import HeartIcon from './HeartIcon';
+import { postLike } from '../../../eventio-api';
+import { deleteLike } from '../../../eventio-api';
 
 const imagePath = '../../../assets/';
 
@@ -22,7 +24,7 @@ const HorizontalScrollComponent = ({ events }) => {
 
   useEffect(() => {
     setUserTagEvents(events);
-    console.log('tag', events);
+    //  console.log('tag', events);
   }, []);
 
   const handleEventPress = (event) => {
@@ -46,15 +48,13 @@ const HorizontalScrollComponent = ({ events }) => {
 
     setUserTagEvents(updatedData);
 
-    if (singleEvent.display_like) {
-      // AKO JE TRUE ONDA OPALIT POST
-      console.log(singleEvent.id);
+    if (!singleEvent.display_like) {
+      postLike(singleEvent.id, 0);
+      console.log('liked event id:', singleEvent.id);
     } else {
-      // OPALIT DELETE
-      console.log(singleEvent.id);
+      deleteLike(singleEvent.id, 0);
+      console.log('unlinked event id:', singleEvent.id);
     }
-
-    console.log(singleEvent);
   };
 
   return (

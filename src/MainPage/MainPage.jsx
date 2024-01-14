@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView } from 'react-native';
+import { View, Text, Image, ScrollView, RefreshControl } from 'react-native';
 import styles from './MainPageStyle';
 import EventioCarousel from '../components/EventioCarousel/EventioCarousel';
 import AllEvents from '../components/AllEvents';
@@ -11,14 +11,22 @@ const MainPage = () => {
   const [userTags, setUserTags] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
   useEffect(() => {
     getUserTags().then((res) => {
       setUserTags(res);
       // console.log('result', JSON.stringify(res));
+      console.log('got userTags');
       setLoading(false);
       // console.log('res', res);
     });
-  }, []);
+  }, [refreshing]);
 
   if (loading) {
     return (
@@ -29,7 +37,12 @@ const MainPage = () => {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      style={styles.containerStyle}
+    >
       {/* HEADER */}
       <View style={styles.headerStyle}>
         <Text style={styles.headingStyle}>Eventio</Text>

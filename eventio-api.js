@@ -28,9 +28,11 @@ fetchData = async (url, method, body, navigation) => {
       Alert.alert('Session expired', 'Please sign in again');
       return;
     }
+    /* // Log the response content before parsing
+    const responseText = await response.text();
+    console.log('API Response:', responseText); */
 
     data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log(JSON.stringify(error));
@@ -67,5 +69,19 @@ export const setUserTags = (tags) => {
   );
 };
 
-// post event id 
-export const 
+export const postLike = (id, number) => {
+  return fetchData(
+    'api/post-like',
+    'POST',
+    JSON.stringify({ event_id: id, likeable_type: number }),
+    null
+  );
+};
+export const deleteLike = (id, number) => {
+  return fetchData(
+    'api/delete-like',
+    'DELETE',
+    JSON.stringify({ event_id: id, likeable_type: number }),
+    null
+  );
+};
