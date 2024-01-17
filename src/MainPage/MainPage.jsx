@@ -1,7 +1,7 @@
 import { View, Text, Image, ScrollView, RefreshControl } from 'react-native';
 import styles from './MainPageStyle';
 import EventioCarousel from '../components/EventioCarousel/EventioCarousel';
-import AllEvents from '../components/AllEvents';
+import AllEventsComponent from '../components/AllEventsComponent/AllEventsComponent';
 import HorizontalScrollComponent from '../components/HorizontalScrollComponent/HorizontalScrollComponent';
 import { useEffect, useState } from 'react';
 import { getUserTags } from '../../eventio-api';
@@ -71,7 +71,7 @@ const MainPage = () => {
       })}
 
       <View style={styles.allEventsContainerStyle}>
-        <AllEvents />
+        <AllEventsComponent />
       </View>
     </ScrollView>
   );

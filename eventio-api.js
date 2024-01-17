@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'http://192.168.0.9:8000/';
+const apiBaseUrl = 'https://9cca-77-78-203-194.ngrok-free.app/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {

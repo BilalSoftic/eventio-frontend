@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-const WelcomeScreenStyle = StyleSheet.create({
+const WelcomePageStyle = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: '#004972',
@@ -71,4 +71,4 @@ const WelcomeScreenStyle = StyleSheet.create({
   },
 });
 
-export default WelcomeScreenStyle;
+export default WelcomePageStyle;

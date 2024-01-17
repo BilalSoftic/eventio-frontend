@@ -1,11 +1,11 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import styles from './WelcomeScreenStyle';
+import styles from './WelcomePageStyle';
 import React, { useState } from 'react';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import { useNavigation } from '@react-navigation/native';
 const imgPath = '../../assets/img/';
 
-function WelcomeScreen() {
+function WelcomePage() {
   const navigation = useNavigation();
 
   /* State */
@@ -90,4 +90,4 @@ function WelcomeScreen() {
   );
 }
 
-export default WelcomeScreen;
+export default WelcomePage;

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import WelcomeScreen from './src/WelcomeScreen/WelcomeScreen';
+import WelcomePage from './src/WelcomePage/WelcomePage';
 import FirstSignUpPage from './src/FirstSignUpPage/FirstSignUpPage';
 import SecondSignUpPage from './src/SecondSignUpPage/SecondSignUpPage';
 import SignInPage from './src/SignInPage/SignInPage';
@@ -22,12 +22,14 @@ const Stack = createStackNavigator();
 // 8. Komponente za loading i error handleing
 // 9. Dodat skeleton loading
 // 10. Sign up page
-// 11. Rasporedit komponente
 // 12. Navigacija kroz aplikaciju
 // 13. Istestirat token logiku
-// 14. Like logika
-// 15. EventioCarousel , ubacit dugmad za lijevo i desno
 // 16. Events of the venue you liked ??
+
+//=====//
+// 11. Rasporedit komponente
+// 14. Like logika
+// 15. EventioCarousel , ubacit dugmad za lijevo i desno - izzbacio TouchableOpacity
 export default function App() {
   return (
     <NavigationContainer>
@@ -36,7 +38,7 @@ export default function App() {
           headerShown: false,
         }}
       >
-        {/* <Stack.Screen name='WelcomeScreen' component={WelcomeScreen} /> */}
+        {/* <Stack.Screen name='WelcomePage' component={WelcomePage} /> */}
         {/*  <Stack.Screen name='FirstSignUpPage' component={FirstSignUpPage} /> */}
         {/*  <Stack.Screen name='SecondSignUpPage' component={SecondSignUpPage} /> */}
         {/* <Stack.Screen name='SignInPage' component={SignInPage} /> */}
