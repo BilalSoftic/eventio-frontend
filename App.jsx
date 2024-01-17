@@ -16,17 +16,17 @@ const Stack = createStackNavigator();
 // 2. Bosanski i engleski jezik
 // 3. Search komponenta
 // 4. Bottom bar (navigacija kroz aplikaciju sa menijem dole)
-// 5. Single event page back i swipe down akcije
 // 6. Profil stranica
-// 7. Pripremit single event page za tagove
 // 8. Komponente za loading i error handleing
 // 9. Dodat skeleton loading
 // 10. Sign up page
 // 12. Navigacija kroz aplikaciju
 // 13. Istestirat token logiku
 // 16. Events of the venue you liked ??
+// 7. Pripremit single event page za tagove
 
 //=====//
+// 5. Single event page back i swipe down akcije
 // 11. Rasporedit komponente
 // 14. Like logika
 // 15. EventioCarousel , ubacit dugmad za lijevo i desno - izzbacio TouchableOpacity
@@ -46,7 +46,7 @@ export default function App() {
         {/*  <Stack.Screen name='InfoPage' component={InfoPage} /> */}
         {/*  <Stack.Screen name='TagsPage' component={TagsPage} /> */}
 
-        {/*  <Stack.Screen name='SingleEventPage' component={SingleEventPage} /> */}
+        <Stack.Screen name='SingleEventPage' component={SingleEventPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

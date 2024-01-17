@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import styles from './AllEventsComponentStyle';
 import { getAllEvents } from '../../../eventio-api';
@@ -37,6 +38,9 @@ const AllEventsComponent = () => {
         setLoading(false);
       });
   }, []);
+  const handleEventPress = (event) => {
+    navigation.navigate('SingleEventPage', { event });
+  };
 
   if (loading) {
     return (
@@ -58,7 +62,11 @@ const AllEventsComponent = () => {
     <View style={styles.containerStyle}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {events.map((event) => (
-          <View key={event.id} style={styles.eventContainer}>
+          <TouchableOpacity
+            key={event.id}
+            style={styles.eventContainer}
+            onPress={() => handleEventPress(event)}
+          >
             {/*  {console.log('Event1: ', event)} */}
             <ImageBackground
               source={{ uri: event.media[0]?.display_image }}
@@ -72,9 +80,9 @@ const AllEventsComponent = () => {
                 {formatTime(new Date(event.end_date))}
               </Text>
               <Text style={styles.eventNameStyle}>{event.name}</Text>
-              <Text style={styles.eventAddressStyle}>{event.address}</Text>
+              <Text style={styles.eventAddress}>{event.address}</Text>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>

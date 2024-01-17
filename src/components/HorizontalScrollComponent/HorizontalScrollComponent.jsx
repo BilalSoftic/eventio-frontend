@@ -31,10 +31,6 @@ const HorizontalScrollComponent = ({ events }) => {
     navigation.navigate('SingleEventPage', { event });
   };
   const handleLikeButton = (id) => {
-    // const updatedData = data.map((item) =>
-    //   item.id === id ? { ...item, liked: !item.liked } : item
-    // );
-    // setData(updatedData);
     let singleEvent;
     const updatedData = userTagEvents.map((event) => {
       if (event.id === id) {
