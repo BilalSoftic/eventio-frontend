@@ -3,28 +3,27 @@ import {
   Text,
   ScrollView,
   Image,
-  TouchableWithoutFeedback,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import styles from './HorizontalScrollComponentStyle';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useEffect, useState } from 'react';
-import { getUserTags } from '../../../eventio-api';
 import { formatDate, formatTime } from '../../../helpers';
 import { useNavigation } from '@react-navigation/native';
 import HeartIcon from './HeartIcon';
-import { postLike } from '../../../eventio-api';
-import { deleteLike } from '../../../eventio-api';
+import { postLike, deleteLike } from '../../../eventio-api';
 
 const imagePath = '../../../assets/';
 
 const HorizontalScrollComponent = ({ events }) => {
   const navigation = useNavigation();
   const [userTagEvents, setUserTagEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setUserTagEvents(events);
-    //  console.log('tag', events);
+    setLoading(false);
   }, []);
 
   const handleEventPress = (event) => {
@@ -53,6 +52,14 @@ const HorizontalScrollComponent = ({ events }) => {
     }
   };
 
+  /* loading */
+  if (loading) {
+    return (
+      <View style={{ flex: 1 }}>
+        <ActivityIndicator size='large' color='#004972' />
+      </View>
+    );
+  }
   return (
     <ScrollView horizontal={true}>
       {userTagEvents.map((event) => (

@@ -25,7 +25,7 @@ const SecondSignUpPageStyle = StyleSheet.create({
     marginBottom: 15,
     fontWeight: 'bold',
   },
-  pageNumberingContainer: {
+  pageNumberingContainerStyle: {
     marginBottom: 20,
     width: '100%',
     alignItems: 'flex-start',
@@ -47,7 +47,7 @@ const SecondSignUpPageStyle = StyleSheet.create({
     color: 'rgb(0, 49, 72)',
   },
   /* DatePicker */
-  datePickerContainer: {},
+  datePickerContainerStyle: {},
   buttonStyle: {
     padding: 12,
     borderWidth: 2,

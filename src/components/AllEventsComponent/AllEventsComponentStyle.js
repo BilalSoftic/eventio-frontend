@@ -1,67 +1,60 @@
 import { StyleSheet } from 'react-native';
 const AllEventsComponentStyle = StyleSheet.create({
-  containerStyle: {
+  singleEventContainerStyle: {
+    width: 'auto',
+    height: 400,
+    marginHorizontal: 10,
+    marginBottom: 30,
+    borderRadius: 15,
     position: 'relative',
-    bottom: 90,
-    zIndex: 2,
+    flexDirection: 'column',
+    overflow: 'hidden',
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
   },
-  loadingContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-  },
-  eventContainer: {
-    position: 'relative',
-    backgroundColor: '#F0FAFF',
-    margin: 16,
-    borderRadius: 22.92,
-  },
-  eventImageStyle: {
-    height: 384.98,
-    borderRadius: 22.92,
-  },
-  eventDetailsStyle: {
-    height: 142,
+  backgroundImageContainerStyle: {
+    height: '60%',
     width: '100%',
-    padding: 16,
-    backgroundColor: '#fff',
-    borderRadius: 22.92,
+    position: 'relative',
+  },
+  backgroundImageStyle: {
+    width: '100%',
+    height: '100%',
+  },
+  heartButton: {
+    position: 'absolute',
+    top: 15,
+    right: 15,
+  },
+  heartIcon: {
+    padding: 5,
+    color: 'white',
+    fontSize: 40,
+  },
+
+  informationContainerStyle: {
+    width: '100%',
+    height: '50%',
+    padding: 25,
+    gap: 5,
+    borderRadius: 15,
     position: 'absolute',
     bottom: 0,
-    display: 'flex',
+    backgroundColor: 'white',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    shadowColor: '#333333',
-    shadowOffset: {
-      width: 2.046511650085449,
-      height: 2.046511650085449,
-    },
-    shadowOpacity: 0.12156862765550613,
-    shadowRadius: 22.920930862426758,
-    elevation: 3,
   },
-  eventDateStyle: {
-    fontSize: 13,
-    fontWeight: '400',
-    lineHeight: 15.73,
-    color: '#0C6A9F',
-  },
-  eventNameStyle: {
-    fontSize: 26,
-    fontWeight: '600',
-    lineHeight: 28,
-    color: '#333333',
-  },
-  eventAddressStyle: {
-    fontSize: 13,
-    fontWeight: '400',
-    lineHeight: 15.73,
-  },
-  errorContainer: {
-    alignSelf: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
+  dateStyle: { fontSize: 20, color: '#0C6A9F' },
+  titleStyle: { fontSize: 25, fontWeight: 'bold' },
+  locationStyle: { flexDirection: 'row', gap: 3 },
+  locationIconStyle: { fontSize: 20, color: '#707070', marginRight: 5 },
+  locationTextStyle: { fontSize: 20, color: '#707070' },
 });
 
 export default AllEventsComponentStyle;

@@ -1,36 +1,29 @@
 import React, { useEffect, useState, useRef } from 'react';
-import {
-  ScrollView,
-  View,
-  ImageBackground,
-  StyleSheet,
-  ActivityIndicator,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { ScrollView, View, Image, Text, TouchableOpacity } from 'react-native';
 import styles from './AllEventsComponentStyle';
 import { getAllEvents } from '../../../eventio-api';
 import { formatDate, formatTime } from '../../../helpers';
 import { useNavigation } from '@react-navigation/native';
+import HeartIcon from './HeartIcon';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { postLike, deleteLike } from '../../../eventio-api';
+import LoadingComponent from '../LoadingComponent/LoadingComponent';
+
+const imagePath = '../../../assets/';
 
 const AllEventsComponent = () => {
   const navigation = useNavigation();
-  const allEventsContainer = useRef({});
 
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isGetError, setIsGetError] = useState(false);
 
+  /* on load */
   useEffect(() => {
-    allEventsContainer.current = {
-      flex: 1,
-      backgroundColor: '#fff',
-    };
-
     getAllEvents(navigation)
       .then((response) => {
         setEvents(response.data.data);
-        console.log(response);
+        console.log('getAllEvents Response:', response);
         setLoading(false);
       })
       .catch((error) => {
@@ -38,18 +31,40 @@ const AllEventsComponent = () => {
         setLoading(false);
       });
   }, []);
+
+  /* Navigate to SingleEventPage */
   const handleEventPress = (event) => {
     navigation.navigate('SingleEventPage', { event });
   };
 
+  /* Handle Like*/
+  const handleLikeButton = (id) => {
+    let singleEvent;
+    const updatedData = events.map((event) => {
+      if (event.id === id) {
+        singleEvent = event;
+      }
+      return event.id === id
+        ? { ...event, display_like: !event.display_like }
+        : event;
+    });
+    setEvents(updatedData);
+
+    if (!singleEvent.display_like) {
+      postLike(singleEvent.id, 0);
+      console.log('liked event id:', singleEvent.id);
+    } else {
+      deleteLike(singleEvent.id, 0);
+      console.log('unlinked event id:', singleEvent.id);
+    }
+  };
+
+  /* loading */
   if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size='large' color='#007BFF' />
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
+  /* Error */
   if (isGetError) {
     return (
       <View style={styles.errorContainer}>
@@ -59,33 +74,40 @@ const AllEventsComponent = () => {
   }
 
   return (
-    <View style={styles.containerStyle}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        {events.map((event) => (
-          <TouchableOpacity
-            key={event.id}
-            style={styles.eventContainer}
-            onPress={() => handleEventPress(event)}
-          >
-            {/*  {console.log('Event1: ', event)} */}
-            <ImageBackground
-              source={{ uri: event.media[0]?.display_image }}
-              resizeMode='cover'
-              borderRadius={22.92}
-              style={styles.eventImageStyle}
+    <ScrollView>
+      {events.map((event) => (
+        <TouchableOpacity
+          style={styles.singleEventContainerStyle}
+          key={event.id}
+          onPress={() => handleEventPress(event)}
+        >
+          <View style={styles.backgroundImageContainerStyle}>
+            <Image
+              style={styles.backgroundImageStyle}
+              source={require(imagePath + 'placeholder.png')}
             />
-            <View style={styles.eventDetailsStyle}>
-              <Text style={styles.eventDateStyle}>
-                {formatDate(new Date(event.end_date))} u{' '}
-                {formatTime(new Date(event.end_date))}
-              </Text>
-              <Text style={styles.eventNameStyle}>{event.name}</Text>
-              <Text style={styles.eventAddress}>{event.address}</Text>
+
+            <TouchableOpacity
+              style={styles.heartButton}
+              onPress={() => handleLikeButton(event.id)}
+            >
+              <HeartIcon iconName={event.display_like ? 'heart' : 'heart-o'} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.informationContainerStyle}>
+            <Text style={styles.dateStyle}>
+              {formatDate(new Date(event.start_date))} u{' '}
+              {formatTime(new Date(event.start_date))}
+            </Text>
+            <Text style={styles.titleStyle}>{event.name}</Text>
+            <View style={styles.locationStyle}>
+              <Icon name={'map-pin'} style={styles.locationIconStyle} />
+              <Text style={styles.locationTextStyle}>{event.address}</Text>
             </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-    </View>
+          </View>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
   );
 };
 

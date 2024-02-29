@@ -3,9 +3,9 @@ import {
   Text,
   ScrollView,
   Image,
-  StyleSheet,
   PanResponder,
   Animated,
+  TouchableOpacity,
 } from 'react-native';
 import styles from './SingleEventPageStyle';
 import StaticTagComponent from '../StaticTagComponent/StaticTagComponent';
@@ -14,20 +14,27 @@ import VenueSocialsButtonComponent from '../VenueSocialsButtonComponent/VenueSoc
 import { formatDate, formatTime } from '../../../helpers';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import LoadingComponent from '../LoadingComponent/LoadingComponent';
 
 const imagePath = '../../../assets/';
 
 const SingleEventPage = ({ route }) => {
   const navigation = useNavigation();
-  const [eventDetails, setEventDetails] = useState(route.params);
+  const [eventDetails, setEventDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const event = eventDetails.event;
 
+  useEffect(() => {
+    setEventDetails(route.params);
+    setLoading(false);
+  }, []);
+
+  /* go back on swipe down */
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (evt, gestureState) => {
       // Enable the pan responder only if the user is swiping down
-      return gestureState.dy > 0 && gestureState.dy > Math.abs(gestureState.dx);
+      return gestureState.dy > 0;
     },
     onPanResponderRelease: (evt, gestureState) => {
       // If the swipe down gesture is completed, navigate back
@@ -37,22 +44,18 @@ const SingleEventPage = ({ route }) => {
     },
   });
 
-  /* if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <Text>Error loading</Text>
-        {console.log(event)}
-      </View>
-    );
+  /* loading */
+  if (loading) {
+    return <LoadingComponent />;
   }
 
-  if (isError) {
+  /* if (isError) {
     return (
       <View style={styles.errorContainer}>
         <Text>Error fetching event details</Text>
       </View>
     ); 
-  }*/
+  } */
 
   return (
     <Animated.View

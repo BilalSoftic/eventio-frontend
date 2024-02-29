@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 const InfoPageStyle = StyleSheet.create({
-  loadingContainer: {
+  loadingContainerStyle: {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
@@ -21,7 +21,7 @@ const InfoPageStyle = StyleSheet.create({
     left: '3%',
   },
 
-  tagsContainer: {
+  tagsContainerStyle: {
     padding: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -29,16 +29,16 @@ const InfoPageStyle = StyleSheet.create({
     columnGap: 5,
     rowGap: 10,
   },
-  tag: {
+  tagStyle: {
     padding: 5,
     borderRadius: 10,
     textAlign: 'center',
   },
-  tagText: {
+  tagTextStyle: {
     fontSize: 20,
   },
 
-  arrow: {
+  arrowStyle: {
     position: 'absolute',
     bottom: '-8%',
     right: '15%',
@@ -62,14 +62,14 @@ const InfoPageStyle = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
   },
-  mainText: {
+  mainTextStyle: {
     fontSize: 16,
     opacity: 0.5,
     lineHeight: 25,
     justifyContent: 'center',
     textAlign: 'center',
   },
-  dotsContainer: {
+  dotsContainerStyle: {
     width: '100%',
     gap: 10,
     flexDirection: 'row',

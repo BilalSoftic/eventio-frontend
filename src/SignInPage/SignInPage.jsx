@@ -6,7 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import styles from './SignInPageStyle';
 import InputComponent from '../components/InputComponent/InputComponent';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
@@ -118,7 +118,6 @@ const SignInPage = () => {
         </View>
         <View style={styles.textWrapperStyle}>
           <BouncyCheckbox
-            style={styles.checkbox}
             size={20}
             fillColor='#004972'
             unfillColor='#FFFFFF'

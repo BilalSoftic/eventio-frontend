@@ -3,6 +3,8 @@ import styles from './MainPageStyle';
 import EventioCarousel from '../components/EventioCarousel/EventioCarousel';
 import AllEventsComponent from '../components/AllEventsComponent/AllEventsComponent';
 import HorizontalScrollComponent from '../components/HorizontalScrollComponent/HorizontalScrollComponent';
+import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
+
 import { useEffect, useState } from 'react';
 import { getUserTags } from '../../eventio-api';
 
@@ -10,8 +12,9 @@ const imagePath = '../../assets/img/';
 const MainPage = () => {
   const [userTags, setUserTags] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const [refreshing, setRefreshing] = useState(false);
+
+  /* Refresh page */
   const onRefresh = () => {
     setRefreshing(true);
     setTimeout(() => {
@@ -21,19 +24,14 @@ const MainPage = () => {
   useEffect(() => {
     getUserTags().then((res) => {
       setUserTags(res);
-      // console.log('result', JSON.stringify(res));
       console.log('got userTags');
       setLoading(false);
-      // console.log('res', res);
     });
   }, [refreshing]);
 
+  /* loading */
   if (loading) {
-    return (
-      <View style={styles.wrapper}>
-        <Text>Loading...</Text>
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
   return (
@@ -71,6 +69,7 @@ const MainPage = () => {
       })}
 
       <View style={styles.allEventsContainerStyle}>
+        <Text style={styles.allEventsHeaderStyle}>All Events</Text>
         <AllEventsComponent />
       </View>
     </ScrollView>

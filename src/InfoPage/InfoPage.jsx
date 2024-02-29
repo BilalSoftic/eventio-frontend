@@ -8,9 +8,9 @@ const imgPath = '../../assets/img/';
 function InfoPage() {
   /* Page navigation */
   const navigation = useNavigation();
-  /*  const navigateToTagsPage = () => {
+  const navigateToNextPage = () => {
     navigation.navigate('TagsPage');
-  }; */
+  };
   return (
     <View style={styles.containerStyle}>
       {/* BACKGROUND*/}
@@ -32,20 +32,17 @@ function InfoPage() {
       {/* INTERACTIVE BOX */}
       <View style={styles.interactiveContainerStyle}>
         <Text style={styles.mainHeaderTextStyle}>Traži Event</Text>
-        <Text style={styles.mainText}>
+        <Text style={styles.mainTextStyle}>
           Naša aplikacija će vam omogućiti da budete u toku s najnovijim
           događajima, koncertima, izložbama, sportskim manifestacijama i mnogo
           čimbenim aktivnostima koje vas zanimaju.
         </Text>
 
-        <View style={styles.dotsContainer}>
+        <View style={styles.dotsContainerStyle}>
           <DotComponent size={15} backgroundColor={'#004972'} />
           <DotComponent size={15} backgroundColor={'#C1C9DC'} />
         </View>
-        <ButtonComponent
-          /*    onPress={navigateToTagsPage} */
-          text='Next'
-        />
+        <ButtonComponent onPress={navigateToNextPage} text='Next' />
       </View>
     </View>
   );

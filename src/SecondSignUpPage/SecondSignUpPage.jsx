@@ -35,16 +35,12 @@ const SecondSignUpPage = () => {
   const phoneNumberRef = useRef();
 
   /* Page navigation */
-  const navigateToFirstSignUpPage = () => {
+  const goBack = () => {
     navigation.navigate('FirstSignUpPage');
   };
 
-  const navigateFirstInfoPage = () => {
-    navigation.navigate('FirstInfoPage');
-  };
-
   const onSignUpSuccess = () => {
-    navigation.navigate('AllEvents');
+    navigation.navigate('WelcomePage');
   };
 
   /* Validation function */
@@ -133,7 +129,7 @@ const SecondSignUpPage = () => {
       >
         <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
         {/* PAGE NUMBERING */}
-        <View style={styles.pageNumberingContainer}>
+        <View style={styles.pageNumberingContainerStyle}>
           <PageNumberingComponent signUpPageNumber='SecondSignUpPage' />
         </View>
         {/* FORM */}
@@ -168,7 +164,7 @@ const SecondSignUpPage = () => {
             onSubmitEditing={() => setIsDatePickerVisible(true)}
           />
           {/* DatePicker */}
-          <View style={styles.datePickerContainer}>
+          <View style={styles.datePickerContainerStyle}>
             <TouchableOpacity style={buttonStyle} onPress={showDatePicker}>
               <Text style={buttonTextStyle}>{buttonText}</Text>
               <View style={styles.iconContainerStyle}>
@@ -194,7 +190,7 @@ const SecondSignUpPage = () => {
             text='Continue'
           />
         </View>
-        <Text style={styles.goBackStyle} onPress={navigateToFirstSignUpPage}>
+        <Text style={styles.goBackStyle} onPress={goBack}>
           go back
         </Text>
       </KeyboardAvoidingView>

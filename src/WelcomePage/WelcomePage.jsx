@@ -13,8 +13,8 @@ function WelcomePage() {
   const [selectedFlag, setSelectedFlag] = useState(null);
 
   /* Page navigation */
-  const navigateToFirstSignUpPage = () => {
-    navigation.navigate('FirstSignUpPage');
+  const handleSubmitLanguage = () => {
+    navigation.navigate('InfoPage');
   };
   return (
     <View style={styles.containerStyle}>
@@ -82,7 +82,7 @@ function WelcomePage() {
 
         <ButtonComponent
           disabled={isSubmitDisabled}
-          onPress={navigateToFirstSignUpPage}
+          onPress={handleSubmitLanguage}
           text='Next'
         />
       </View>

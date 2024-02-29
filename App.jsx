@@ -12,40 +12,29 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 // TODO:
-// 1. Pregledat i ispravit sve styling greske
-// 2. Bosanski i engleski jezik
-// 3. Search komponenta
-// 4. Bottom bar (navigacija kroz aplikaciju sa menijem dole)
-// 6. Profil stranica
-// 8. Komponente za loading i error handleing
-// 9. Dodat skeleton loading
-// 10. Sign up page
-// 12. Navigacija kroz aplikaciju
-// 13. Istestirat token logiku
-// 16. Events of the venue you liked ??
-// 7. Pripremit single event page za tagove
+// Sign Up page,user data handling
+// Komponente za loading i error handling
+// Like logika, ispravit error
+// forgot password
+// remember me
+// Istestirat token logiku
 
-//=====//
-// 5. Single event page back i swipe down akcije
-// 11. Rasporedit komponente
-// 14. Like logika
-// 15. EventioCarousel , ubacit dugmad za lijevo i desno - izzbacio TouchableOpacity
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        /*   initialRouteName='MainPage' */
         screenOptions={{
           headerShown: false,
         }}
       >
-        {/* <Stack.Screen name='WelcomePage' component={WelcomePage} /> */}
-        {/*  <Stack.Screen name='FirstSignUpPage' component={FirstSignUpPage} /> */}
-        {/*  <Stack.Screen name='SecondSignUpPage' component={SecondSignUpPage} /> */}
+        {/*  <Stack.Screen name='FirstSignUpPage' component={FirstSignUpPage} />
+        <Stack.Screen name='SecondSignUpPage' component={SecondSignUpPage} /> */}
         {/* <Stack.Screen name='SignInPage' component={SignInPage} /> */}
+        <Stack.Screen name='WelcomePage' component={WelcomePage} />
+        <Stack.Screen name='InfoPage' component={InfoPage} />
+        <Stack.Screen name='TagsPage' component={TagsPage} />
         <Stack.Screen name='MainPage' component={MainPage} />
-        {/*  <Stack.Screen name='InfoPage' component={InfoPage} /> */}
-        {/*  <Stack.Screen name='TagsPage' component={TagsPage} /> */}
-
         <Stack.Screen name='SingleEventPage' component={SingleEventPage} />
       </Stack.Navigator>
     </NavigationContainer>

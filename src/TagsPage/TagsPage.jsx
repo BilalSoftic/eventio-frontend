@@ -11,24 +11,21 @@ import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DotComponent from '../components/DotComponent/DotComponent';
 import { useNavigation } from '@react-navigation/native';
 import { useState, useEffect } from 'react';
-import { getAllTags } from '../../eventio-api';
-import { setUserTags } from '../../eventio-api';
+import { getAllTags, setUserTags } from '../../eventio-api';
+import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
 
 const imgPath = '../../assets/img/';
 const lightGreen = '#64FCD9';
 const darkGreen = '#146D87';
 
 function TagsPage() {
-  /* Page navigation */
   const navigation = useNavigation();
-  /*  const navigateTo = () => {
-    navigation.navigate('');
-  }; */
+
   const [Tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [nextLoading, setNextLoading] = useState(false);
 
+  /* on load */
   useEffect(() => {
     getAllTags().then((res) => {
       setTags(res);
@@ -37,38 +34,35 @@ function TagsPage() {
     });
   }, []);
 
+  /* toggle tag */
   const toggleTag = (tag) => {
     if (selectedTags.includes(tag)) {
-      // Remove the tag if it's already selected
       setSelectedTags(
         selectedTags.filter((selectedTag) => selectedTag !== tag)
       );
     } else {
-      // Add the tag if it's not selected
       setSelectedTags([...selectedTags, tag]);
     }
   };
+
+  /* update user tags */
   const handleUserTags = () => {
     const selectedTagsId = selectedTags.map((tag) => tag.id);
     console.log(selectedTagsId);
-    setNextLoading(true);
+
     setUserTags(selectedTagsId).then((res) => {
-      setNextLoading(false);
       console.log(res.message);
       Alert.alert('User Tags', res.message);
     });
+    navigation.navigate('MainPage');
   };
-  // Log the selected tags whenever they change
   useEffect(() => {
     console.log('Selected Tags:', selectedTags);
   }, [selectedTags]);
 
+  /* loading */
   if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size='large' color='#007BFF' />
-      </View>
-    );
+    return <LoadingComponent />;
   }
 
   return (
@@ -79,13 +73,13 @@ function TagsPage() {
           style={styles.dotsStartStyle}
           source={require(imgPath + 'BackgroundDots.png')}
         />
-        <View style={styles.tagsContainer}>
+        <View style={styles.tagsContainerStyle}>
           {Tags.data.map((tag) => (
             <TouchableOpacity
               key={tag.id}
               onPress={() => toggleTag(tag)}
               style={[
-                styles.tag,
+                styles.tagStyle,
                 {
                   backgroundColor: selectedTags.includes(tag)
                     ? lightGreen
@@ -98,7 +92,7 @@ function TagsPage() {
             >
               <Text
                 style={[
-                  styles.tagText,
+                  styles.tagTextStyle,
                   {
                     color: selectedTags.includes(tag) ? 'black' : lightGreen,
                   },
@@ -110,7 +104,10 @@ function TagsPage() {
           ))}
         </View>
 
-        <Image style={styles.arrow} source={require(imgPath + 'Arrow.png')} />
+        <Image
+          style={styles.arrowStyle}
+          source={require(imgPath + 'Arrow.png')}
+        />
         <Image
           style={styles.dotsEndStyle}
           source={require(imgPath + 'BackgroundDots.png')}
@@ -120,13 +117,13 @@ function TagsPage() {
       {/* INTERACTIVE BOX */}
       <View style={styles.interactiveContainerStyle}>
         <Text style={styles.mainHeaderTextStyle}>Izaberi 3 kategorije</Text>
-        <Text style={styles.mainText}>
+        <Text style={styles.mainTextStyle}>
           Naša aplikacija će vam omogućiti da budete u toku s najnovijim
           događajima, koncertima, izložbama, sportskim manifestacijama i mnogo
           čimbenim aktivnostima koje vas zanimaju.
         </Text>
 
-        <View style={styles.dotsContainer}>
+        <View style={styles.dotsContainerStyle}>
           <DotComponent size={15} backgroundColor={'#C1C9DC'} />
           <DotComponent size={15} backgroundColor={'#004972'} />
         </View>
@@ -135,7 +132,7 @@ function TagsPage() {
           onPress={handleUserTags}
           text={
             loading ? (
-              <View style={styles.loadingContainer}>
+              <View style={styles.loadingContainerStyle}>
                 <ActivityIndicator size='large' color='#007BFF' />
               </View>
             ) : (

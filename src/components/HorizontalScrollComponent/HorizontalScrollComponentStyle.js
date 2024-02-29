@@ -5,7 +5,6 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
     width: 160,
     marginHorizontal: 10,
     marginVertical: 10,
-    marginBottom: 10,
     borderRadius: 15,
     position: 'relative',
     flexDirection: 'column',

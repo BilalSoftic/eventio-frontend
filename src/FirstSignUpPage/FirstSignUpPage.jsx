@@ -15,6 +15,7 @@ import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DividerComponent from '../components/DividerComponent/DividerComponent';
 import IconButtonComponent from '../components/IconButtonComponent/IconButtonComponent';
 import { useNavigation } from '@react-navigation/native';
+
 const imgPath = '../../assets/img/';
 
 const FirstSignUpPage = () => {
@@ -80,6 +81,7 @@ const FirstSignUpPage = () => {
     const signInUrl = 'https://google.com';
     Linking.openURL(signInUrl);
   };
+
   return (
     <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
