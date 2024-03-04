@@ -1,11 +1,4 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-  Alert,
-} from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import styles from './TagsPageStyle';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DotComponent from '../components/DotComponent/DotComponent';
@@ -48,14 +41,14 @@ function TagsPage() {
   /* update user tags */
   const handleUserTags = () => {
     const selectedTagsId = selectedTags.map((tag) => tag.id);
-    console.log(selectedTagsId);
 
     setUserTags(selectedTagsId).then((res) => {
       console.log(res.message);
-      Alert.alert('User Tags', res.message);
+      navigation.navigate('MainPage');
     });
-    navigation.navigate('MainPage');
   };
+
+  /* log selected tags */
   useEffect(() => {
     console.log('Selected Tags:', selectedTags);
   }, [selectedTags]);
@@ -130,15 +123,7 @@ function TagsPage() {
         <ButtonComponent
           disabled={selectedTags.length < 3}
           onPress={handleUserTags}
-          text={
-            loading ? (
-              <View style={styles.loadingContainerStyle}>
-                <ActivityIndicator size='large' color='#007BFF' />
-              </View>
-            ) : (
-              'Next'
-            )
-          }
+          text={'Next'}
         />
       </View>
     </View>

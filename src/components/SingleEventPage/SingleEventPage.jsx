@@ -105,10 +105,9 @@ const SingleEventPage = ({ route }) => {
           </ScrollView>
         </View>
         <View style={styles.socialsContainerStyle}>
-          <VenueSocialsButtonComponent />
-          <VenueSocialsButtonComponent />
-          <VenueSocialsButtonComponent />
-          <VenueSocialsButtonComponent />
+          <VenueSocialsButtonComponent socialIconName={'facebook'} />
+          <VenueSocialsButtonComponent socialIconName={'instagram'} />
+          <VenueSocialsButtonComponent socialIconName={'google maps'} />
         </View>
       </View>
     </Animated.View>
