@@ -29,8 +29,12 @@ const FirstSignUpPage = () => {
   const [isConfirmPasswordValid, setConfirmPasswordValid] = useState(false);
 
   /* Page navigation */
-  const navigateToSecondSignUpPage = () => {
-    navigation.navigate('SecondSignUpPage');
+  const navigateToSecondSignUpPage = (email, password, confirmPassword) => {
+    navigation.navigate('SecondSignUpPage', {
+      email,
+      password,
+      confirmPassword,
+    });
   };
   const navigateToSignInPage = () => {
     navigation.navigate('SignInPage');
@@ -137,7 +141,9 @@ const FirstSignUpPage = () => {
         <View style={styles.buttonContainerStyle}>
           <ButtonComponent
             disabled={!isContinueButtonEnabled}
-            onPress={navigateToSecondSignUpPage}
+            onPress={() =>
+              navigateToSecondSignUpPage(email, password, confirmPassword)
+            }
             text='Continue'
           />
         </View>

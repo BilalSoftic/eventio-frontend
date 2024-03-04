@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'https://7a87-77-78-203-194.ngrok-free.app/';
+const apiBaseUrl = 'http://192.168.0.10:8000/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
@@ -21,7 +21,7 @@ fetchData = async (url, method, body, navigation) => {
       },
     });
     let data;
-
+    console.log('response status:', response.status);
     if (response.status === 401) {
       AsyncStorage.removeItem('token');
       navigation.navigate('SignInPage');
@@ -37,14 +37,34 @@ fetchData = async (url, method, body, navigation) => {
   }
 };
 
-export const registerUser = (user) => {
-  fetchData('register', 'POST', JSON.stringify(user));
-};
-
 export const getAllEvents = (navigation) => {
   return fetchData('api/events', 'GET', null, navigation);
 };
 
+export const signUp = (
+  email,
+  firstName,
+  lastName,
+  password,
+  confirmPassword,
+  phoneNumber,
+  selectedDate
+) => {
+  return fetchData(
+    'api/register',
+    'POST',
+    JSON.stringify({
+      email,
+      first_name: firstName,
+      last_name: lastName,
+      password,
+      password_confirmation: confirmPassword,
+      phone_number: phoneNumber,
+      date_of_birth: selectedDate,
+    }),
+    null
+  );
+};
 export const signIn = (user) => {
   return fetchData('login', 'POST', JSON.stringify(user), null);
 };

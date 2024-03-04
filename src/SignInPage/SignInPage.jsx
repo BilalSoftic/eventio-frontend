@@ -45,7 +45,6 @@ const SignInPage = () => {
       })
       .catch((error) => {
         console.error('Login failed', error);
-        // Handle login failure (e.g., show an alert or message to the user)
       });
   };
 

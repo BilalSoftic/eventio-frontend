@@ -6,7 +6,7 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './SecondSignUpPageStyle';
 import PageNumberingComponent from '../components/PageNumberingComponent/PageNumberingComponent';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -15,12 +15,19 @@ import PhoneNumberInputComponent from '../components/PhoneNumberInputComponent/P
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { signUp } from '../../eventio-api';
+import { formatDate } from '../../helpers';
 
 const imgPath = '../../assets/img/';
 
-const SecondSignUpPage = () => {
+const SecondSignUpPage = ({ route }) => {
   const navigation = useNavigation();
-  /* State */
+  /*  */
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  /*  */
   const [firstName, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -34,13 +41,33 @@ const SecondSignUpPage = () => {
   const lastNameRef = useRef();
   const phoneNumberRef = useRef();
 
+  /* update email and pass */
+  useEffect(() => {
+    setEmail(route.params.email);
+    setPassword(route.params.password);
+    setConfirmPassword(route.params.confirmPassword);
+    console.log(route.params.confirmPassword);
+  }, []);
+
   /* Page navigation */
   const goBack = () => {
     navigation.navigate('FirstSignUpPage');
   };
 
-  const onSignUpSuccess = () => {
-    navigation.navigate('WelcomePage');
+  const handleSignUp = () => {
+    signUp(
+      email,
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+      phoneNumber,
+      selectedDate
+    )
+      .then((res) => {
+        console.log('response:', res);
+      })
+      .catch((error) => console.log(error));
   };
 
   /* Validation function */
@@ -88,21 +115,22 @@ const SecondSignUpPage = () => {
   };
 
   const handleConfirm = (date) => {
-    setSelectedDate(date);
+    const formattedDate = date.toLocaleDateString('bs-BA', {
+      month: 'numeric',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    setSelectedDate(formattedDate);
     hideDatePicker();
   };
 
-  const buttonText = selectedDate
-    ? selectedDate.toLocaleDateString('bs-BA', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      })
-    : 'date of birth';
+  const buttonText = selectedDate ? selectedDate : 'date of birth';
+
   const buttonTextStyle = {
     ...styles.buttonTextStyle,
     color: selectedDate ? 'black' : 'rgba(70, 70, 70, 0.5)',
   };
+
   const buttonStyle = {
     ...styles.buttonStyle,
     borderColor: selectedDate ? 'green' : '#D9D9D9',
@@ -186,7 +214,7 @@ const SecondSignUpPage = () => {
           <ButtonComponent
             styleType='signUpPageButtonStyle'
             disabled={!isContinueButtonEnabled}
-            onPress={onSignUpSuccess}
+            onPress={handleSignUp}
             text='Continue'
           />
         </View>
