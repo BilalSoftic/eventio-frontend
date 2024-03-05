@@ -39,7 +39,7 @@ const SignInPage = () => {
   const handleSignIn = () => {
     signIn({ email, password })
       .then(async (res) => {
-        const token = res?.token?.plainTextToken; // Check your response structure
+        const token = res?.data?.token?.plainTextToken; // Check your response structure
         await AsyncStorage.setItem('token', token);
         navigation.navigate('MainPage');
       })

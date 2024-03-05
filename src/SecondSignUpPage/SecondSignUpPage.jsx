@@ -16,7 +16,7 @@ import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import { signUp } from '../../eventio-api';
-import { formatDate } from '../../helpers';
+import ErrorModalComponent from '../components/ErrorModalComponent/ErrorModalComponent';
 
 const imgPath = '../../assets/img/';
 
@@ -36,6 +36,9 @@ const SecondSignUpPage = ({ route }) => {
   const [isPhoneNumberValid, setPhoneNumberValid] = useState(false);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   /* useRef */
   const nameRef = useRef();
   const lastNameRef = useRef();
@@ -46,7 +49,6 @@ const SecondSignUpPage = ({ route }) => {
     setEmail(route.params.email);
     setPassword(route.params.password);
     setConfirmPassword(route.params.confirmPassword);
-    console.log(route.params.confirmPassword);
   }, []);
 
   /* Page navigation */
@@ -65,9 +67,19 @@ const SecondSignUpPage = ({ route }) => {
       selectedDate
     )
       .then((res) => {
-        console.log('response:', res);
+        const responseMessage = res.data.message;
+        const responseStatus = res.status;
+        if (responseStatus !== 200) {
+          setIsError(true);
+          setErrorMessage(responseMessage);
+        } else {
+          navigation.navigate('WelcomePage');
+        }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setIsError(true);
+        setErrorMessage(error);
+      });
   };
 
   /* Validation function */
@@ -142,7 +154,10 @@ const SecondSignUpPage = ({ route }) => {
   /* Enable Button */
   const isContinueButtonEnabled =
     isNameValid && isLastNameValid && isPhoneNumberValid && selectedDate;
-
+  /* Error */
+  const handleCloseModal = () => {
+    setIsError(false);
+  };
   return (
     <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
@@ -155,6 +170,15 @@ const SecondSignUpPage = ({ route }) => {
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         style={styles.interactiveContainerStyle}
       >
+        {/* Error message rendering */}
+        {isError && (
+          <ErrorModalComponent
+            errorMessage={errorMessage}
+            isError={isError}
+            closeModal={handleCloseModal}
+          />
+        )}
+
         <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
         {/* PAGE NUMBERING */}
         <View style={styles.pageNumberingContainerStyle}>

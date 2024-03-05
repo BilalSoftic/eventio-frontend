@@ -21,7 +21,7 @@ function TagsPage() {
   /* on load */
   useEffect(() => {
     getAllTags().then((res) => {
-      setTags(res);
+      setTags(res.data);
       console.log('All tags', JSON.stringify(res));
       setLoading(false);
     });

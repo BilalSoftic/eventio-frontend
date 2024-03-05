@@ -22,7 +22,7 @@ const AllEventsComponent = () => {
   useEffect(() => {
     getAllEvents(navigation)
       .then((response) => {
-        setEvents(response.data.data);
+        setEvents(response.data.data.data);
         console.log('getAllEvents Response:', response);
         setLoading(false);
       })

@@ -23,8 +23,9 @@ const MainPage = () => {
   };
   useEffect(() => {
     getUserTags().then((res) => {
-      setUserTags(res);
+      setUserTags(res.data);
       console.log('got userTags');
+      console.log(res.data);
       setLoading(false);
     });
   }, [refreshing]);

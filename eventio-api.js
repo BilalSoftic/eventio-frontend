@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'http://192.168.0.10:8000/';
+const apiBaseUrl = 'https://a7a8-77-78-203-194.ngrok-free.app/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
@@ -21,16 +21,22 @@ fetchData = async (url, method, body, navigation) => {
       },
     });
     let data;
+    let responseStatus;
     console.log('response status:', response.status);
     if (response.status === 401) {
       AsyncStorage.removeItem('token');
       navigation.navigate('SignInPage');
       Alert.alert('Session expired', 'Please sign in again');
       return;
+    } else {
+      responseStatus = response.status;
     }
 
     data = await response.json();
-    return data;
+    return {
+      data: data,
+      status: responseStatus,
+    };
   } catch (error) {
     console.log(JSON.stringify(error));
     throw error;
