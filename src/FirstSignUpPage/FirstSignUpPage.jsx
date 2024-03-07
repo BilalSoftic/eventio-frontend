@@ -81,8 +81,12 @@ const FirstSignUpPage = () => {
     isEmailValid && isPasswordValid && isConfirmPasswordValid;
 
   /* Handle Sign in link */
-  const handleSignInPress = () => {
+  const handleGoogleSignIn = () => {
     const signInUrl = 'https://google.com';
+    Linking.openURL(signInUrl);
+  };
+  const handleFacebookSignIn = () => {
+    const signInUrl = 'https://facebook.com';
     Linking.openURL(signInUrl);
   };
 
@@ -154,8 +158,14 @@ const FirstSignUpPage = () => {
         {/* SOCIALS */}
         <View style={styles.socialsContainerStyle}>
           <View style={styles.socialButtonsContainerStyle}>
-            <IconButtonComponent imageName={'google'} />
-            <IconButtonComponent imageName={'facebook'} />
+            <IconButtonComponent
+              imageName={'google'}
+              onPress={handleGoogleSignIn}
+            />
+            <IconButtonComponent
+              imageName={'facebook'}
+              onPress={handleFacebookSignIn}
+            />
           </View>
           <Text style={styles.socialsTextStyle}>
             Already have an account?

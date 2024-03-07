@@ -16,6 +16,8 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { signIn } from '../../eventio-api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import ErrorModalComponent from '../components/MessageModalComponent/MessageModalComponent';
+import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
 const imgPath = '../../assets/img/';
 
 const SignInPage = () => {

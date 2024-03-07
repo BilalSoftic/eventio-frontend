@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'https://a7a8-77-78-203-194.ngrok-free.app/';
+const apiBaseUrl = 'https://22d0-77-78-203-194.ngrok-free.app/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
@@ -28,9 +28,9 @@ fetchData = async (url, method, body, navigation) => {
       navigation.navigate('SignInPage');
       Alert.alert('Session expired', 'Please sign in again');
       return;
-    } else {
-      responseStatus = response.status;
     }
+
+    responseStatus = response.status;
 
     data = await response.json();
     return {

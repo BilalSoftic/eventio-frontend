@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { View, Text, Modal } from 'react-native';
 
-const ErrorModalComponent = ({ isError, errorMessage, closeModal }) => {
+const MessageModalComponent = ({ isVisible, message, closeModal }) => {
   useEffect(() => {
     let timeoutId;
-    if (isError) {
-      timeoutId = setTimeout(closeModal, 3000); // Hide modal after 3 seconds
+    if (isVisible) {
+      timeoutId = setTimeout(closeModal, 2000); // Hide modal
     }
     return () => clearTimeout(timeoutId); // Clear timeout on component unmount
-  }, [isError]);
+  }, [isVisible]);
 
   return (
-    <Modal visible={isError} animationType='fade' transparent>
+    <Modal visible={isVisible} animationType='fade' transparent>
       <View
         style={{
           flex: 1,
@@ -32,7 +32,7 @@ const ErrorModalComponent = ({ isError, errorMessage, closeModal }) => {
           }}
         >
           <Text style={{ fontSize: 20, padding: 5, textAlign: 'center' }}>
-            {errorMessage}
+            {message}
           </Text>
         </View>
       </View>
@@ -40,4 +40,4 @@ const ErrorModalComponent = ({ isError, errorMessage, closeModal }) => {
   );
 };
 
-export default ErrorModalComponent;
+export default MessageModalComponent;
