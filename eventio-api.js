@@ -1,8 +1,10 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'https://22d0-77-78-203-194.ngrok-free.app/';
+
+const apiBaseUrl = 'http://192.168.0.10:8000/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
+  /* AsyncStorage.clear('token'); */
   const token = await AsyncStorage.getItem('token');
 
   console.log('BASE URL: ', apiBaseUrl + url);
@@ -23,7 +25,8 @@ fetchData = async (url, method, body, navigation) => {
     let data;
     let responseStatus;
     console.log('response status:', response.status);
-    if (response.status === 401) {
+
+    if (response.status === 401 && navigation) {
       AsyncStorage.removeItem('token');
       navigation.navigate('SignInPage');
       Alert.alert('Session expired', 'Please sign in again');
@@ -31,7 +34,6 @@ fetchData = async (url, method, body, navigation) => {
     }
 
     responseStatus = response.status;
-
     data = await response.json();
     return {
       data: data,
@@ -41,10 +43,6 @@ fetchData = async (url, method, body, navigation) => {
     console.log(JSON.stringify(error));
     throw error;
   }
-};
-
-export const getAllEvents = (navigation) => {
-  return fetchData('api/events', 'GET', null, navigation);
 };
 
 export const signUp = (
@@ -75,8 +73,11 @@ export const signIn = (user) => {
   return fetchData('login', 'POST', JSON.stringify(user), null);
 };
 
-export const getUserTags = () => {
-  return fetchData('api/user-events', 'GET');
+export const getAllEvents = () => {
+  return fetchData('api/events', 'GET');
+};
+export const getUserTags = (navigation) => {
+  return fetchData('api/user-events', 'GET', null, navigation);
 };
 
 export const getAllTags = () => {

@@ -7,28 +7,33 @@ import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
 
 import { useEffect, useState } from 'react';
 import { getUserTags } from '../../eventio-api';
+import { useNavigation } from '@react-navigation/native';
 
 const imagePath = '../../assets/img/';
 const MainPage = () => {
   const [userTags, setUserTags] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
+  const navigation = useNavigation();
   /* Refresh page */
   const onRefresh = () => {
     setRefreshing(true);
     setTimeout(() => {
       setRefreshing(false);
-    }, 2000);
+    }, 500);
   };
+
   useEffect(() => {
-    getUserTags().then((res) => {
-      setUserTags(res.data);
-      console.log('got userTags');
-      console.log(res.data);
-      setLoading(false);
-    });
-  }, [refreshing]);
+    getUserTags(navigation)
+      .then((res) => {
+        setUserTags(res.data);
+        console.log('got userTags');
+        console.log(res.data);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   /* loading */
   if (loading) {

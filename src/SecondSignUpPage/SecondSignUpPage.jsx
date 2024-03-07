@@ -71,16 +71,14 @@ const SecondSignUpPage = ({ route }) => {
       selectedDate
     )
       .then((res) => {
-        const responseMessage = res.data.message;
-        const responseStatus = res.status;
-        if (responseStatus !== 200) {
+        if (res.status !== 200) {
           setLoading(false);
           setIsError(true);
-          setIsMessage(responseMessage);
+          setIsMessage(res.data.message);
         } else {
           setLoading(false);
           setIsSuccess(true);
-          setIsMessage(responseMessage);
+          setIsMessage(res.data.message);
           navigation.navigate('WelcomePage');
         }
       })
@@ -163,7 +161,7 @@ const SecondSignUpPage = ({ route }) => {
   /* Enable Button */
   const isContinueButtonEnabled =
     isNameValid && isLastNameValid && isPhoneNumberValid && selectedDate;
-  /* Error */
+  /* message modal */
   const handleCloseModal = () => {
     setIsError(false);
     setIsSuccess(false);
