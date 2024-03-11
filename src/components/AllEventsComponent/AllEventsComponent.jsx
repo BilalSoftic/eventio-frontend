@@ -11,15 +11,16 @@ import LoadingComponent from '../LoadingComponent/LoadingComponent';
 
 const imagePath = '../../../assets/';
 
-const AllEventsComponent = () => {
+const AllEventsComponent = ({ refreshing }) => {
   const navigation = useNavigation();
 
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isGetError, setIsGetError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   /* on load */
   useEffect(() => {
+    console.log('refreshing AllEvents');
     getAllEvents(navigation)
       .then((response) => {
         setEvents(response.data.data.data);
@@ -27,10 +28,11 @@ const AllEventsComponent = () => {
         setLoading(false);
       })
       .catch((error) => {
-        setIsGetError(true);
+        setIsError(true);
+        console.log('AllEvents error:', error);
         setLoading(false);
       });
-  }, []);
+  }, [refreshing]);
 
   /* Navigate to SingleEventPage */
   const handleEventPress = (event) => {
@@ -65,13 +67,6 @@ const AllEventsComponent = () => {
   }
 
   /* Error */
-  if (isGetError) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text>ERROROROROROOR</Text>
-      </View>
-    );
-  }
 
   return (
     <ScrollView>
