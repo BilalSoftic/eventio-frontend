@@ -15,6 +15,8 @@ import { formatDate, formatTime } from '../../../helpers';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import LoadingComponent from '../LoadingComponent/LoadingComponent';
+import HeartIcon from './HeartIcon';
+import { postLike, deleteLike } from '../../../eventio-api';
 
 const imagePath = '../../../assets/';
 
@@ -22,7 +24,7 @@ const SingleEventPage = ({ route }) => {
   const navigation = useNavigation();
   const [eventDetails, setEventDetails] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+  const [didChange, setDidChange] = useState(false);
   const event = eventDetails.event;
 
   useEffect(() => {
@@ -39,23 +41,29 @@ const SingleEventPage = ({ route }) => {
     onPanResponderRelease: (evt, gestureState) => {
       // If the swipe down gesture is completed, navigate back
       if (gestureState.dy > 50) {
-        navigation.goBack();
+        navigation.navigate('MainPage', { didChange });
       }
     },
   });
+
+  const handleLikeButton = () => {
+    const updatedEvent = { ...event, display_like: !event.display_like };
+    setEventDetails({ ...eventDetails, event: updatedEvent });
+    setDidChange(true);
+
+    if (!event.display_like) {
+      postLike(event.id, 0).catch((error) => console.log(error));
+      console.log('liked event id:', event.id);
+    } else {
+      deleteLike(event.id, 0).catch((error) => console.log(error));
+      console.log('unlinked event id:', event.id);
+    }
+  };
 
   /* loading */
   if (loading) {
     return <LoadingComponent />;
   }
-
-  /* if (isError) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text>Error fetching event details</Text>
-      </View>
-    ); 
-  } */
 
   return (
     <Animated.View
@@ -68,6 +76,12 @@ const SingleEventPage = ({ route }) => {
           source={require(imagePath + 'placeholder.png')}
           style={styles.backgroundImageStyle}
         />
+        <TouchableOpacity
+          style={styles.heartButton}
+          onPress={() => handleLikeButton()}
+        >
+          <HeartIcon iconName={event.display_like ? 'heart' : 'heart-o'} />
+        </TouchableOpacity>
       </View>
       <View style={styles.eventInformationContainerStyle}>
         <Text style={styles.headerStyle}>{event.name}</Text>

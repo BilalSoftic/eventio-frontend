@@ -1,19 +1,22 @@
+import React from 'react';
 import { View, Text, Image, ScrollView, RefreshControl } from 'react-native';
+
 import styles from './MainPageStyle';
 import EventioCarousel from '../components/EventioCarousel/EventioCarousel';
 import AllEventsComponent from '../components/AllEventsComponent/AllEventsComponent';
 import HorizontalScrollComponent from '../components/HorizontalScrollComponent/HorizontalScrollComponent';
 import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
 import MessageModalComponent from '../components/MessageModalComponent/MessageModalComponent';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { useEffect, useState } from 'react';
-import { getUserTags } from '../../eventio-api';
+import { getAllEvents, getUserTags } from '../../eventio-api';
 import { useNavigation } from '@react-navigation/native';
 
 const imagePath = '../../assets/img/';
-const MainPage = () => {
+const MainPage = ({ route }) => {
   const [userTags, setUserTags] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(null);
   const [refreshing, setRefreshing] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isMessage, setIsMessage] = useState('');
@@ -23,13 +26,16 @@ const MainPage = () => {
   const onRefresh = () => {
     console.log('REFRESHING');
     setRefreshing(true);
+    loadData();
     const clearRefreshTimeout = setTimeout(() => {
       setRefreshing(false);
-    }, 500);
+    }, 2000);
 
     return () => clearTimeout(clearRefreshTimeout);
   };
-  useEffect(() => {
+
+  const loadData = () => {
+    setLoading(true);
     getUserTags(navigation)
       .then((res) => {
         if (res.status !== 200) {
@@ -38,8 +44,8 @@ const MainPage = () => {
           setIsMessage(res.data.message);
         } else {
           setUserTags(res.data);
-          console.log('got userTags');
-          console.log(res.data);
+          console.log('got userTags', res.data);
+
           setLoading(false);
         }
       })
@@ -48,7 +54,25 @@ const MainPage = () => {
         setIsError(true);
         setIsMessage(error);
       });
-  }, [refreshing]);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    console.log('route?.params?.didChange:', route?.params?.didChange);
+    if (route?.params?.didChange === true) {
+      loadData();
+    }
+  }, [route?.params?.didChange]);
+
+  /* useFocusEffect(
+    React.useCallback(() => {
+      console.log('mounted');
+      loadData();
+    }, [])
+  ); */
 
   /* message modal */
   const handleCloseModal = () => {

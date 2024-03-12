@@ -53,10 +53,10 @@ const AllEventsComponent = ({ refreshing }) => {
     setEvents(updatedData);
 
     if (!singleEvent.display_like) {
-      postLike(singleEvent.id, 0);
+      postLike(singleEvent.id, 0).catch((error) => console.log(error));
       console.log('liked event id:', singleEvent.id);
     } else {
-      deleteLike(singleEvent.id, 0);
+      deleteLike(singleEvent.id, 0).catch((error) => console.log(error));
       console.log('unlinked event id:', singleEvent.id);
     }
   };
