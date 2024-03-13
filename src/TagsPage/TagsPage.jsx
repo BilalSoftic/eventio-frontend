@@ -11,20 +11,28 @@ const imgPath = '../../assets/img/';
 const lightGreen = '#64FCD9';
 const darkGreen = '#146D87';
 
-function TagsPage() {
+function TagsPage({ route }) {
   const navigation = useNavigation();
 
   const [Tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [language, setLanguage] = useState('eng');
   const [loading, setLoading] = useState(true);
 
   /* on load */
   useEffect(() => {
-    getAllTags().then((res) => {
-      setTags(res.data);
-      console.log('All tags', JSON.stringify(res));
-      setLoading(false);
-    });
+    getAllTags()
+      .then((res) => {
+        setTags(res.data);
+        console.log('All tags', JSON.stringify(res));
+        console.log('language Tags page', route.params.language);
+        setLanguage(route.params.language);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   }, []);
 
   /* toggle tag */
@@ -36,6 +44,7 @@ function TagsPage() {
     } else {
       setSelectedTags([...selectedTags, tag]);
     }
+    console.log(selectedTags);
   };
 
   /* update user tags */
@@ -109,11 +118,13 @@ function TagsPage() {
 
       {/* INTERACTIVE BOX */}
       <View style={styles.interactiveContainerStyle}>
-        <Text style={styles.mainHeaderTextStyle}>Izaberi 3 kategorije</Text>
+        <Text style={styles.mainHeaderTextStyle}>
+          {language === 'bih' ? 'izaberi 3 kategorije' : 'choose 3 categories'}
+        </Text>
         <Text style={styles.mainTextStyle}>
-          Naša aplikacija će vam omogućiti da budete u toku s najnovijim
-          događajima, koncertima, izložbama, sportskim manifestacijama i mnogo
-          čimbenim aktivnostima koje vas zanimaju.
+          {language === 'bih'
+            ? 'Izaberite kategorije koje odražavaju vaše interesovanje. Vaše odabirane kategorije će personalizovati vaše iskustvo našom aplikacijom, omogućavajući vam da dobijete relevantne informacije o događajima i aktivnostima koje vas zanimaju.'
+            : 'Choose categories that reflect your interests. Your selected categories will personalize your experience with our application, allowing you to receive relevant information about events and activities that interest you.'}
         </Text>
 
         <View style={styles.dotsContainerStyle}>
@@ -123,7 +134,7 @@ function TagsPage() {
         <ButtonComponent
           disabled={selectedTags.length < 3}
           onPress={handleUserTags}
-          text={'Next'}
+          text={language === 'bih' ? 'Nastavi' : 'Next'}
         />
       </View>
     </View>

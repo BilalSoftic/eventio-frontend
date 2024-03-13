@@ -6,6 +6,7 @@ import {
   PanResponder,
   Animated,
   TouchableOpacity,
+  BackHandler,
 } from 'react-native';
 import styles from './SingleEventPageStyle';
 import StaticTagComponent from '../StaticTagComponent/StaticTagComponent';
@@ -31,6 +32,19 @@ const SingleEventPage = ({ route }) => {
     setEventDetails(route.params);
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    const backAction = () => {
+      navigation.navigate('MainPage', { didChange });
+      return true; // Return true to prevent default behavior (exit the app)
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, [didChange]);
 
   /* go back on swipe down */
   const panResponder = PanResponder.create({

@@ -61,6 +61,7 @@ const InfoPageStyle = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     alignSelf: 'center',
+    textTransform: 'capitalize',
   },
   mainTextStyle: {
     fontSize: 16,

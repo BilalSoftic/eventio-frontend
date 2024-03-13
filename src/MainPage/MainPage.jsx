@@ -55,7 +55,6 @@ const MainPage = ({ route }) => {
         setIsMessage(error);
       });
   };
-
   useEffect(() => {
     loadData();
   }, []);
@@ -66,13 +65,6 @@ const MainPage = ({ route }) => {
       loadData();
     }
   }, [route?.params?.didChange]);
-
-  /* useFocusEffect(
-    React.useCallback(() => {
-      console.log('mounted');
-      loadData();
-    }, [])
-  ); */
 
   /* message modal */
   const handleCloseModal = () => {
