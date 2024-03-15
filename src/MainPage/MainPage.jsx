@@ -59,12 +59,14 @@ const MainPage = ({ route }) => {
     loadData();
   }, []);
 
-  useEffect(() => {
-    console.log('route?.params?.didChange:', route?.params?.didChange);
-    if (route?.params?.didChange === true) {
-      loadData();
-    }
-  }, [route?.params?.didChange]);
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log('route?.params?.didChange:', route?.params?.didChange);
+      if (route?.params?.didChange === true) {
+        loadData();
+      }
+    }, [route?.params?.didChange])
+  );
 
   /* message modal */
   const handleCloseModal = () => {

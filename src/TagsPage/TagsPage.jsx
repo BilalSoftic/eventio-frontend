@@ -51,10 +51,12 @@ function TagsPage({ route }) {
   const handleUserTags = () => {
     const selectedTagsId = selectedTags.map((tag) => tag.id);
 
-    setUserTags(selectedTagsId).then((res) => {
-      console.log(res.message);
-      navigation.navigate('MainPage');
-    });
+    setUserTags(selectedTagsId)
+      .then((res) => {
+        console.log(res.message);
+        navigation.navigate('MainPage');
+      })
+      .catch((error) => console.log(error));
   };
 
   /* log selected tags */

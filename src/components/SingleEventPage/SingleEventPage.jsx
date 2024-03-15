@@ -29,6 +29,7 @@ const SingleEventPage = ({ route }) => {
   const event = eventDetails.event;
 
   useEffect(() => {
+    console.log('mounted');
     setEventDetails(route.params);
     setLoading(false);
   }, []);
@@ -42,8 +43,7 @@ const SingleEventPage = ({ route }) => {
       'hardwareBackPress',
       backAction
     );
-
-    return () => backHandler.remove();
+    return () => backHandler.remove(); // Remove the event listener on component unmount
   }, [didChange]);
 
   /* go back on swipe down */
