@@ -1,3 +1,6 @@
+"🌟 Welcome to Eventio! 🎉 Simplifying event discovery in your city. Our app streamlines the process of finding events that match your interests. 
+From concerts to exhibitions, explore effortlessly with customizable categories. 🔍 Currently in early development, we're seeking funding to enhance your event-finding experience. Stay tuned for updates!
+
 Screenshots from the app:
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
     <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/02c59bc2-d395-4f31-8426-c0fd83d6c465" alt="eventio_screenshot1" style="width: 200px; margin: 10px;">
@@ -10,6 +13,8 @@ Screenshots from the app:
     <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/22a33f04-bcb0-416f-899e-01454d4dd705" alt="eventio_screenshot8" style="width: 200px; margin: 10px;">
     <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/1905aa7e-a469-47e9-b1f7-973dcf8f3e7c" alt="eventio_screenshot9" style="width: 200px; margin: 10px;">
 </div>
+
+
 
 
 # React Native Expo Project README
