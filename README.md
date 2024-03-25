@@ -1,11 +1,15 @@
 Screenshots from the app:
-![eventio_screenshot1](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/02c59bc2-d395-4f31-8426-c0fd83d6c465) ![eventio_screenshot2](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/e9d0ed5c-a1b6-475e-9016-f6382708b447) ![eventio_screenshot3](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/3fb42dde-647a-4c02-979f-443b72a3284f)
-![eventio_screenshot4](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/153dec0a-60c1-455d-95cd-99d1f67565d6)
-![eventio_screenshot5](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/232e5fcc-5768-40ac-abc1-a6c69e8fc1bb)
-![eventio_screenshot6](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/53361e51-5d17-48dd-a2b6-57be61967516)
-![eventio_screenshot7](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/2570a147-9548-4f48-97e1-fa13ebdcf0fc)
-![eventio_screenshot8](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/22a33f04-bcb0-416f-899e-01454d4dd705)
-![eventio_screenshot9](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/1905aa7e-a469-47e9-b1f7-973dcf8f3e7c)
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/02c59bc2-d395-4f31-8426-c0fd83d6c465" alt="eventio_screenshot1" style="width: 200px; margin: 10px;">
+    <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/e9d0ed5c-a1b6-475e-9016-f6382708b447" alt="eventio_screenshot2" style="width: 200px; margin: 10px;">
+    <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/3fb42dde-647a-4c02-979f-443b72a3284f" alt="eventio_screenshot3" style="width: 200px; margin: 10px;">
+    <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/153dec0a-60c1-455d-95cd-99d1f67565d6" alt="eventio_screenshot4" style="width: 200px; margin: 10px;">
+    <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/232e5fcc-5768-40ac-abc1-a6c69e8fc1bb" alt="eventio_screenshot5" style="width: 200px; margin: 10px;">
+    <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/53361e51-5d17-48dd-a2b6-57be61967516" alt="eventio_screenshot6" style="width: 200px; margin: 10px;">
+    <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/2570a147-9548-4f48-97e1-fa13ebdcf0fc" alt="eventio_screenshot7" style="width: 200px; margin: 10px;">
+    <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/22a33f04-bcb0-416f-899e-01454d4dd705" alt="eventio_screenshot8" style="width: 200px; margin: 10px;">
+    <img src="https://github.com/BilalSoftic/eventio-frontend/assets/120599776/1905aa7e-a469-47e9-b1f7-973dcf8f3e7c" alt="eventio_screenshot9" style="width: 200px; margin: 10px;">
+</div>
 
 
 # React Native Expo Project README
