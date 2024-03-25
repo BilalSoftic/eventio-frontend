@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 const AllEventsComponentStyle = StyleSheet.create({
+  container: { flex: 1 },
   singleEventContainerStyle: {
     width: 'auto',
     height: 400,

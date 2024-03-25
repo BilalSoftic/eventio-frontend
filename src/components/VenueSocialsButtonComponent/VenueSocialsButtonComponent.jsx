@@ -1,8 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-const VenueSocialsButtonComponent = () => {
+const VenueSocialsButtonComponent = ({ socialIconName }) => {
   return (
     <TouchableOpacity style={styles.button}>
-      <Text style={styles.text}>facebook</Text>
+      <Text style={styles.text}>{socialIconName}</Text>
     </TouchableOpacity>
   );
 };

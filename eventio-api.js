@@ -1,8 +1,10 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'https://7a87-77-78-203-194.ngrok-free.app/';
+
+const apiBaseUrl = 'http://192.168.0.10:8000/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
+  /* AsyncStorage.clear('token'); */
   const token = await AsyncStorage.getItem('token');
 
   console.log('BASE URL: ', apiBaseUrl + url);
@@ -21,36 +23,61 @@ fetchData = async (url, method, body, navigation) => {
       },
     });
     let data;
+    let responseStatus;
+    console.log('response status:', response.status);
 
-    if (response.status === 401) {
+    if (response.status === 401 && navigation) {
       AsyncStorage.removeItem('token');
       navigation.navigate('SignInPage');
       Alert.alert('Session expired', 'Please sign in again');
       return;
     }
 
+    responseStatus = response.status;
     data = await response.json();
-    return data;
+    return {
+      data: data,
+      status: responseStatus,
+    };
   } catch (error) {
     console.log(JSON.stringify(error));
     throw error;
   }
 };
 
-export const registerUser = (user) => {
-  fetchData('register', 'POST', JSON.stringify(user));
+export const signUp = (
+  email,
+  firstName,
+  lastName,
+  password,
+  confirmPassword,
+  phoneNumber,
+  selectedDate
+) => {
+  return fetchData(
+    'api/register',
+    'POST',
+    JSON.stringify({
+      email,
+      first_name: firstName,
+      last_name: lastName,
+      password,
+      password_confirmation: confirmPassword,
+      phone_number: phoneNumber,
+      date_of_birth: selectedDate,
+    }),
+    null
+  );
 };
-
-export const getAllEvents = (navigation) => {
-  return fetchData('api/events', 'GET', null, navigation);
-};
-
 export const signIn = (user) => {
   return fetchData('login', 'POST', JSON.stringify(user), null);
 };
 
-export const getUserTags = () => {
-  return fetchData('api/user-events', 'GET');
+export const getAllEvents = (number) => {
+  return fetchData(`api/events?page=${number}`, 'GET');
+};
+export const getUserTags = (navigation) => {
+  return fetchData('api/user-events', 'GET', null, navigation);
 };
 
 export const getAllTags = () => {

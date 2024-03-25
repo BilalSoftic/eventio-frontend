@@ -16,6 +16,9 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { signIn } from '../../eventio-api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import MessageModalComponent from '../components/MessageModalComponent/MessageModalComponent';
+import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
+
 const imgPath = '../../assets/img/';
 
 const SignInPage = () => {
@@ -26,6 +29,10 @@ const SignInPage = () => {
   const [password, setPassword] = useState('');
   const [isEmailValid, setEmailValid] = useState(false);
   const [isPasswordValid, setPasswordValid] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isMessage, setIsMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   /* Page navigation */
   const handleSignUpPress = () => {
@@ -37,15 +44,27 @@ const SignInPage = () => {
   };
 
   const handleSignIn = () => {
+    setLoading(true);
     signIn({ email, password })
       .then(async (res) => {
-        const token = res?.token?.plainTextToken; // Check your response structure
-        await AsyncStorage.setItem('token', token);
-        navigation.navigate('MainPage');
+        console.log(res);
+        if (res.status !== 200) {
+          setLoading(false);
+          setIsError(true);
+          setIsMessage(res.data.message);
+        } else {
+          setLoading(false);
+          setIsSuccess(true);
+          setIsMessage(res.data.message);
+          const token = res.data.token.plainTextToken;
+          await AsyncStorage.setItem('token', token);
+          navigation.navigate('MainPage');
+        }
       })
       .catch((error) => {
-        console.error('Login failed', error);
-        // Handle login failure (e.g., show an alert or message to the user)
+        setLoading(false);
+        setIsError(true);
+        setIsMessage(error);
       });
   };
 
@@ -79,7 +98,16 @@ const SignInPage = () => {
 
   /* Enable ButtonComponent */
   const isContinueButtonEnabled = isEmailValid && isPasswordValid;
+  /* Error */
+  const handleCloseModal = () => {
+    setIsError(false);
+    setIsSuccess(false);
+  };
 
+  /* loading */
+  if (loading) {
+    return <LoadingComponent />;
+  }
   return (
     <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
@@ -92,6 +120,12 @@ const SignInPage = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         style={styles.interactiveContainerStyle}
       >
+        {/* Error and Success message rendering */}
+        <MessageModalComponent
+          message={isMessage}
+          isVisible={isError || isSuccess}
+          closeModal={handleCloseModal}
+        />
         <Text style={styles.mainHeaderTextStyle}>Sign in</Text>
         {/* FORM */}
         <View style={styles.inputsContainerStyle}>

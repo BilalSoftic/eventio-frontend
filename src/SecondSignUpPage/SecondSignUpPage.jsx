@@ -6,7 +6,7 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './SecondSignUpPageStyle';
 import PageNumberingComponent from '../components/PageNumberingComponent/PageNumberingComponent';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -15,12 +15,19 @@ import PhoneNumberInputComponent from '../components/PhoneNumberInputComponent/P
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
-
+import { signUp } from '../../eventio-api';
+import MessageModalComponent from '../components/MessageModalComponent/MessageModalComponent';
+import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
 const imgPath = '../../assets/img/';
 
-const SecondSignUpPage = () => {
+const SecondSignUpPage = ({ route }) => {
   const navigation = useNavigation();
-  /* State */
+  /*  */
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  /*  */
   const [firstName, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -29,18 +36,57 @@ const SecondSignUpPage = () => {
   const [isPhoneNumberValid, setPhoneNumberValid] = useState(false);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isMessage, setIsMessage] = useState('');
+  const [loading, setLoading] = useState(true);
+
   /* useRef */
   const nameRef = useRef();
   const lastNameRef = useRef();
   const phoneNumberRef = useRef();
+
+  /* update email and pass */
+  useEffect(() => {
+    setEmail(route.params.email);
+    setPassword(route.params.password);
+    setConfirmPassword(route.params.confirmPassword);
+    setLoading(false);
+  }, []);
 
   /* Page navigation */
   const goBack = () => {
     navigation.navigate('FirstSignUpPage');
   };
 
-  const onSignUpSuccess = () => {
-    navigation.navigate('WelcomePage');
+  const handleSignUp = () => {
+    setLoading(true);
+    signUp(
+      email,
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+      phoneNumber,
+      selectedDate
+    )
+      .then((res) => {
+        if (res.status !== 200) {
+          setLoading(false);
+          setIsError(true);
+          setIsMessage(res.data.message);
+        } else {
+          setLoading(false);
+          setIsSuccess(true);
+          setIsMessage(res.data.message);
+          navigation.navigate('WelcomePage');
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        setIsError(true);
+        setIsMessage(error);
+      });
   };
 
   /* Validation function */
@@ -88,21 +134,22 @@ const SecondSignUpPage = () => {
   };
 
   const handleConfirm = (date) => {
-    setSelectedDate(date);
+    const formattedDate = date.toLocaleDateString('bs-BA', {
+      month: 'numeric',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    setSelectedDate(formattedDate);
     hideDatePicker();
   };
 
-  const buttonText = selectedDate
-    ? selectedDate.toLocaleDateString('bs-BA', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      })
-    : 'date of birth';
+  const buttonText = selectedDate ? selectedDate : 'date of birth';
+
   const buttonTextStyle = {
     ...styles.buttonTextStyle,
     color: selectedDate ? 'black' : 'rgba(70, 70, 70, 0.5)',
   };
+
   const buttonStyle = {
     ...styles.buttonStyle,
     borderColor: selectedDate ? 'green' : '#D9D9D9',
@@ -114,6 +161,16 @@ const SecondSignUpPage = () => {
   /* Enable Button */
   const isContinueButtonEnabled =
     isNameValid && isLastNameValid && isPhoneNumberValid && selectedDate;
+  /* message modal */
+  const handleCloseModal = () => {
+    setIsError(false);
+    setIsSuccess(false);
+  };
+
+  /* loading */
+  if (loading) {
+    return <LoadingComponent />;
+  }
 
   return (
     <View style={styles.containerStyle}>
@@ -127,6 +184,13 @@ const SecondSignUpPage = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         style={styles.interactiveContainerStyle}
       >
+        {/* Error and Success message rendering */}
+        <MessageModalComponent
+          message={isMessage}
+          isVisible={isError || isSuccess}
+          closeModal={handleCloseModal}
+        />
+
         <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
         {/* PAGE NUMBERING */}
         <View style={styles.pageNumberingContainerStyle}>
@@ -186,7 +250,7 @@ const SecondSignUpPage = () => {
           <ButtonComponent
             styleType='signUpPageButtonStyle'
             disabled={!isContinueButtonEnabled}
-            onPress={onSignUpSuccess}
+            onPress={handleSignUp}
             text='Continue'
           />
         </View>

@@ -8,11 +8,11 @@ const images = {
   // Add other images here
 };
 
-const IconButtonComponent = ({ imageName }) => {
+const IconButtonComponent = ({ imageName, onPress }) => {
   const imageSource = images[imageName];
 
   return (
-    <TouchableOpacity style={styles.iconContainer}>
+    <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
       <View style={styles.imageContainer}>
         {imageSource && <Image style={styles.image} source={imageSource} />}
       </View>

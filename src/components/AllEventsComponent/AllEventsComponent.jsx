@@ -11,26 +11,29 @@ import LoadingComponent from '../LoadingComponent/LoadingComponent';
 
 const imagePath = '../../../assets/';
 
-const AllEventsComponent = () => {
+const AllEventsComponent = ({ refreshing, loadMoreData }) => {
   const navigation = useNavigation();
 
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isGetError, setIsGetError] = useState(false);
-
+  const [isError, setIsError] = useState(false);
+  console.log(loadMoreData);
   /* on load */
   useEffect(() => {
-    getAllEvents(navigation)
+    console.log(loadMoreData);
+    console.log('refreshing AllEvents');
+    getAllEvents(1)
       .then((response) => {
-        setEvents(response.data.data);
+        setEvents(response.data.data.data);
         console.log('getAllEvents Response:', response);
         setLoading(false);
       })
       .catch((error) => {
-        setIsGetError(true);
+        setIsError(true);
+        console.log('AllEvents error:', error);
         setLoading(false);
       });
-  }, []);
+  }, [refreshing]);
 
   /* Navigate to SingleEventPage */
   const handleEventPress = (event) => {
@@ -51,10 +54,10 @@ const AllEventsComponent = () => {
     setEvents(updatedData);
 
     if (!singleEvent.display_like) {
-      postLike(singleEvent.id, 0);
+      postLike(singleEvent.id, 0).catch((error) => console.log(error));
       console.log('liked event id:', singleEvent.id);
     } else {
-      deleteLike(singleEvent.id, 0);
+      deleteLike(singleEvent.id, 0).catch((error) => console.log(error));
       console.log('unlinked event id:', singleEvent.id);
     }
   };
@@ -64,17 +67,8 @@ const AllEventsComponent = () => {
     return <LoadingComponent />;
   }
 
-  /* Error */
-  if (isGetError) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text>ERROROROROROOR</Text>
-      </View>
-    );
-  }
-
   return (
-    <ScrollView>
+    <>
       {events.map((event) => (
         <TouchableOpacity
           style={styles.singleEventContainerStyle}
@@ -107,7 +101,7 @@ const AllEventsComponent = () => {
           </View>
         </TouchableOpacity>
       ))}
-    </ScrollView>
+    </>
   );
 };
 

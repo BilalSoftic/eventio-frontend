@@ -17,6 +17,16 @@ const SingleEventPageStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  heartButton: {
+    position: 'absolute',
+    top: 40,
+    right: 40,
+  },
+  heartIcon: {
+    padding: 3,
+    color: 'white',
+    fontSize: 50,
+  },
 
   eventInformationContainerStyle: {
     height: '60%',

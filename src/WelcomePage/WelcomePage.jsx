@@ -10,11 +10,11 @@ function WelcomePage() {
 
   /* State */
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-  const [selectedFlag, setSelectedFlag] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
 
   /* Page navigation */
   const handleSubmitLanguage = () => {
-    navigation.navigate('InfoPage');
+    navigation.navigate('InfoPage', { selectedLanguage });
   };
   return (
     <View style={styles.containerStyle}>
@@ -45,12 +45,12 @@ function WelcomePage() {
           <TouchableOpacity
             style={[
               styles.flagButtonStyle,
-              selectedFlag === 'bih'
+              selectedLanguage === 'bih'
                 ? styles.selectedFlagStyle
                 : styles.unselectedFlagStyle,
             ]}
             onPress={() => {
-              setSelectedFlag('bih');
+              setSelectedLanguage('bih');
               setIsSubmitDisabled(false);
             }}
           >
@@ -63,18 +63,18 @@ function WelcomePage() {
           <TouchableOpacity
             style={[
               styles.flagButtonStyle,
-              selectedFlag === 'uk'
+              selectedLanguage === 'eng'
                 ? styles.selectedFlagStyle
                 : styles.unselectedFlagStyle,
             ]}
             onPress={() => {
-              setSelectedFlag('uk');
+              setSelectedLanguage('eng');
               setIsSubmitDisabled(false);
             }}
           >
             <Image
               style={styles.flagImageStyle}
-              id='uk'
+              id='eng'
               source={require(imgPath + 'FlagUK.png')}
             />
           </TouchableOpacity>
