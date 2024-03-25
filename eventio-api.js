@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-const apiBaseUrl = 'https://7110-77-78-203-194.ngrok-free.app/';
+const apiBaseUrl = 'http://192.168.0.10:8000/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
@@ -73,8 +73,8 @@ export const signIn = (user) => {
   return fetchData('login', 'POST', JSON.stringify(user), null);
 };
 
-export const getAllEvents = () => {
-  return fetchData('api/events', 'GET');
+export const getAllEvents = (number) => {
+  return fetchData(`api/events?page=${number}`, 'GET');
 };
 export const getUserTags = (navigation) => {
   return fetchData('api/user-events', 'GET', null, navigation);

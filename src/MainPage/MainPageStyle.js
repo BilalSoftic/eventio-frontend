@@ -34,7 +34,7 @@ const MainPageStyle = StyleSheet.create({
   horizontalScrollsContainerStyle: {
     gap: 5,
   },
-  allEventsContainerStyle: { flex: 1, marginTop: 30, paddingHorizontal: 10 },
+  allEventsContainerStyle: { marginTop: 30, paddingHorizontal: 10 },
   allEventsHeaderStyle: {
     fontSize: 30,
     marginLeft: 15,

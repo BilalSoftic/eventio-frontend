@@ -20,9 +20,11 @@ const MainPage = ({ route }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isMessage, setIsMessage] = useState('');
+  const [loadMoreData, setLoadMoreData] = useState(false);
 
   const navigation = useNavigation();
   /* Refresh page */
+
   const onRefresh = () => {
     console.log('REFRESHING');
     setRefreshing(true);
@@ -73,6 +75,22 @@ const MainPage = ({ route }) => {
     setIsError(false);
   };
 
+  /* scroll end */
+  const handleScrollEnd = (event) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 20;
+    if (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    ) {
+      setLoadMoreData(true);
+      setTimeout(() => {
+        setLoadMoreData(false);
+      }, 1000);
+    } else {
+      setLoadMoreData(false);
+    }
+  };
   /* loading */
   if (loading) {
     return <LoadingComponent />;
@@ -80,6 +98,8 @@ const MainPage = ({ route }) => {
 
   return (
     <ScrollView
+      onScroll={handleScrollEnd}
+      scrollEventThrottle={400}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
@@ -122,7 +142,10 @@ const MainPage = ({ route }) => {
 
       <View style={styles.allEventsContainerStyle}>
         <Text style={styles.allEventsHeaderStyle}>All Events</Text>
-        <AllEventsComponent refreshing={refreshing} />
+        <AllEventsComponent
+          refreshing={refreshing}
+          loadMoreData={loadMoreData}
+        />
       </View>
     </ScrollView>
   );

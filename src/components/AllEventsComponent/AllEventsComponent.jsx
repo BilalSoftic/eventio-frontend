@@ -11,17 +11,18 @@ import LoadingComponent from '../LoadingComponent/LoadingComponent';
 
 const imagePath = '../../../assets/';
 
-const AllEventsComponent = ({ refreshing }) => {
+const AllEventsComponent = ({ refreshing, loadMoreData }) => {
   const navigation = useNavigation();
 
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-
+  console.log(loadMoreData);
   /* on load */
   useEffect(() => {
+    console.log(loadMoreData);
     console.log('refreshing AllEvents');
-    getAllEvents(navigation)
+    getAllEvents(1)
       .then((response) => {
         setEvents(response.data.data.data);
         console.log('getAllEvents Response:', response);
@@ -66,10 +67,8 @@ const AllEventsComponent = ({ refreshing }) => {
     return <LoadingComponent />;
   }
 
-  /* Error */
-
   return (
-    <ScrollView>
+    <>
       {events.map((event) => (
         <TouchableOpacity
           style={styles.singleEventContainerStyle}
@@ -102,7 +101,7 @@ const AllEventsComponent = ({ refreshing }) => {
           </View>
         </TouchableOpacity>
       ))}
-    </ScrollView>
+    </>
   );
 };
 

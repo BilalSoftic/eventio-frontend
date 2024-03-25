@@ -26,7 +26,7 @@ const InfoPageStyle = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    columnGap: 5,
+    columnGap: 10,
     rowGap: 10,
   },
   tagStyle: {
@@ -35,7 +35,8 @@ const InfoPageStyle = StyleSheet.create({
     textAlign: 'center',
   },
   tagTextStyle: {
-    fontSize: 20,
+    textTransform: 'capitalize',
+    fontSize: 24,
   },
 
   arrowStyle: {
