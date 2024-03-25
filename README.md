@@ -7,7 +7,7 @@ Before starting the React Native Expo project, make sure you have the following 
 - An Android/iOS phone or an emulator/simulator with Expo Go installed
 
 ### Installing Node.js and npm
-1. **Node.js**: Visit the [Node.js website](https:/   ![BilalSoftic](https://github.com/BilalSoftic/eventio-frontend/assets/120599776/e1c289e6-9365-49f8-8f44-e17bc1dfba71)
+1. **Node.js**: Visit the [Node.js website](https:/ 
 /nodejs.org/) and download the latest stable version for your operating system.
 2. **npm**: npm is bundled with Node.js. Once you have installed Node.js, npm will be automatically installed on your machine.
 
