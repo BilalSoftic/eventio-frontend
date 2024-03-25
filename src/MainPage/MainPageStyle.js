@@ -22,17 +22,37 @@ const MainPageStyle = StyleSheet.create({
     top: 130,
     right: 40,
   },
-  contentContainerStyle: {
-    flex: 1,
-    paddingBottom: 30,
-    alignItems: 'center',
-  },
+
   carouselContainerStyle: {
     borderRadius: 20,
     marginBottom: 30,
-    overflow: 'hidden',
     height: 200,
+    overflow: 'hidden',
     width: '96%',
+    alignSelf: 'center',
+  },
+  horizontalScrollsContainerStyle: {
+    gap: 5,
+  },
+  allEventsContainerStyle: { marginTop: 30, paddingHorizontal: 10 },
+  allEventsHeaderStyle: {
+    fontSize: 30,
+    marginLeft: 15,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+  },
+  containerI: {
+    marginBottom: 5,
+    height: 300,
+  },
+  HorizontalScrollHeaderStyle: {
+    paddingLeft: '5%',
+  },
+  horizontalScrollHeading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
   },
 });
 

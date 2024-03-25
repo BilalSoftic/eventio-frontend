@@ -1,17 +1,20 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import styles from './WelcomeScreenStyle';
+import styles from './WelcomePageStyle';
 import React, { useState } from 'react';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
-
+import { useNavigation } from '@react-navigation/native';
 const imgPath = '../../assets/img/';
 
-function WelcomeScreen({ navigation }) {
+function WelcomePage() {
+  const navigation = useNavigation();
+
+  /* State */
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-  const [selectedFlag, setSelectedFlag] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
 
   /* Page navigation */
-  const navigateToFirstSignUpPage = () => {
-    navigation.navigate('FirstSignUpPage');
+  const handleSubmitLanguage = () => {
+    navigation.navigate('InfoPage', { selectedLanguage });
   };
   return (
     <View style={styles.containerStyle}>
@@ -42,12 +45,12 @@ function WelcomeScreen({ navigation }) {
           <TouchableOpacity
             style={[
               styles.flagButtonStyle,
-              selectedFlag === 'bih'
+              selectedLanguage === 'bih'
                 ? styles.selectedFlagStyle
                 : styles.unselectedFlagStyle,
             ]}
             onPress={() => {
-              setSelectedFlag('bih');
+              setSelectedLanguage('bih');
               setIsSubmitDisabled(false);
             }}
           >
@@ -60,18 +63,18 @@ function WelcomeScreen({ navigation }) {
           <TouchableOpacity
             style={[
               styles.flagButtonStyle,
-              selectedFlag === 'uk'
+              selectedLanguage === 'eng'
                 ? styles.selectedFlagStyle
                 : styles.unselectedFlagStyle,
             ]}
             onPress={() => {
-              setSelectedFlag('uk');
+              setSelectedLanguage('eng');
               setIsSubmitDisabled(false);
             }}
           >
             <Image
               style={styles.flagImageStyle}
-              id='uk'
+              id='eng'
               source={require(imgPath + 'FlagUK.png')}
             />
           </TouchableOpacity>
@@ -79,7 +82,7 @@ function WelcomeScreen({ navigation }) {
 
         <ButtonComponent
           disabled={isSubmitDisabled}
-          onPress={navigateToFirstSignUpPage}
+          onPress={handleSubmitLanguage}
           text='Next'
         />
       </View>
@@ -87,4 +90,4 @@ function WelcomeScreen({ navigation }) {
   );
 }
 
-export default WelcomeScreen;
+export default WelcomePage;

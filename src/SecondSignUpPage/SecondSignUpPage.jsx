@@ -4,19 +4,30 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './SecondSignUpPageStyle';
 import PageNumberingComponent from '../components/PageNumberingComponent/PageNumberingComponent';
-import DatePickerComponent from '../components/DatePickerComponent/DatePickerComponent';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import InputComponent from '../components/InputComponent/InputComponent';
 import PhoneNumberInputComponent from '../components/PhoneNumberInputComponent/PhoneNumberInputComponent';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
+import { signUp } from '../../eventio-api';
+import MessageModalComponent from '../components/MessageModalComponent/MessageModalComponent';
+import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
 const imgPath = '../../assets/img/';
 
-const SecondSignUpPage = ({ navigation }) => {
-  /* State */
+const SecondSignUpPage = ({ route }) => {
+  const navigation = useNavigation();
+  /*  */
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  /*  */
   const [firstName, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -24,23 +35,58 @@ const SecondSignUpPage = ({ navigation }) => {
   const [isLastNameValid, setLastNameValid] = useState(false);
   const [isPhoneNumberValid, setPhoneNumberValid] = useState(false);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isMessage, setIsMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   /* useRef */
   const nameRef = useRef();
   const lastNameRef = useRef();
   const phoneNumberRef = useRef();
 
+  /* update email and pass */
+  useEffect(() => {
+    setEmail(route.params.email);
+    setPassword(route.params.password);
+    setConfirmPassword(route.params.confirmPassword);
+    setLoading(false);
+  }, []);
+
   /* Page navigation */
-  const navigateToFirstSignUpPage = () => {
+  const goBack = () => {
     navigation.navigate('FirstSignUpPage');
   };
 
-  const navigateFirstInfoPage = () => {
-    navigation.navigate('FirstInfoPage');
-  };
-
-  const onSignUpSuccess = () => {
-    navigation.navigate('AllEvents');
+  const handleSignUp = () => {
+    setLoading(true);
+    signUp(
+      email,
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+      phoneNumber,
+      selectedDate
+    )
+      .then((res) => {
+        if (res.status !== 200) {
+          setLoading(false);
+          setIsError(true);
+          setIsMessage(res.data.message);
+        } else {
+          setLoading(false);
+          setIsSuccess(true);
+          setIsMessage(res.data.message);
+          navigation.navigate('WelcomePage');
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        setIsError(true);
+        setIsMessage(error);
+      });
   };
 
   /* Validation function */
@@ -78,9 +124,53 @@ const SecondSignUpPage = ({ navigation }) => {
     }
   };
 
+  /* DatePicker */
+  const showDatePicker = () => {
+    setIsDatePickerVisible(true);
+  };
+
+  const hideDatePicker = () => {
+    setIsDatePickerVisible(false);
+  };
+
+  const handleConfirm = (date) => {
+    const formattedDate = date.toLocaleDateString('bs-BA', {
+      month: 'numeric',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    setSelectedDate(formattedDate);
+    hideDatePicker();
+  };
+
+  const buttonText = selectedDate ? selectedDate : 'date of birth';
+
+  const buttonTextStyle = {
+    ...styles.buttonTextStyle,
+    color: selectedDate ? 'black' : 'rgba(70, 70, 70, 0.5)',
+  };
+
+  const buttonStyle = {
+    ...styles.buttonStyle,
+    borderColor: selectedDate ? 'green' : '#D9D9D9',
+  };
+  // Maximum date (today minus 15 years)
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 15);
+
   /* Enable Button */
   const isContinueButtonEnabled =
-    isNameValid && isLastNameValid && isPhoneNumberValid;
+    isNameValid && isLastNameValid && isPhoneNumberValid && selectedDate;
+  /* message modal */
+  const handleCloseModal = () => {
+    setIsError(false);
+    setIsSuccess(false);
+  };
+
+  /* loading */
+  if (loading) {
+    return <LoadingComponent />;
+  }
 
   return (
     <View style={styles.containerStyle}>
@@ -94,9 +184,16 @@ const SecondSignUpPage = ({ navigation }) => {
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         style={styles.interactiveContainerStyle}
       >
+        {/* Error and Success message rendering */}
+        <MessageModalComponent
+          message={isMessage}
+          isVisible={isError || isSuccess}
+          closeModal={handleCloseModal}
+        />
+
         <Text style={styles.mainHeaderTextStyle}>Sign up</Text>
         {/* PAGE NUMBERING */}
-        <View style={styles.pageNumberingContainer}>
+        <View style={styles.pageNumberingContainerStyle}>
           <PageNumberingComponent signUpPageNumber='SecondSignUpPage' />
         </View>
         {/* FORM */}
@@ -130,20 +227,34 @@ const SecondSignUpPage = ({ navigation }) => {
             borderColor={isPhoneNumberValid ? 'green' : '#D9D9D9'}
             onSubmitEditing={() => setIsDatePickerVisible(true)}
           />
-          <DatePickerComponent
-            isDatePickerVisible={isDatePickerVisible}
-            setIsDatePickerVisible={setIsDatePickerVisible}
-          />
+          {/* DatePicker */}
+          <View style={styles.datePickerContainerStyle}>
+            <TouchableOpacity style={buttonStyle} onPress={showDatePicker}>
+              <Text style={buttonTextStyle}>{buttonText}</Text>
+              <View style={styles.iconContainerStyle}>
+                <Icon name='calendar' style={styles.iconStyle} />
+              </View>
+            </TouchableOpacity>
+
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode='date'
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+              maximumDate={maxDate}
+              minimumDate={new Date(1950, 0, 1)}
+            />
+          </View>
         </View>
         <View style={styles.buttonContainerStyle}>
           <ButtonComponent
             styleType='signUpPageButtonStyle'
-            disabled={false}
-            onPress={onSignUpSuccess}
+            disabled={!isContinueButtonEnabled}
+            onPress={handleSignUp}
             text='Continue'
           />
         </View>
-        <Text style={styles.goBackStyle} onPress={navigateToFirstSignUpPage}>
+        <Text style={styles.goBackStyle} onPress={goBack}>
           go back
         </Text>
       </KeyboardAvoidingView>

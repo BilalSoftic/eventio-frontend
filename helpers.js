@@ -6,7 +6,7 @@ export function formatTime(date) {
 
 export function formatDate(date) {
   const daysOfWeek = ['Ned', 'Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub'];
-  const dayOfWeek = daysOfWeek[date.getDay()]; // Get day of the week
+  const dayOfWeek = daysOfWeek[date.getDay()];
 
   const dayOfMonth = date.getDate();
   const monthNames = [
@@ -23,7 +23,7 @@ export function formatDate(date) {
     'Novembar',
     'Decembar',
   ];
-  const month = monthNames[date.getMonth()]; // Get the real month name
+  const month = monthNames[date.getMonth()];
 
   return `${dayOfWeek}, ${dayOfMonth}. ${month}`;
 }

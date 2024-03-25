@@ -8,21 +8,31 @@ import {
 } from 'react-native';
 import { useState, useRef } from 'react';
 import styles from './SignInPageStyle';
-import * as Keychain from 'react-native-keychain';
 import InputComponent from '../components/InputComponent/InputComponent';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DividerComponent from '../components/DividerComponent/DividerComponent';
 import IconButtonComponent from '../components/IconButtonComponent/IconButtonComponent';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { signIn } from '../../eventio-api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import MessageModalComponent from '../components/MessageModalComponent/MessageModalComponent';
+import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
+
 const imgPath = '../../assets/img/';
 
-const SignInPage = ({ navigation }) => {
+const SignInPage = () => {
+  const navigation = useNavigation();
+
   /* State */
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isEmailValid, setEmailValid] = useState(false);
   const [isPasswordValid, setPasswordValid] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isMessage, setIsMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   /* Page navigation */
   const handleSignUpPress = () => {
@@ -34,26 +44,27 @@ const SignInPage = ({ navigation }) => {
   };
 
   const handleSignIn = () => {
+    setLoading(true);
     signIn({ email, password })
-      .then(
-        /* async */
-        (res) => {
-          const token = res?.token?.plainTextToken; // Check your response structure
-          console.log(token);
-
-          // Save the token using react-native-keychain
-          try {
-            /* await Keychain.setGenericPassword('token', token); */
-            navigation.navigate('AllEvents');
-          } catch (error) {
-            console.error('Error saving token', error);
-            // Handle the error (e.g., show an alert to the user)
-          }
+      .then(async (res) => {
+        console.log(res);
+        if (res.status !== 200) {
+          setLoading(false);
+          setIsError(true);
+          setIsMessage(res.data.message);
+        } else {
+          setLoading(false);
+          setIsSuccess(true);
+          setIsMessage(res.data.message);
+          const token = res.data.token.plainTextToken;
+          await AsyncStorage.setItem('token', token);
+          navigation.navigate('MainPage');
         }
-      )
+      })
       .catch((error) => {
-        console.error('Login failed', error);
-        // Handle login failure (e.g., show an alert or message to the user)
+        setLoading(false);
+        setIsError(true);
+        setIsMessage(error);
       });
   };
 
@@ -87,7 +98,16 @@ const SignInPage = ({ navigation }) => {
 
   /* Enable ButtonComponent */
   const isContinueButtonEnabled = isEmailValid && isPasswordValid;
+  /* Error */
+  const handleCloseModal = () => {
+    setIsError(false);
+    setIsSuccess(false);
+  };
 
+  /* loading */
+  if (loading) {
+    return <LoadingComponent />;
+  }
   return (
     <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
@@ -100,6 +120,12 @@ const SignInPage = ({ navigation }) => {
         behavior={Platform.OS === 'ios' ? 'padding' : ''}
         style={styles.interactiveContainerStyle}
       >
+        {/* Error and Success message rendering */}
+        <MessageModalComponent
+          message={isMessage}
+          isVisible={isError || isSuccess}
+          closeModal={handleCloseModal}
+        />
         <Text style={styles.mainHeaderTextStyle}>Sign in</Text>
         {/* FORM */}
         <View style={styles.inputsContainerStyle}>
@@ -120,13 +146,12 @@ const SignInPage = ({ navigation }) => {
             onChangeText={(text) => handleInputChange('password', text)}
             borderColor={isPasswordValid ? 'green' : '#D9D9D9'}
             secureTextEntry={true}
-            iconName='lock'
+            iconName='eye'
             ref={passwordRef}
           ></InputComponent>
         </View>
         <View style={styles.textWrapperStyle}>
           <BouncyCheckbox
-            style={styles.checkbox}
             size={20}
             fillColor='#004972'
             unfillColor='#FFFFFF'

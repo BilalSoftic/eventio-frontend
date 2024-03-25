@@ -31,9 +31,6 @@ const SignInPageStyle = StyleSheet.create({
     marginBottom: 15,
     gap: 5,
   },
-  buttonContainerStyle: {
-    marginBottom: 15,
-  },
   dividerContainerStyle: { marginBottom: 5 },
 
   textWrapperStyle: {
@@ -48,6 +45,9 @@ const SignInPageStyle = StyleSheet.create({
     textTransform: 'capitalize',
     color: '#004972',
   },
+  buttonContainerStyle: {
+    marginBottom: 15,
+  },
   linesWrapper: {
     padding: 5,
     marginTop: 10,
@@ -55,8 +55,7 @@ const SignInPageStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  line: { flex: 3, padding: 0.5, backgroundColor: '#EAEAEA' },
-  middleText: { fontSize: 16, marginHorizontal: 10, color: '#707070' },
+
   socialsContainerStyle: {
     flexDirection: 'column',
   },

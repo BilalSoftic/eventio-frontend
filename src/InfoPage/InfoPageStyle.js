@@ -38,15 +38,16 @@ const InfoPageStyle = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     alignSelf: 'center',
+    textTransform: 'capitalize',
   },
-  mainText: {
+  mainTextStyle: {
     fontSize: 16,
     opacity: 0.5,
     lineHeight: 25,
     justifyContent: 'center',
     textAlign: 'center',
   },
-  dotsContainer: {
+  dotsContainerStyle: {
     width: '100%',
     gap: 10,
     flexDirection: 'row',

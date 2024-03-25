@@ -14,10 +14,12 @@ import SignUpInput from '../components/InputComponent/InputComponent';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
 import DividerComponent from '../components/DividerComponent/DividerComponent';
 import IconButtonComponent from '../components/IconButtonComponent/IconButtonComponent';
+import { useNavigation } from '@react-navigation/native';
 
 const imgPath = '../../assets/img/';
 
-const FirstSignUpPage = ({ navigation }) => {
+const FirstSignUpPage = () => {
+  const navigation = useNavigation();
   /* State */
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,9 +29,12 @@ const FirstSignUpPage = ({ navigation }) => {
   const [isConfirmPasswordValid, setConfirmPasswordValid] = useState(false);
 
   /* Page navigation */
-  const navigateToSecondSignUpPage = () => {
-    navigation.navigate('SecondSignUpPage');
-    console.log('pressed');
+  const navigateToSecondSignUpPage = (email, password, confirmPassword) => {
+    navigation.navigate('SecondSignUpPage', {
+      email,
+      password,
+      confirmPassword,
+    });
   };
   const navigateToSignInPage = () => {
     navigation.navigate('SignInPage');
@@ -76,10 +81,15 @@ const FirstSignUpPage = ({ navigation }) => {
     isEmailValid && isPasswordValid && isConfirmPasswordValid;
 
   /* Handle Sign in link */
-  const handleSignInPress = () => {
+  const handleGoogleSignIn = () => {
     const signInUrl = 'https://google.com';
     Linking.openURL(signInUrl);
   };
+  const handleFacebookSignIn = () => {
+    const signInUrl = 'https://facebook.com';
+    Linking.openURL(signInUrl);
+  };
+
   return (
     <View style={styles.containerStyle}>
       {/* BACKGROUND IMAGE */}
@@ -116,7 +126,7 @@ const FirstSignUpPage = ({ navigation }) => {
             onChangeText={(text) => handleInputChange('password', text)}
             borderColor={isPasswordValid ? 'green' : '#D9D9D9'}
             secureTextEntry={true}
-            iconName='lock'
+            iconName='eye'
             ref={passwordRef}
             nextRef={confirmPasswordRef}
           ></SignUpInput>
@@ -127,29 +137,35 @@ const FirstSignUpPage = ({ navigation }) => {
             onChangeText={(text) => handleInputChange('confirmPassword', text)}
             borderColor={isConfirmPasswordValid ? 'green' : '#D9D9D9'}
             secureTextEntry={true}
-            iconName='lock'
+            iconName='eye'
             ref={confirmPasswordRef}
           ></SignUpInput>
         </View>
         {/* BUTTON */}
         <View style={styles.buttonContainerStyle}>
           <ButtonComponent
-            disabled={false}
-            onPress={navigateToSecondSignUpPage}
+            disabled={!isContinueButtonEnabled}
+            onPress={() =>
+              navigateToSecondSignUpPage(email, password, confirmPassword)
+            }
             text='Continue'
           />
         </View>
         {/*DIVIDER */}
-
         <View style={styles.dividerContainerStyle}>
           <DividerComponent text='or' />
         </View>
         {/* SOCIALS */}
-
         <View style={styles.socialsContainerStyle}>
           <View style={styles.socialButtonsContainerStyle}>
-            <IconButtonComponent imageName={'google'} />
-            <IconButtonComponent imageName={'facebook'} />
+            <IconButtonComponent
+              imageName={'google'}
+              onPress={handleGoogleSignIn}
+            />
+            <IconButtonComponent
+              imageName={'facebook'}
+              onPress={handleFacebookSignIn}
+            />
           </View>
           <Text style={styles.socialsTextStyle}>
             Already have an account?
