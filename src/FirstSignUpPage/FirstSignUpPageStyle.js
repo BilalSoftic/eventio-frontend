@@ -6,7 +6,7 @@ const FirstSignUpPageStyle = StyleSheet.create({
     position: 'relative',
   },
   backgroundImageStyle: {
-    minWidth: '150%',
+    minWidth: '110%',
     position: 'absolute',
     top: 0,
   },

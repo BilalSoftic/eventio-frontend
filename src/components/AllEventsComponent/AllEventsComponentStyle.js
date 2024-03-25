@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-
-const HorizontalScrollComponentStyle = StyleSheet.create({
+const AllEventsComponentStyle = StyleSheet.create({
   singleEventContainerStyle: {
-    width: 160,
+    width: 'auto',
+    height: 400,
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginBottom: 30,
     borderRadius: 15,
     position: 'relative',
     flexDirection: 'column',
@@ -33,15 +33,15 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
     right: 15,
   },
   heartIcon: {
-    padding: 3,
+    padding: 5,
     color: 'white',
-    fontSize: 20,
+    fontSize: 40,
   },
 
   informationContainerStyle: {
     width: '100%',
     height: '50%',
-    padding: 10,
+    padding: 25,
     gap: 5,
     borderRadius: 15,
     position: 'absolute',
@@ -50,11 +50,11 @@ const HorizontalScrollComponentStyle = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  dateStyle: { fontSize: 11, color: '#0C6A9F' },
-  titleStyle: { fontSize: 15, fontWeight: 'bold' },
+  dateStyle: { fontSize: 20, color: '#0C6A9F' },
+  titleStyle: { fontSize: 25, fontWeight: 'bold' },
   locationStyle: { flexDirection: 'row', gap: 3 },
-  locationIconStyle: { color: '#707070' },
-  locationTextStyle: { fontSize: 11, color: '#707070' },
+  locationIconStyle: { fontSize: 20, color: '#707070', marginRight: 5 },
+  locationTextStyle: { fontSize: 20, color: '#707070' },
 });
 
-export default HorizontalScrollComponentStyle;
+export default AllEventsComponentStyle;

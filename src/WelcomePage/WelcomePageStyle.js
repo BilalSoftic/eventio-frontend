@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
-const WelcomeScreenStyle = StyleSheet.create({
+const WelcomePageStyle = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: '#004972',
   },
   backgroundImageStyle: {
-    flex: 2,
+    height: '60%',
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
@@ -27,12 +27,13 @@ const WelcomeScreenStyle = StyleSheet.create({
   },
 
   interactiveContainerStyle: {
-    flex: 1.3,
-    padding: 20,
+    height: '40%',
+    padding: 15,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
     backgroundColor: '#FFFFFF',
-    justifyContent: 'space-around',
   },
   mainHeaderTextStyle: {
     fontSize: 30,
@@ -40,15 +41,15 @@ const WelcomeScreenStyle = StyleSheet.create({
     alignSelf: 'center',
   },
   secondaryHeaderTextStyle: {
-    marginBottom: 20,
+    marginBottom: 15,
     fontSize: 20,
     opacity: 0.5,
     alignSelf: 'center',
   },
   flagSelectorContainerStyle: {
     height: '25%',
-    marginBottom: 30,
     gap: 20,
+    marginBottom: 15,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -70,4 +71,4 @@ const WelcomeScreenStyle = StyleSheet.create({
   },
 });
 
-export default WelcomeScreenStyle;
+export default WelcomePageStyle;

@@ -6,7 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import styles from './SignInPageStyle';
 import InputComponent from '../components/InputComponent/InputComponent';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
@@ -14,10 +14,13 @@ import DividerComponent from '../components/DividerComponent/DividerComponent';
 import IconButtonComponent from '../components/IconButtonComponent/IconButtonComponent';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { signIn } from '../../eventio-api';
-const imgPath = '../../assets/img/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+const imgPath = '../../assets/img/';
 
-const SignInPage = ({ navigation }) => {
+const SignInPage = () => {
+  const navigation = useNavigation();
+
   /* State */
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,19 +38,11 @@ const SignInPage = ({ navigation }) => {
 
   const handleSignIn = () => {
     signIn({ email, password })
-      .then(
-        /* async */
-        (res) => {
-          const token = res?.token?.plainTextToken; // Check your response structure
-          AsyncStorage.setItem('token', token);
-          try {
-            navigation.navigate('MainPage');
-          } catch (error) {
-            console.error('Error saving token', error);
-            // Handle the error (e.g., show an alert to the user)
-          }
-        }
-      )
+      .then(async (res) => {
+        const token = res?.token?.plainTextToken; // Check your response structure
+        await AsyncStorage.setItem('token', token);
+        navigation.navigate('MainPage');
+      })
       .catch((error) => {
         console.error('Login failed', error);
         // Handle login failure (e.g., show an alert or message to the user)
@@ -117,13 +112,12 @@ const SignInPage = ({ navigation }) => {
             onChangeText={(text) => handleInputChange('password', text)}
             borderColor={isPasswordValid ? 'green' : '#D9D9D9'}
             secureTextEntry={true}
-            iconName='lock'
+            iconName='eye'
             ref={passwordRef}
           ></InputComponent>
         </View>
         <View style={styles.textWrapperStyle}>
           <BouncyCheckbox
-            style={styles.checkbox}
             size={20}
             fillColor='#004972'
             unfillColor='#FFFFFF'

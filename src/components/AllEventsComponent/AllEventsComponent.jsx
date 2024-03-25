@@ -1,47 +1,54 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
-import styles from './HorizontalScrollComponentStyle';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { ScrollView, View, Image, Text, TouchableOpacity } from 'react-native';
+import styles from './AllEventsComponentStyle';
+import { getAllEvents } from '../../../eventio-api';
 import { formatDate, formatTime } from '../../../helpers';
 import { useNavigation } from '@react-navigation/native';
 import HeartIcon from './HeartIcon';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { postLike, deleteLike } from '../../../eventio-api';
+import LoadingComponent from '../LoadingComponent/LoadingComponent';
 
 const imagePath = '../../../assets/';
 
-const HorizontalScrollComponent = ({ events }) => {
+const AllEventsComponent = () => {
   const navigation = useNavigation();
-  const [userTagEvents, setUserTagEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
 
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isGetError, setIsGetError] = useState(false);
+
+  /* on load */
   useEffect(() => {
-    setUserTagEvents(events);
-    setLoading(false);
+    getAllEvents(navigation)
+      .then((response) => {
+        setEvents(response.data.data);
+        console.log('getAllEvents Response:', response);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setIsGetError(true);
+        setLoading(false);
+      });
   }, []);
 
+  /* Navigate to SingleEventPage */
   const handleEventPress = (event) => {
     navigation.navigate('SingleEventPage', { event });
   };
+
+  /* Handle Like*/
   const handleLikeButton = (id) => {
     let singleEvent;
-    const updatedData = userTagEvents.map((event) => {
+    const updatedData = events.map((event) => {
       if (event.id === id) {
         singleEvent = event;
       }
-
       return event.id === id
         ? { ...event, display_like: !event.display_like }
         : event;
     });
-
-    setUserTagEvents(updatedData);
+    setEvents(updatedData);
 
     if (!singleEvent.display_like) {
       postLike(singleEvent.id, 0);
@@ -54,15 +61,21 @@ const HorizontalScrollComponent = ({ events }) => {
 
   /* loading */
   if (loading) {
+    return <LoadingComponent />;
+  }
+
+  /* Error */
+  if (isGetError) {
     return (
-      <View style={{ flex: 1 }}>
-        <ActivityIndicator size='large' color='#004972' />
+      <View style={styles.errorContainer}>
+        <Text>ERROROROROROOR</Text>
       </View>
     );
   }
+
   return (
-    <ScrollView horizontal={true}>
-      {userTagEvents.map((event) => (
+    <ScrollView>
+      {events.map((event) => (
         <TouchableOpacity
           style={styles.singleEventContainerStyle}
           key={event.id}
@@ -98,4 +111,4 @@ const HorizontalScrollComponent = ({ events }) => {
   );
 };
 
-export default HorizontalScrollComponent;
+export default AllEventsComponent;

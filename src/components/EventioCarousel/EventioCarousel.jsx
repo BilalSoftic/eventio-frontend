@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { View, Image, Pressable } from 'react-native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import styles from './EventioCarouselStyle';
 
@@ -13,9 +13,13 @@ const EventioCarousel = () => {
   ];
 
   const renderTouchableOpacity = (item, index) => (
-    <TouchableOpacity key={index} style={styles.child}>
+    <Pressable
+      key={index}
+      style={styles.child}
+      onPress={() => console.log(index)}
+    >
       <Image style={styles.image} source={item.imageSource} />
-    </TouchableOpacity>
+    </Pressable>
   );
 
   return (
@@ -26,7 +30,6 @@ const EventioCarousel = () => {
       autoplayLoopKeepAnimation
       showPagination
       renderAll
-      disableGesture
       paginationStyleItemActive={{
         backgroundColor: '#004972',
         borderWidth: 1,

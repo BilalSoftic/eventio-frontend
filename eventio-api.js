@@ -1,5 +1,5 @@
 import { Alert } from 'react-native';
-const apiBaseUrl = 'http://192.168.0.2:8000/';
+const apiBaseUrl = 'https://7a87-77-78-203-194.ngrok-free.app/';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 fetchData = async (url, method, body, navigation) => {
@@ -14,7 +14,6 @@ fetchData = async (url, method, body, navigation) => {
     const response = await fetch(apiBaseUrl + url, {
       method,
       body: body ? body : null,
-
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -23,25 +22,18 @@ fetchData = async (url, method, body, navigation) => {
     });
     let data;
 
-    /*  console.log(response); */
-
     if (response.status === 401) {
-      console.log('401');
       AsyncStorage.removeItem('token');
-      console.log('token removed');
       navigation.navigate('SignInPage');
-      console.log(navigation);
       Alert.alert('Session expired', 'Please sign in again');
       return;
     }
 
     data = await response.json();
-    /*  console.log('data', data); */
-
     return data;
   } catch (error) {
     console.log(JSON.stringify(error));
-    // throw error;
+    throw error;
   }
 };
 
@@ -61,6 +53,32 @@ export const getUserTags = () => {
   return fetchData('api/user-events', 'GET');
 };
 
-export const getEventById = (eventId, navigation) => {
-  return fetchData(`api/events/${eventId}`, 'GET', null, navigation);
+export const getAllTags = () => {
+  return fetchData('api/tags', 'GET');
+};
+
+export const setUserTags = (tags) => {
+  return fetchData(
+    'api/user-tags',
+    'PATCH',
+    JSON.stringify({ tag_ids: tags }),
+    null
+  );
+};
+
+export const postLike = (id, number) => {
+  return fetchData(
+    'api/post-like',
+    'POST',
+    JSON.stringify({ event_id: id, likeable_type: number }),
+    null
+  );
+};
+export const deleteLike = (id, number) => {
+  return fetchData(
+    'api/delete-like',
+    'DELETE',
+    JSON.stringify({ event_id: id, likeable_type: number }),
+    null
+  );
 };

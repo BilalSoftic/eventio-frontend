@@ -39,14 +39,14 @@ const InfoPageStyle = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
   },
-  mainText: {
+  mainTextStyle: {
     fontSize: 16,
     opacity: 0.5,
     lineHeight: 25,
     justifyContent: 'center',
     textAlign: 'center',
   },
-  dotsContainer: {
+  dotsContainerStyle: {
     width: '100%',
     gap: 10,
     flexDirection: 'row',

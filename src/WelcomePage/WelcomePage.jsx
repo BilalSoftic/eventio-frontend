@@ -1,17 +1,20 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import styles from './WelcomeScreenStyle';
+import styles from './WelcomePageStyle';
 import React, { useState } from 'react';
 import ButtonComponent from '../components/ButtonComponent/ButtonComponent';
-
+import { useNavigation } from '@react-navigation/native';
 const imgPath = '../../assets/img/';
 
-function WelcomeScreen({ navigation }) {
+function WelcomePage() {
+  const navigation = useNavigation();
+
+  /* State */
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [selectedFlag, setSelectedFlag] = useState(null);
 
   /* Page navigation */
-  const navigateToFirstSignUpPage = () => {
-    navigation.navigate('FirstSignUpPage');
+  const handleSubmitLanguage = () => {
+    navigation.navigate('InfoPage');
   };
   return (
     <View style={styles.containerStyle}>
@@ -79,7 +82,7 @@ function WelcomeScreen({ navigation }) {
 
         <ButtonComponent
           disabled={isSubmitDisabled}
-          onPress={navigateToFirstSignUpPage}
+          onPress={handleSubmitLanguage}
           text='Next'
         />
       </View>
@@ -87,4 +90,4 @@ function WelcomeScreen({ navigation }) {
   );
 }
 
-export default WelcomeScreen;
+export default WelcomePage;
