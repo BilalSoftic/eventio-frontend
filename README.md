@@ -1,4 +1,4 @@
-"🌟 Welcome to Eventio! 🎉 Simplifying event discovery in your city. Our app streamlines the process of finding events that match your interests. 
+🌟 Welcome to Eventio! 🎉 Simplifying event discovery in your city. Our app streamlines the process of finding events that match your interests. 
 From concerts to exhibitions, explore effortlessly with customizable categories. 🔍 Currently in early development, we're seeking funding to enhance your event-finding experience. Stay tuned for updates!
 
 Screenshots from the app:
